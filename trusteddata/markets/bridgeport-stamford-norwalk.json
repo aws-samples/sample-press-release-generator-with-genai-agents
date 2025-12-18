@@ -1,0 +1,26 @@
+{
+  "market": "Bridgeport-Stamford-Norwalk",
+  "realEstate": {
+    "medianHomePrice": 208734,
+    "priceChange": 1.5,
+    "inventoryLevel": 14551,
+    "daysOnMarket": 68,
+    "activeListings": 12489
+  },
+  "demographics": {
+    "population": 2312458,
+    "medianIncome": 43266,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 94.2,
+    "gdpGrowth": 1.9,
+    "majorIndustries": [
+      "Professional Services",
+      "Education",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.656106Z",
+  "source": "synthetic"
+}

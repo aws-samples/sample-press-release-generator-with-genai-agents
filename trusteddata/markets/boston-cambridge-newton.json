@@ -1,0 +1,26 @@
+{
+  "market": "Boston-Cambridge-Newton",
+  "realEstate": {
+    "medianHomePrice": 808154,
+    "priceChange": 7.9,
+    "inventoryLevel": 3159,
+    "daysOnMarket": 57,
+    "activeListings": 4718
+  },
+  "demographics": {
+    "population": 13940471,
+    "medianIncome": 60533,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 92.2,
+    "gdpGrowth": 3.9,
+    "majorIndustries": [
+      "Professional Services",
+      "Finance",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.637233Z",
+  "source": "synthetic"
+}

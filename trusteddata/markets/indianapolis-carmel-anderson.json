@@ -1,0 +1,26 @@
+{
+  "market": "Indianapolis-Carmel-Anderson",
+  "realEstate": {
+    "medianHomePrice": 494397,
+    "priceChange": 5.2,
+    "inventoryLevel": 4267,
+    "daysOnMarket": 35,
+    "activeListings": 11329
+  },
+  "demographics": {
+    "population": 1157797,
+    "medianIncome": 63153,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 93.6,
+    "gdpGrowth": 3.1,
+    "majorIndustries": [
+      "Finance",
+      "Healthcare",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.648985Z",
+  "source": "synthetic"
+}

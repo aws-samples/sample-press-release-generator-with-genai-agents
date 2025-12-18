@@ -1,0 +1,178 @@
+# Press Release Generator - Terraform Variables
+# Configuration with Authentication ENABLED (Recommended for Production)
+
+# ============================================================================
+# Core Configuration
+# ============================================================================
+project_name = "press-rele"
+environment  = "prod"
+aws_region   = "us-west-2"
+
+# ============================================================================
+# Authentication Configuration (ENABLED by default)
+# ============================================================================
+enable_authentication = true
+auth_mode             = "cognito"  # Options: cognito, api-key, jwt, oauth, hybrid, none
+enable_mfa            = false      # Set to true for enhanced security
+
+# Cognito domain prefix (leave empty for auto-generated)
+cognito_domain_prefix = ""  # Will auto-generate: press-rele-prod-xxxxxxxx
+
+# Cognito password policy
+cognito_password_policy = {
+  minimum_length    = 12
+  require_lowercase = true
+  require_uppercase = true
+  require_numbers   = true
+  require_symbols   = true
+}
+
+# Advanced security mode: OFF, AUDIT, ENFORCED
+cognito_advanced_security_mode = "AUDIT"  # Use ENFORCED for production
+
+# ============================================================================
+# Deployment Configuration
+# ============================================================================
+deployment_type   = "public"   # Options: public (internet-facing) or internal (VPC-only)
+enable_cloudfront = true       # Enable CloudFront for public deployments
+
+# Custom domain (optional - leave empty to use ALB/CloudFront default domains)
+domain_name = ""
+frontend_url = ""
+
+# SSL certificate (leave empty to use self-signed for testing)
+ssl_certificate_arn = ""
+
+# ============================================================================
+# Redis Configuration
+# ============================================================================
+redis_mode = "embedded"  # Options: none, embedded, elasticache
+
+# ElastiCache configuration (only used when redis_mode = "elasticache")
+redis_node_type                = "cache.t3.micro"
+redis_num_cache_nodes          = 1
+redis_engine_version           = "7.0"
+redis_snapshot_retention_limit = 1
+redis_encryption_at_rest       = true
+redis_encryption_in_transit    = true
+
+# ============================================================================
+# Application Configuration
+# ============================================================================
+
+# Docker images (will be replaced with ECR URLs after first deployment)
+backend_image  = "nginx:alpine"
+frontend_image = "nginx:alpine"
+
+# ECS task sizing
+backend_cpu    = 512
+backend_memory = 1024
+frontend_cpu    = 256
+frontend_memory = 512
+
+# Service scaling
+backend_desired_count  = 2
+frontend_desired_count = 2
+backend_min_capacity   = 1
+backend_max_capacity   = 10
+frontend_min_capacity  = 1
+frontend_max_capacity  = 5
+
+# ============================================================================
+# AI Services Configuration
+# ============================================================================
+
+# AWS Bedrock
+aws_bedrock_model_id = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+# API Keys (store in AWS Secrets Manager)
+firecrawl_api_key_secret_arn  = ""  # ARN of secret containing Firecrawl API key
+perplexity_api_key_secret_arn = ""  # ARN of secret containing Perplexity API key
+tavily_api_key_secret_arn     = ""  # ARN of secret containing Tavily API key
+
+# ============================================================================
+# Strands Framework Configuration
+# ============================================================================
+enable_strands                        = false  # Set to true to enable Strands
+strands_orchestration_pattern         = "adaptive_hybrid"
+strands_performance_mode              = "balanced"
+strands_log_level                     = "info"
+strands_node_timeout                  = 120000
+strands_graph_timeout                 = 600000
+strands_max_node_executions           = 50
+strands_python_version                = "3.11"
+strands_enable_hybrid_orchestration   = true
+strands_enable_performance_optimizer  = true
+strands_enable_enterprise_security    = true
+
+# ============================================================================
+# Feature Flags
+# ============================================================================
+enable_dynamodb   = true
+enable_monitoring = true
+enable_waf        = false  # Enable AWS WAF for additional security
+
+# ============================================================================
+# CORS Configuration
+# ============================================================================
+cors_allowed_origins = "https://*.cloudfront.net,https://*.elb.amazonaws.com"
+cors_domain_pattern  = "^https://[a-z0-9-]+\\.(cloudfront\\.net|elb\\.[a-z0-9-]+\\.amazonaws\\.com)$"
+cors_credentials     = true
+cors_max_age         = 86400
+
+# ============================================================================
+# Monitoring & Logging
+# ============================================================================
+log_retention_days          = 30
+enable_cloudwatch_dashboard = true
+enable_alerting             = true
+
+# ============================================================================
+# Cost Tracking Tags
+# ============================================================================
+cost_center     = "engineering"
+owner           = "platform-team"
+business_unit   = "product-engineering"
+team            = "platform-team"
+backup_required = "yes"
+monitoring_level = "standard"
+data_classification = "internal"
+auto_shutdown   = "no"
+
+# ============================================================================
+# Security Configuration
+# ============================================================================
+allowed_cidr_blocks          = ["0.0.0.0/0"]  # For public deployments
+allowed_cidr_blocks_internal = ["10.0.0.0/16"]  # For internal deployments
+
+# ============================================================================
+# Common Tags
+# ============================================================================
+common_tags = {
+  Application = "press-release-generator"
+  ManagedBy   = "terraform"
+  Team        = "platform-team"
+}
+
+# ============================================================================
+# DEPLOYMENT NOTES
+# ============================================================================
+# 
+# This configuration enables authentication by default for production deployments.
+# 
+# To deploy with authentication (recommended):
+#   ./scripts/deploy-with-auth.sh --environment prod --public
+# 
+# To deploy without authentication (NOT recommended, requires confirmation):
+#   ./scripts/deploy-with-auth.sh --environment prod --public --disable-auth --confirm-no-auth
+# 
+# To enable MFA:
+#   ./scripts/deploy-with-auth.sh --environment prod --public --enable-mfa
+# 
+# To use a custom Cognito domain:
+#   ./scripts/deploy-with-auth.sh --environment prod --public --cognito-domain my-company-auth
+# 
+# To use ElastiCache with authentication:
+#   ./scripts/deploy-with-auth.sh --redis-mode elasticache --public --enable-auth
+# 
+# ============================================================================

@@ -1,0 +1,26 @@
+{
+  "market": "Salt Lake City",
+  "realEstate": {
+    "medianHomePrice": 440809,
+    "priceChange": -0.0,
+    "inventoryLevel": 5068,
+    "daysOnMarket": 35,
+    "activeListings": 2069
+  },
+  "demographics": {
+    "population": 7259548,
+    "medianIncome": 46180,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 94.7,
+    "gdpGrowth": 2.0,
+    "majorIndustries": [
+      "Aerospace",
+      "Technology",
+      "Tourism"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.652734Z",
+  "source": "synthetic"
+}

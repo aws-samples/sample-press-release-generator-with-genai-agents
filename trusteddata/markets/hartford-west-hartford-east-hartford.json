@@ -1,0 +1,26 @@
+{
+  "market": "Hartford-West Hartford-East Hartford",
+  "realEstate": {
+    "medianHomePrice": 211045,
+    "priceChange": -3.4,
+    "inventoryLevel": 10495,
+    "daysOnMarket": 62,
+    "activeListings": 2312
+  },
+  "demographics": {
+    "population": 13869557,
+    "medianIncome": 67949,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 94.0,
+    "gdpGrowth": 3.8,
+    "majorIndustries": [
+      "Healthcare",
+      "Technology",
+      "Finance"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.651508Z",
+  "source": "synthetic"
+}

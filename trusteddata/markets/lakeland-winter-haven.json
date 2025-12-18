@@ -1,0 +1,26 @@
+{
+  "market": "Lakeland-Winter Haven",
+  "realEstate": {
+    "medianHomePrice": 270288,
+    "priceChange": 0.3,
+    "inventoryLevel": 1371,
+    "daysOnMarket": 28,
+    "activeListings": 5307
+  },
+  "demographics": {
+    "population": 9733900,
+    "medianIncome": 40901,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 92.4,
+    "gdpGrowth": 1.6,
+    "majorIndustries": [
+      "Energy",
+      "Healthcare",
+      "Retail"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.661775Z",
+  "source": "synthetic"
+}

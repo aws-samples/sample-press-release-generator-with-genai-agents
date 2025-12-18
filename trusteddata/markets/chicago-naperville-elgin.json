@@ -1,0 +1,26 @@
+{
+  "market": "Chicago-Naperville-Elgin",
+  "realEstate": {
+    "medianHomePrice": 695865,
+    "priceChange": 6.4,
+    "inventoryLevel": 22392,
+    "daysOnMarket": 32,
+    "activeListings": 11213
+  },
+  "demographics": {
+    "population": 14285361,
+    "medianIncome": 84919,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 94.1,
+    "gdpGrowth": 2.8,
+    "majorIndustries": [
+      "Healthcare",
+      "Agriculture",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.635717Z",
+  "source": "synthetic"
+}

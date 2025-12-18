@@ -1,0 +1,26 @@
+{
+  "market": "Tampa-St. Petersburg-Clearwater",
+  "realEstate": {
+    "medianHomePrice": 711020,
+    "priceChange": 2.9,
+    "inventoryLevel": 2096,
+    "daysOnMarket": 63,
+    "activeListings": 4751
+  },
+  "demographics": {
+    "population": 629909,
+    "medianIncome": 73081,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 97.5,
+    "gdpGrowth": 2.3,
+    "majorIndustries": [
+      "Healthcare",
+      "Energy",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.644143Z",
+  "source": "synthetic"
+}

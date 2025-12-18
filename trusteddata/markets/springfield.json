@@ -1,0 +1,26 @@
+{
+  "market": "Springfield",
+  "realEstate": {
+    "medianHomePrice": 400176,
+    "priceChange": 6.9,
+    "inventoryLevel": 4179,
+    "daysOnMarket": 56,
+    "activeListings": 4223
+  },
+  "demographics": {
+    "population": 8387364,
+    "medianIncome": 43683,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 94.5,
+    "gdpGrowth": 4.9,
+    "majorIndustries": [
+      "Education",
+      "Healthcare",
+      "Professional Services"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.660596Z",
+  "source": "synthetic"
+}

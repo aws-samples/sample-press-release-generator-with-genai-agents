@@ -1,0 +1,26 @@
+{
+  "market": "New York-Newark-Jersey City",
+  "realEstate": {
+    "medianHomePrice": 312461,
+    "priceChange": 8.2,
+    "inventoryLevel": 14991,
+    "daysOnMarket": 57,
+    "activeListings": 17713
+  },
+  "demographics": {
+    "population": 12531346,
+    "medianIncome": 79365,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 92.4,
+    "gdpGrowth": 3.9,
+    "majorIndustries": [
+      "Technology",
+      "Education",
+      "Professional Services"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.625735Z",
+  "source": "synthetic"
+}

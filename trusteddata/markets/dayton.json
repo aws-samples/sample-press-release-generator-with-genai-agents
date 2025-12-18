@@ -1,0 +1,26 @@
+{
+  "market": "Dayton",
+  "realEstate": {
+    "medianHomePrice": 359496,
+    "priceChange": -3.9,
+    "inventoryLevel": 3731,
+    "daysOnMarket": 32,
+    "activeListings": 9968
+  },
+  "demographics": {
+    "population": 9093411,
+    "medianIncome": 49494,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 92.3,
+    "gdpGrowth": 4.2,
+    "majorIndustries": [
+      "Technology",
+      "Manufacturing",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.658106Z",
+  "source": "synthetic"
+}

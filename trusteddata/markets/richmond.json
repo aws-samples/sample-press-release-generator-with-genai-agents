@@ -1,0 +1,26 @@
+{
+  "market": "Richmond",
+  "realEstate": {
+    "medianHomePrice": 482733,
+    "priceChange": -1.1,
+    "inventoryLevel": 6697,
+    "daysOnMarket": 68,
+    "activeListings": 9643
+  },
+  "demographics": {
+    "population": 6125322,
+    "medianIncome": 38020,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 94.7,
+    "gdpGrowth": 4.6,
+    "majorIndustries": [
+      "Energy",
+      "Retail",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.651809Z",
+  "source": "synthetic"
+}

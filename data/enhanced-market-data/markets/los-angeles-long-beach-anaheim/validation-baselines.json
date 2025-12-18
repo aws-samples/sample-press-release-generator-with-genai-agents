@@ -1,0 +1,77 @@
+{
+  "marketInfo": {
+    "name": "Los Angeles-Long Beach-Anaheim",
+    "code": "LAX",
+    "tier": "tier1",
+    "lastUpdated": "2025-08-21"
+  },
+  "qualityThresholds": {
+    "accuracy": {
+      "priceVariance": 0.05,
+      "inventoryVariance": 0.10,
+      "demographicVariance": 0.08,
+      "minimumDataPoints": 5
+    },
+    "relevance": {
+      "neighborhoodMentions": 3,
+      "localContextScore": 0.75,
+      "marketSpecificTerms": 5,
+      "culturalReferences": 2
+    },
+    "consistency": {
+      "dataSourceAlignment": 0.90,
+      "temporalConsistency": 0.85,
+      "crossReferenceAccuracy": 0.92
+    }
+  },
+  "marketSpecificRules": {
+    "requiredNeighborhoods": [
+      "Santa Monica",
+      "Beverly Hills",
+      "Long Beach",
+      "Pasadena",
+      "Irvine"
+    ],
+    "keyEconomicIndicators": [
+      "tech_employment",
+      "entertainment_industry",
+      "international_trade",
+      "tourism_impact",
+      "port_activity"
+    ],
+    "culturalReferences": [
+      "beach_lifestyle",
+      "entertainment_capital",
+      "cultural_diversity",
+      "tech_innovation",
+      "mediterranean_climate"
+    ],
+    "industryFocus": [
+      "Technology",
+      "Entertainment",
+      "International Trade",
+      "Tourism",
+      "Aerospace"
+    ],
+    "lifestyleFactors": [
+      "coastal_living",
+      "year_round_outdoor_activities",
+      "cultural_attractions",
+      "dining_scene",
+      "traffic_considerations"
+    ]
+  },
+  "validationConfig": {
+    "strictMode": true,
+    "warningThresholds": {
+      "lowAccuracy": 0.80,
+      "lowRelevance": 0.70,
+      "lowConsistency": 0.75
+    },
+    "errorThresholds": {
+      "criticalAccuracy": 0.60,
+      "criticalRelevance": 0.50,
+      "criticalConsistency": 0.55
+    }
+  }
+}

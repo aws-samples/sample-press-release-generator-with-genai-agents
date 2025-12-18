@@ -1,0 +1,34 @@
+{
+  "name": "100market-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for 100Market Press Release Generator - AI-powered press release generation system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "press-release",
+    "ai",
+    "frontend",
+    "static-server",
+    "100market"
+  ],
+  "author": "100Market Team",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "ssh://ssh.gitlab.aws.dev/2pizzadao/100market-press-release-generator-genai-agents.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.aws.dev/2pizzadao/100market-press-release-generator-genai-agents/-/issues"
+  },
+  "homepage": "http://localhost:3000"
+}

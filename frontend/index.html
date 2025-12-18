@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Press Release Generator</title>
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-newspaper"></i>
+                    <h1>AI Press Release Generator</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="data-lineage-dashboard" class="btn btn-outline">
+                        <i class="fas fa-chart-line"></i>
+                        Data Lineage (experimental)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Input</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Configure</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Generate</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Results</div>
+                </div>
+            </div>
+
+            <!-- Step 1: Press Release Input -->
+            <section id="step-input" class="step-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-edit"></i> Press Release Template</h2>
+                        <p>Enter your master press release template below. This will be used to generate localized variants for all selected markets.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-section">
+                            <div class="button-group">
+                                <button id="loadTemplateBtn" class="btn btn-outline">
+                                    <i class="fas fa-file-import"></i>
+                                    Load Sample Template
+                                </button>
+                                <button id="clearTemplateBtn" class="btn btn-outline">
+                                    <i class="fas fa-trash"></i>
+                                    Clear
+                                </button>
+                            </div>
+                            <div class="textarea-container">
+                                <textarea 
+                                    id="press-release-input" 
+                                    placeholder="Enter your press release template here...
+
+Example:
+FOR IMMEDIATE RELEASE
+
+[Company Name] Reports Strong Q4 Results in [Market Name]
+
+[Market Name], [State] - [Date] - [Company Name] today announced exceptional performance in the [Market Name] market, with [specific metric] showing significant growth...
+
+Use placeholders like [Market Name], [State], [Date], etc. for content that should be localized."
+                                    rows="15"
+                                ></textarea>
+                                <div class="character-count">
+                                    <span id="char-count">0</span> / 50,000 characters
+                                </div>
+                            </div>
+                            <div class="template-validation">
+                                <div id="validation-feedback" class="validation-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="step-actions">
+                            <button id="next-to-configure" class="btn btn-primary" disabled>
+                                Next: Configure Settings
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Configuration -->
+            <section id="step-configure" class="step-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cog"></i> Generation Settings</h2>
+                        <p>Configure how your press release variants will be generated and formatted.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="config-grid">
+                            <!-- Generation Approach Selection -->
+                            <div class="config-section">
+                                <h3><i class="fas fa-rocket"></i> Generation Approach</h3>
+                                <div class="approach-selection">
+                                    <div class="selection-options">
+                                        <label class="radio-option">
+                                            <input type="radio" name="generation-approach" value="traditional" checked>
+                                            <span class="radio-custom"></span>
+                                            <div class="option-content">
+                                                <div class="option-title">Traditional</div>
+                                                <div class="option-description">Standard 37-agent sequential processing</div>
+                                            </div>
+                                            <i class="fas fa-cogs option-icon"></i>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="generation-approach" value="strands">
+                                            <span class="radio-custom"></span>
+                                            <div class="option-content">
+                                                <div class="option-title">Strands Framework</div>
+                                                <div class="option-description">Advanced multi-agent orchestration patterns</div>
+                                            </div>
+                                            <i class="fas fa-network-wired option-icon"></i>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Strands Configuration - Conditional Section -->
+                                    <div id="strands-configuration" class="strands-configuration" style="display: none;">
+                                        <!-- Performance Mode Selection -->
+                                        <div class="strands-section">
+                                            <h4><i class="fas fa-tachometer-alt"></i> Performance Mode</h4>
+                                            <p class="section-description">Optimize for speed, quality, or balance</p>
+                                            <div class="performance-options">
+                                                <label class="radio-option performance-option">
+                                                    <input type="radio" name="performance-mode" value="fast">
+                                                    <span class="radio-custom"></span>
+                                                    <div class="option-content">
+                                                        <div class="option-title">Fast</div>
+                                                        <div class="option-description">Speed-optimized execution</div>
+                                                    </div>
+                                                    <i class="fas fa-bolt option-icon"></i>
+                                                </label>
+                                                <label class="radio-option performance-option">
+                                                    <input type="radio" name="performance-mode" value="balanced" checked>
+                                                    <span class="radio-custom"></span>
+                                                    <div class="option-content">
+                                                        <div class="option-title">Balanced</div>
+                                                        <div class="option-description">Optimal speed/quality balance (Recommended)</div>
+                                                    </div>
+                                                    <i class="fas fa-balance-scale option-icon"></i>
+                                                </label>
+                                                <label class="radio-option performance-option">
+                                                    <input type="radio" name="performance-mode" value="quality">
+                                                    <span class="radio-custom"></span>
+                                                    <div class="option-content">
+                                                        <div class="option-title">Quality</div>
+                                                        <div class="option-description">Maximum quality output</div>
+                                                        <div class="option-benefit">Highest accuracy and detail</div>
+                                                    </div>
+                                                    <i class="fas fa-gem option-icon"></i>
+                                                </label>
+                                                <label class="radio-option performance-option">
+                                                    <input type="radio" name="performance-mode" value="comprehensive">
+                                                    <span class="radio-custom"></span>
+                                                    <div class="option-content">
+                                                        <div class="option-title">Comprehensive</div>
+                                                        <div class="option-description">Full feature utilization</div>
+                                                        <div class="option-benefit">All capabilities enabled</div>
+                                                    </div>
+                                                    <i class="fas fa-crown option-icon"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data Source Selection -->
+                            <div class="config-section">
+                                <h3><i class="fas fa-database"></i> Data Source</h3>
+                                <div class="data-source-selection">
+                                    <div class="selection-options">
+                                        <!-- COMMENTED OUT - Web Scraping option removed (Firecrawl) -->
+                                        <!-- COMMENTED OUT - AI Search option removed (Perplexity AI) -->
+                                        <label class="radio-option">
+                                            <input type="radio" name="data-source" value="trusted" checked>
+                                            <span class="radio-custom"></span>
+                                            <div class="option-content">
+                                                <div class="option-title">Trusted Data</div>
+                                                <div class="option-description">Pre-processed market data from verified sources</div>
+                                            </div>
+                                            <i class="fas fa-shield-alt option-icon"></i>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="data-source" value="tavily">
+                                            <span class="radio-custom"></span>
+                                            <div class="option-content">
+                                                <div class="option-title">Tavily AI Search</div>
+                                                <div class="option-description">AI-powered real-time market research and analysis</div>
+                                            </div>
+                                            <i class="fas fa-brain option-icon"></i>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- AI Provider Selection - Conditional Section -->
+                                    <div id="ai-provider-selection" class="ai-provider-selection" style="display: none;">
+                                        <h4><i class="fas fa-robot"></i> AI Provider Selection</h4>
+                                        <p class="provider-description">Choose specific AI provider for manual testing</p>
+                                        <div class="provider-options">
+                                            <label class="radio-option provider-option">
+                                                <input type="radio" name="ai-provider" value="auto" checked>
+                                                <span class="radio-custom"></span>
+                                                <div class="option-content">
+                                                    <div class="option-title">Auto</div>
+                                                    <div class="option-description">System chooses optimal provider</div>
+                                                </div>
+                                                <i class="fas fa-magic option-icon"></i>
+                                            </label>
+                                            <!-- COMMENTED OUT - Perplexity AI option removed -->
+                                            <!-- COMMENTED OUT - Firecrawl API option removed -->
+                                            <label class="radio-option provider-option">
+                                                <input type="radio" name="ai-provider" value="tavily">
+                                                <span class="radio-custom"></span>
+                                                <div class="option-content">
+                                                    <div class="option-title">Tavily AI Search</div>
+                                                    <div class="option-description">AI-powered search and research</div>
+                                                </div>
+                                                <i class="fas fa-brain option-icon"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="data-source-info">
+                                        <div id="data-source-details" class="source-details">
+                                            <div class="detail-item">
+                                                <i class="fas fa-clock"></i>
+                                                <span>Real-time market data collection</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <i class="fas fa-sync-alt"></i>
+                                                <span>Live updates from Example Company, Competitor One, competitor2.com</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <i class="fas fa-chart-line"></i>
+                                                <span>Current market trends and statistics</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Market Selection -->
+                            <div class="config-section">
+                                <h3><i class="fas fa-map-marker-alt"></i> Market Selection</h3>
+                                <div class="market-selection">
+                                    <div class="selection-options">
+                                        <label class="radio-option">
+                                            <input type="radio" name="market-selection" value="all" checked>
+                                            <span class="radio-custom"></span>
+                                            All 100 US Metro Markets
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="market-selection" value="top25">
+                                            <span class="radio-custom"></span>
+                                            Top 25 Markets Only
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="market-selection" value="top10">
+                                            <span class="radio-custom"></span>
+                                            Top 10 Major Markets
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="market-selection" value="custom">
+                                            <span class="radio-custom"></span>
+                                            Custom Selection
+                                        </label>
+                                    </div>
+                                    <div id="custom-markets" class="custom-markets hidden">
+                                        <div class="market-search">
+                                            <input type="text" id="market-search" placeholder="Search markets...">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <div id="market-list" class="market-list"></div>
+                                        <div class="selected-count">
+                                            <span id="selected-count">0</span> markets selected
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Output Formats -->
+                            <div class="config-section">
+                                <h3><i class="fas fa-file-export"></i> Output Formats</h3>
+                                <div class="format-options">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="formats" value="json" checked>
+                                        <span class="checkbox-custom"></span>
+                                        JSON (Structured Data)
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="formats" value="txt" checked>
+                                        <span class="checkbox-custom"></span>
+                                        TXT (Plain Text)
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="formats" value="html" checked>
+                                        <span class="checkbox-custom"></span>
+                                        HTML (Web Format)
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="formats" value="pitch" checked>
+                                        <span class="checkbox-custom"></span>
+                                        PITCH (Email Format)
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="formats" value="docx">
+                                        <span class="checkbox-custom"></span>
+                                        DOCX (Microsoft Word)
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="formats" value="pdf">
+                                        <span class="checkbox-custom"></span>
+                                        PDF (Print Ready)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Quality Settings -->
+                            <div class="config-section">
+                                <h3><i class="fas fa-shield-alt"></i> Quality Validation</h3>
+                                <div class="quality-options">
+                                    <label class="radio-option">
+                                        <input type="radio" name="validation-mode" value="strict">
+                                        <span class="radio-custom"></span>
+                                        Strict (Highest Quality)
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="validation-mode" value="standard" checked>
+                                        <span class="radio-custom"></span>
+                                        Standard (Balanced)
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="validation-mode" value="lenient">
+                                        <span class="radio-custom"></span>
+                                        Lenient (Faster Generation)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Advanced Options -->
+                            <div class="config-section">
+                                <h3><i class="fas fa-sliders-h"></i> Advanced Options</h3>
+                                <div class="advanced-options">
+                                    <div class="option-group">
+                                        <label for="batch-size">Batch Size</label>
+                                        <select id="batch-size">
+                                            <option value="10" selected>10 markets per batch</option>
+                                            <option value="25">25 markets per batch</option>
+                                            <option value="50">50 markets per batch</option>
+                                        </select>
+                                    </div>
+                                    <div class="option-group">
+                                        <label for="timeout">Timeout (minutes)</label>
+                                        <select id="timeout">
+                                            <option value="5">5 minutes</option>
+                                            <option value="10">10 minutes</option>
+                                            <option value="15">15 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="45">45 minutes</option>
+                                            <option value="60" selected>60 minutes</option>
+                                            <option value="90">90 minutes</option>
+                                            <option value="120">120 minutes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-actions">
+                            <button id="back-to-input" class="btn btn-outline">
+                                <i class="fas fa-arrow-left"></i>
+                                Back to Input
+                            </button>
+                            <button id="next-to-generate" class="btn btn-primary">
+                                Start Generation
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Generation Progress -->
+            <section id="step-generate" class="step-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cogs"></i> Generating Press Release Variants</h2>
+                        <p>AI is creating localized variants for your selected markets. This may take several minutes.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="generation-progress">
+                            <div class="progress-circle">
+                                <svg class="progress-ring" width="120" height="120">
+                                    <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
+                                </svg>
+                                <div class="progress-text">
+                                    <span id="progress-percentage">0%</span>
+                                </div>
+                            </div>
+                            <div class="progress-details">
+                                <div class="progress-bar">
+                                    <div id="progress-fill" class="progress-fill"></div>
+                                </div>
+                                <div class="progress-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Markets Processed:</span>
+                                        <span id="markets-processed">0</span> / <span id="total-markets">0</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Estimated Time:</span>
+                                        <span id="estimated-time">Calculating...</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">Current Status:</span>
+                                        <span id="current-status">Initializing...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="generation-log">
+                            <h4><i class="fas fa-list"></i> Generation Log</h4>
+                            <div id="generation-log" class="log-container"></div>
+                        </div>
+                        <div class="step-actions">
+                            <button id="cancel-generation" class="btn btn-outline btn-danger">
+                                <i class="fas fa-stop"></i>
+                                Cancel Generation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Results -->
+            <section id="step-results" class="step-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-check-circle"></i> Generation Complete</h2>
+                        <p>Your press release variants have been generated successfully. Review and download your results below.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="results-summary">
+                            <div class="summary-stats">
+                                <div class="stat-card">
+                                    <div class="stat-number" id="total-generated">0</div>
+                                    <div class="stat-label">Variants Generated</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number" id="avg-quality">0%</div>
+                                    <div class="stat-label">Average Quality Score</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number" id="generation-time">0s</div>
+                                    <div class="stat-label">Total Generation Time</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number" id="total-cost">$0.00</div>
+                                    <div class="stat-label">Total Cost</div>
+                                    <div class="cost-breakdown-compact">
+                                        <span class="cost-item">Bedrock: <span id="bedrock-cost-compact">$0.00</span></span>
+                                        <span class="cost-item">Tavily: <span id="tavily-cost-compact">$0.00</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="download-actions">
+                                <button id="download-all" class="btn btn-primary btn-large">
+                                    <i class="fas fa-download"></i>
+                                    Download All (ZIP)
+                                </button>
+                                <div class="format-downloads">
+                                    <button class="btn btn-outline format-download" data-format="json">
+                                        <i class="fas fa-code"></i>
+                                        JSON
+                                    </button>
+                                    <button class="btn btn-outline format-download" data-format="txt">
+                                        <i class="fas fa-file-alt"></i>
+                                        TXT
+                                    </button>
+                                    <button class="btn btn-outline format-download" data-format="html">
+                                        <i class="fas fa-globe"></i>
+                                        HTML
+                                    </button>
+                                    <button class="btn btn-outline format-download" data-format="docx">
+                                        <i class="fas fa-file-word"></i>
+                                        DOCX
+                                    </button>
+                                    <button class="btn btn-outline format-download" data-format="pdf">
+                                        <i class="fas fa-file-pdf"></i>
+                                        PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="results-grid">
+                            <div class="results-header">
+                                <h3><i class="fas fa-th-large"></i> Market Variants</h3>
+                                <div class="view-options">
+                                    <button id="grid-view" class="view-btn active">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button id="list-view" class="view-btn">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="results-container" class="results-container grid-view">
+                                <!-- Results will be populated here -->
+                            </div>
+                        </div>
+                        <div class="step-actions">
+                            <button id="start-new" class="btn btn-outline">
+                                <i class="fas fa-plus"></i>
+                                Start New Generation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal for Sample Templates -->
+    <div id="sample-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sample Press Release Templates</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="sample-templates" class="sample-templates">
+                    <!-- Sample templates will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Market Preview -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="preview-title">Market Preview</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="preview-content" class="preview-content">
+                    <!-- Preview content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for Industry Templates -->
+    <div id="industry-template-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-briefcase"></i> Industry Press Release Templates</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Select an industry-specific template to get started. Each template includes realistic data and can be customized for your needs.</p>
+                <div id="industry-templates-list" class="industry-templates-list">
+                    <!-- Templates will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="env-config.js"></script>
+    <script src="js/config.js"></script>
+    <script src="data/sample-templates.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/quality-popover.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+# Cost Tracking Configuration Example
+# Copy this file to terraform.tfvars and customize for your deployment
+
+# Basic Configuration
+project_name = "press-release-generator"
+environment  = "prod"
+aws_region   = "us-west-2"
+
+# Cost Tracking Variables
+cost_center    = "engineering"           # Your cost center for billing
+owner          = "platform-team"         # Team/person responsible for resources
+business_unit  = "product-engineering"   # Business unit for cost allocation
+application    = "press-release-gen"     # Application identifier
+team           = "devops-team"           # Maintaining team
+
+# Compliance and Governance
+data_classification = "internal"         # public, internal, confidential, restricted
+backup_required     = "yes"             # yes/no - affects backup costs
+monitoring_level    = "standard"        # basic, standard, enhanced - affects monitoring costs
+auto_shutdown       = "no"              # yes/no - for dev environments to save costs
+
+# Application Configuration
+backend_cpu    = 512
+backend_memory = 1024
+frontend_cpu   = 256
+frontend_memory = 512
+
+# Scaling Configuration
+backend_desired_count  = 2
+frontend_desired_count = 2
+backend_min_capacity   = 1
+backend_max_capacity   = 10
+frontend_min_capacity  = 1
+frontend_max_capacity  = 5
+
+# Redis Configuration
+redis_mode = "embedded"  # none, embedded, elasticache
+
+# For ElastiCache mode (higher cost but better performance)
+# redis_mode                      = "elasticache"
+# redis_node_type                 = "cache.t3.micro"
+# redis_num_cache_nodes           = 1
+# redis_snapshot_retention_limit  = 1
+# redis_encryption_at_rest        = true
+# redis_encryption_in_transit     = true
+
+# Deployment Type
+deployment_type = "internal"  # internal (VPC-only) or public (internet-facing)
+
+# CORS Configuration
+frontend_url = "https://your-frontend-domain.com"
+
+# SSL Configuration (optional)
+# ssl_certificate_arn = "arn:aws:acm:us-west-2:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+# domain_name = "your-domain.com"
+
+# Secrets (create these in AWS Secrets Manager first)
+# firecrawl_api_key_secret_arn   = "arn:aws:secretsmanager:us-west-2:123456789012:secret:firecrawl-api-key-AbCdEf"
+# perplexity_api_key_secret_arn  = "arn:aws:secretsmanager:us-west-2:123456789012:secret:perplexity-api-key-AbCdEf"
+# tavily_api_key_secret_arn      = "arn:aws:secretsmanager:us-west-2:123456789012:secret:tavily-api-key-AbCdEf"
+
+# Monitoring Configuration
+log_retention_days = 30  # Affects storage costs
+
+# Additional tags for specific requirements
+additional_tags = {
+  "Department"     = "Engineering"
+  "BudgetCode"     = "ENG-2024-001"
+  "Compliance"     = "SOC2"
+  "ContactEmail"   = "devops@yourcompany.com"
+  "MaintenanceWindow" = "Sunday-03:00-05:00-UTC"
+}
+
+# Development Environment Example
+# Uncomment and modify for development deployments
+# environment         = "dev"
+# auto_shutdown       = "yes"           # Allow auto-shutdown for cost savings
+# backup_required     = "no"            # Skip backups for dev
+# monitoring_level    = "basic"         # Reduce monitoring costs
+# backend_desired_count  = 1            # Reduce instance count
+# frontend_desired_count = 1
+# redis_mode          = "embedded"      # Use embedded Redis instead of ElastiCache
+# log_retention_days  = 7               # Shorter log retention

@@ -1,0 +1,608 @@
+{
+  "description": "Top 100 US Metropolitan Markets for Press Release Generation",
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-10",
+  "totalMarkets": 100,
+  "markets": [
+    {
+      "name": "New York-Newark-Jersey City",
+      "state": "NY-NJ-PA",
+      "code": "NYC",
+      "region": "Northeast"
+    },
+    {
+      "name": "Los Angeles-Long Beach-Anaheim",
+      "state": "CA",
+      "code": "LAX",
+      "region": "West"
+    },
+    {
+      "name": "Chicago-Naperville-Elgin",
+      "state": "IL-IN-WI",
+      "code": "CHI",
+      "region": "Midwest"
+    },
+    {
+      "name": "Dallas-Fort Worth-Arlington",
+      "state": "TX",
+      "code": "DFW",
+      "region": "South"
+    },
+    {
+      "name": "Houston-The Woodlands-Sugar Land",
+      "state": "TX",
+      "code": "HOU",
+      "region": "South"
+    },
+    {
+      "name": "Washington-Arlington-Alexandria",
+      "state": "DC-VA-MD-WV",
+      "code": "WAS",
+      "region": "South"
+    },
+    {
+      "name": "Miami-Fort Lauderdale-West Palm Beach",
+      "state": "FL",
+      "code": "MIA",
+      "region": "South"
+    },
+    {
+      "name": "Philadelphia-Camden-Wilmington",
+      "state": "PA-NJ-DE-MD",
+      "code": "PHL",
+      "region": "Northeast"
+    },
+    {
+      "name": "Atlanta-Sandy Springs-Roswell",
+      "state": "GA",
+      "code": "ATL",
+      "region": "South"
+    },
+    {
+      "name": "Boston-Cambridge-Newton",
+      "state": "MA-NH",
+      "code": "BOS",
+      "region": "Northeast"
+    },
+    {
+      "name": "Phoenix-Mesa-Scottsdale",
+      "state": "AZ",
+      "code": "PHX",
+      "region": "West"
+    },
+    {
+      "name": "Riverside-San Bernardino-Ontario",
+      "state": "CA",
+      "code": "RIV",
+      "region": "West"
+    },
+    {
+      "name": "Detroit-Warren-Dearborn",
+      "state": "MI",
+      "code": "DET",
+      "region": "Midwest"
+    },
+    {
+      "name": "Seattle-Tacoma-Bellevue",
+      "state": "WA",
+      "code": "SEA",
+      "region": "West"
+    },
+    {
+      "name": "Minneapolis-St. Paul-Bloomington",
+      "state": "MN-WI",
+      "code": "MSP",
+      "region": "Midwest"
+    },
+    {
+      "name": "San Diego-Carlsbad",
+      "state": "CA",
+      "code": "SAN",
+      "region": "West"
+    },
+    {
+      "name": "Tampa-St. Petersburg-Clearwater",
+      "state": "FL",
+      "code": "TPA",
+      "region": "South"
+    },
+    {
+      "name": "Denver-Aurora-Lakewood",
+      "state": "CO",
+      "code": "DEN",
+      "region": "West"
+    },
+    {
+      "name": "St. Louis",
+      "state": "MO-IL",
+      "code": "STL",
+      "region": "Midwest"
+    },
+    {
+      "name": "Baltimore-Columbia-Towson",
+      "state": "MD",
+      "code": "BWI",
+      "region": "South"
+    },
+    {
+      "name": "Charlotte-Concord-Gastonia",
+      "state": "NC-SC",
+      "code": "CLT",
+      "region": "South"
+    },
+    {
+      "name": "Orlando-Kissimmee-Sanford",
+      "state": "FL",
+      "code": "ORL",
+      "region": "South"
+    },
+    {
+      "name": "San Antonio-New Braunfels",
+      "state": "TX",
+      "code": "SAT",
+      "region": "South"
+    },
+    {
+      "name": "Portland-Vancouver-Hillsboro",
+      "state": "OR-WA",
+      "code": "PDX",
+      "region": "West"
+    },
+    {
+      "name": "Sacramento--Roseville--Arden-Arcade",
+      "state": "CA",
+      "code": "SAC",
+      "region": "West"
+    },
+    {
+      "name": "Pittsburgh",
+      "state": "PA",
+      "code": "PIT",
+      "region": "Northeast"
+    },
+    {
+      "name": "Las Vegas-Henderson-Paradise",
+      "state": "NV",
+      "code": "LAS",
+      "region": "West"
+    },
+    {
+      "name": "Cincinnati",
+      "state": "OH-KY-IN",
+      "code": "CVG",
+      "region": "Midwest"
+    },
+    {
+      "name": "Austin-Round Rock",
+      "state": "TX",
+      "code": "AUS",
+      "region": "South"
+    },
+    {
+      "name": "Kansas City",
+      "state": "MO-KS",
+      "code": "MCI",
+      "region": "Midwest"
+    },
+    {
+      "name": "Columbus",
+      "state": "OH",
+      "code": "CMH",
+      "region": "Midwest"
+    },
+    {
+      "name": "Indianapolis-Carmel-Anderson",
+      "state": "IN",
+      "code": "IND",
+      "region": "Midwest"
+    },
+    {
+      "name": "Cleveland-Elyria",
+      "state": "OH",
+      "code": "CLE",
+      "region": "Midwest"
+    },
+    {
+      "name": "San Jose-Sunnyvale-Santa Clara",
+      "state": "CA",
+      "code": "SJC",
+      "region": "West"
+    },
+    {
+      "name": "Nashville-Davidson--Murfreesboro--Franklin",
+      "state": "TN",
+      "code": "BNA",
+      "region": "South"
+    },
+    {
+      "name": "Virginia Beach-Norfolk-Newport News",
+      "state": "VA-NC",
+      "code": "ORF",
+      "region": "South"
+    },
+    {
+      "name": "Providence-Warwick",
+      "state": "RI-MA",
+      "code": "PVD",
+      "region": "Northeast"
+    },
+    {
+      "name": "Milwaukee-Waukesha-West Allis",
+      "state": "WI",
+      "code": "MKE",
+      "region": "Midwest"
+    },
+    {
+      "name": "Jacksonville",
+      "state": "FL",
+      "code": "JAX",
+      "region": "South"
+    },
+    {
+      "name": "Memphis",
+      "state": "TN-MS-AR",
+      "code": "MEM",
+      "region": "South"
+    },
+    {
+      "name": "Oklahoma City",
+      "state": "OK",
+      "code": "OKC",
+      "region": "South"
+    },
+    {
+      "name": "Louisville/Jefferson County",
+      "state": "KY-IN",
+      "code": "SDF",
+      "region": "South"
+    },
+    {
+      "name": "Hartford-West Hartford-East Hartford",
+      "state": "CT",
+      "code": "BDL",
+      "region": "Northeast"
+    },
+    {
+      "name": "Richmond",
+      "state": "VA",
+      "code": "RIC",
+      "region": "South"
+    },
+    {
+      "name": "New Orleans-Metairie",
+      "state": "LA",
+      "code": "MSY",
+      "region": "South"
+    },
+    {
+      "name": "Buffalo-Cheektowaga-Niagara Falls",
+      "state": "NY",
+      "code": "BUF",
+      "region": "Northeast"
+    },
+    {
+      "name": "Raleigh",
+      "state": "NC",
+      "code": "RDU",
+      "region": "South"
+    },
+    {
+      "name": "Birmingham-Hoover",
+      "state": "AL",
+      "code": "BHM",
+      "region": "South"
+    },
+    {
+      "name": "Salt Lake City",
+      "state": "UT",
+      "code": "SLC",
+      "region": "West"
+    },
+    {
+      "name": "Rochester",
+      "state": "NY",
+      "code": "ROC",
+      "region": "Northeast"
+    },
+    {
+      "name": "Grand Rapids-Wyoming",
+      "state": "MI",
+      "code": "GRR",
+      "region": "Midwest"
+    },
+    {
+      "name": "Tucson",
+      "state": "AZ",
+      "code": "TUS",
+      "region": "West"
+    },
+    {
+      "name": "Tulsa",
+      "state": "OK",
+      "code": "TUL",
+      "region": "South"
+    },
+    {
+      "name": "Honolulu",
+      "state": "HI",
+      "code": "HNL",
+      "region": "West"
+    },
+    {
+      "name": "Fresno",
+      "state": "CA",
+      "code": "FAT",
+      "region": "West"
+    },
+    {
+      "name": "Worcester",
+      "state": "MA-CT",
+      "code": "ORH",
+      "region": "Northeast"
+    },
+    {
+      "name": "Bridgeport-Stamford-Norwalk",
+      "state": "CT",
+      "code": "BDR",
+      "region": "Northeast"
+    },
+    {
+      "name": "Albany-Schenectady-Troy",
+      "state": "NY",
+      "code": "ALB",
+      "region": "Northeast"
+    },
+    {
+      "name": "Omaha-Council Bluffs",
+      "state": "NE-IA",
+      "code": "OMA",
+      "region": "Midwest"
+    },
+    {
+      "name": "Albuquerque",
+      "state": "NM",
+      "code": "ABQ",
+      "region": "West"
+    },
+    {
+      "name": "Greenville-Anderson-Mauldin",
+      "state": "SC",
+      "code": "GSP",
+      "region": "South"
+    },
+    {
+      "name": "Baton Rouge",
+      "state": "LA",
+      "code": "BTR",
+      "region": "South"
+    },
+    {
+      "name": "Dayton",
+      "state": "OH",
+      "code": "DAY",
+      "region": "Midwest"
+    },
+    {
+      "name": "Akron",
+      "state": "OH",
+      "code": "CAK",
+      "region": "Midwest"
+    },
+    {
+      "name": "El Paso",
+      "state": "TX",
+      "code": "ELP",
+      "region": "South"
+    },
+    {
+      "name": "McAllen-Edinburg-Mission",
+      "state": "TX",
+      "code": "MFE",
+      "region": "South"
+    },
+    {
+      "name": "Bakersfield",
+      "state": "CA",
+      "code": "BFL",
+      "region": "West"
+    },
+    {
+      "name": "Stockton-Lodi",
+      "state": "CA",
+      "code": "SCK",
+      "region": "West"
+    },
+    {
+      "name": "Youngstown-Warren-Boardman",
+      "state": "OH-PA",
+      "code": "YNG",
+      "region": "Midwest"
+    },
+    {
+      "name": "Harrisburg-Carlisle",
+      "state": "PA",
+      "code": "MDT",
+      "region": "Northeast"
+    },
+    {
+      "name": "Scranton--Wilkes-Barre--Hazleton",
+      "state": "PA",
+      "code": "AVP",
+      "region": "Northeast"
+    },
+    {
+      "name": "Springfield",
+      "state": "MA",
+      "code": "CEF",
+      "region": "Northeast"
+    },
+    {
+      "name": "Little Rock-North Little Rock-Conway",
+      "state": "AR",
+      "code": "LIT",
+      "region": "South"
+    },
+    {
+      "name": "Oxnard-Thousand Oaks-Ventura",
+      "state": "CA",
+      "code": "OXR",
+      "region": "West"
+    },
+    {
+      "name": "Cape Coral-Fort Myers",
+      "state": "FL",
+      "code": "RSW",
+      "region": "South"
+    },
+    {
+      "name": "Knoxville",
+      "state": "TN",
+      "code": "TYS",
+      "region": "South"
+    },
+    {
+      "name": "Charleston-North Charleston",
+      "state": "SC",
+      "code": "CHS",
+      "region": "South"
+    },
+    {
+      "name": "Lakeland-Winter Haven",
+      "state": "FL",
+      "code": "LAL",
+      "region": "South"
+    },
+    {
+      "name": "Daytona Beach-Deltona-Ormond Beach",
+      "state": "FL",
+      "code": "DAB",
+      "region": "South"
+    },
+    {
+      "name": "Allentown-Bethlehem-Easton",
+      "state": "PA-NJ",
+      "code": "ABE",
+      "region": "Northeast"
+    },
+    {
+      "name": "Boise City",
+      "state": "ID",
+      "code": "BOI",
+      "region": "West"
+    },
+    {
+      "name": "North Port-Sarasota-Bradenton",
+      "state": "FL",
+      "code": "SRQ",
+      "region": "South"
+    },
+    {
+      "name": "Columbia",
+      "state": "SC",
+      "code": "CAE",
+      "region": "South"
+    },
+    {
+      "name": "Colorado Springs",
+      "state": "CO",
+      "code": "COS",
+      "region": "West"
+    },
+    {
+      "name": "Provo-Orem",
+      "state": "UT",
+      "code": "PVU",
+      "region": "West"
+    },
+    {
+      "name": "Jackson",
+      "state": "MS",
+      "code": "JAN",
+      "region": "South"
+    },
+    {
+      "name": "Des Moines-West Des Moines",
+      "state": "IA",
+      "code": "DSM",
+      "region": "Midwest"
+    },
+    {
+      "name": "Deltona-Daytona Beach-Ormond Beach",
+      "state": "FL",
+      "code": "DLT",
+      "region": "South"
+    },
+    {
+      "name": "Wichita",
+      "state": "KS",
+      "code": "ICT",
+      "region": "Midwest"
+    },
+    {
+      "name": "Madison",
+      "state": "WI",
+      "code": "MSN",
+      "region": "Midwest"
+    },
+    {
+      "name": "Toledo",
+      "state": "OH",
+      "code": "TOL",
+      "region": "Midwest"
+    },
+    {
+      "name": "Syracuse",
+      "state": "NY",
+      "code": "SYR",
+      "region": "Northeast"
+    },
+    {
+      "name": "Spokane-Spokane Valley",
+      "state": "WA",
+      "code": "GEG",
+      "region": "West"
+    },
+    {
+      "name": "Chattanooga",
+      "state": "TN-GA",
+      "code": "CHA",
+      "region": "South"
+    },
+    {
+      "name": "Fort Wayne",
+      "state": "IN",
+      "code": "FWA",
+      "region": "Midwest"
+    },
+    {
+      "name": "Modesto",
+      "state": "CA",
+      "code": "MOD",
+      "region": "West"
+    },
+    {
+      "name": "Mobile",
+      "state": "AL",
+      "code": "MOB",
+      "region": "South"
+    },
+    {
+      "name": "Pensacola-Ferry Pass-Brent",
+      "state": "FL",
+      "code": "PNS",
+      "region": "South"
+    },
+    {
+      "name": "Peoria",
+      "state": "IL",
+      "code": "PIA",
+      "region": "Midwest"
+    },
+    {
+      "name": "Fayetteville-Springdale-Rogers",
+      "state": "AR-MO",
+      "code": "XNA",
+      "region": "South"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "market": "Atlanta-Sandy Springs-Roswell",
+  "realEstate": {
+    "medianHomePrice": 288270,
+    "priceChange": -0.4,
+    "inventoryLevel": 20688,
+    "daysOnMarket": 69,
+    "activeListings": 18700
+  },
+  "demographics": {
+    "population": 14106281,
+    "medianIncome": 56746,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 94.6,
+    "gdpGrowth": 1.6,
+    "majorIndustries": [
+      "Manufacturing",
+      "Retail",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.637058Z",
+  "source": "synthetic"
+}

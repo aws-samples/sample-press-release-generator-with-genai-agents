@@ -1,0 +1,251 @@
+{
+  "marketInfo": {
+    "name": "Los Angeles-Long Beach-Anaheim",
+    "code": "LAX",
+    "state": "CA",
+    "region": "West",
+    "lastUpdated": "2025-08-21"
+  },
+  "demographics": {
+    "population": {
+      "total": 13200000,
+      "growthRate": {
+        "annual": 0.8,
+        "fiveYear": 4.2
+      },
+      "density": 2100,
+      "ageDistribution": {
+        "under25": 0.28,
+        "age25to44": 0.32,
+        "age45to64": 0.25,
+        "over65": 0.15
+      }
+    },
+    "households": {
+      "total": 4800000,
+      "averageSize": 2.75,
+      "incomeDistribution": {
+        "median": 75000,
+        "under50k": 0.35,
+        "50kto100k": 0.30,
+        "100kto200k": 0.25,
+        "over200k": 0.10
+      }
+    },
+    "education": {
+      "collegeGraduates": 0.338,
+      "advancedDegrees": 0.142,
+      "highSchoolGraduates": 0.891
+    }
+  },
+  "economicIndicators": {
+    "employment": {
+      "unemploymentRate": 0.042,
+      "laborForceParticipation": 0.64,
+      "jobGrowthRate": 2.1,
+      "majorIndustries": [
+        {
+          "sector": "Technology",
+          "employmentShare": 0.18,
+          "growthRate": 3.5
+        },
+        {
+          "sector": "Entertainment",
+          "employmentShare": 0.12,
+          "growthRate": 1.8
+        },
+        {
+          "sector": "International Trade",
+          "employmentShare": 0.15,
+          "growthRate": 2.3
+        },
+        {
+          "sector": "Tourism",
+          "employmentShare": 0.10,
+          "growthRate": 2.8
+        },
+        {
+          "sector": "Aerospace",
+          "employmentShare": 0.08,
+          "growthRate": 1.2
+        }
+      ]
+    },
+    "economy": {
+      "gdpPerCapita": 68000,
+      "economicGrowthRate": 2.8,
+      "businessFormationRate": 12.5,
+      "costOfLivingIndex": 142
+    }
+  },
+  "housingMarket": {
+    "pricing": {
+      "medianSalePrice": 849000,
+      "pricePerSquareFoot": 625,
+      "priceGrowthYoY": 3.2,
+      "priceRanges": {
+        "entry": {
+          "min": 400000,
+          "max": 600000
+        },
+        "mid": {
+          "min": 600000,
+          "max": 1200000
+        },
+        "luxury": {
+          "min": 1200000,
+          "max": null
+        }
+      }
+    },
+    "inventory": {
+      "activeListings": 15420,
+      "monthsOfSupply": 2.8,
+      "newListings": 3200,
+      "daysOnMarket": 35,
+      "inventoryTrend": "declining"
+    },
+    "activity": {
+      "salesVolume": 2850,
+      "pendingSales": 1420,
+      "saleToListRatio": 0.992,
+      "soldAboveList": 0.31,
+      "offMarketInTwoWeeks": 0.43
+    },
+    "seasonality": {
+      "peakSeason": "spring",
+      "slowSeason": "winter",
+      "seasonalVariation": 0.15
+    }
+  },
+  "neighborhoods": {
+    "submarkets": [
+      {
+        "name": "Santa Monica",
+        "type": "coastal_premium",
+        "medianPrice": 1250000,
+        "characteristics": ["beach_proximity", "walkable", "high_density", "tech_corridor"],
+        "demographics": {
+          "medianIncome": 95000,
+          "ageMedian": 38,
+          "educationLevel": "high"
+        }
+      },
+      {
+        "name": "Beverly Hills",
+        "type": "luxury_enclave",
+        "medianPrice": 2100000,
+        "characteristics": ["luxury", "celebrity", "exclusive", "retail_destination"],
+        "demographics": {
+          "medianIncome": 185000,
+          "ageMedian": 45,
+          "educationLevel": "very_high"
+        }
+      },
+      {
+        "name": "Long Beach",
+        "type": "port_industrial",
+        "medianPrice": 675000,
+        "characteristics": ["port_access", "industrial", "diverse", "affordable_relative"],
+        "demographics": {
+          "medianIncome": 62000,
+          "ageMedian": 35,
+          "educationLevel": "moderate"
+        }
+      },
+      {
+        "name": "Pasadena",
+        "type": "suburban_premium",
+        "medianPrice": 950000,
+        "characteristics": ["historic", "cultural", "family_oriented", "tech_adjacent"],
+        "demographics": {
+          "medianIncome": 78000,
+          "ageMedian": 42,
+          "educationLevel": "high"
+        }
+      },
+      {
+        "name": "Irvine",
+        "type": "planned_community",
+        "medianPrice": 1100000,
+        "characteristics": ["master_planned", "family_friendly", "tech_hub", "new_construction"],
+        "demographics": {
+          "medianIncome": 105000,
+          "ageMedian": 36,
+          "educationLevel": "very_high"
+        }
+      },
+      {
+        "name": "Manhattan Beach",
+        "type": "coastal_luxury",
+        "medianPrice": 1850000,
+        "characteristics": ["beach_front", "luxury", "family_oriented", "exclusive"],
+        "demographics": {
+          "medianIncome": 145000,
+          "ageMedian": 43,
+          "educationLevel": "very_high"
+        }
+      }
+    ],
+    "neighborhoodTiers": {
+      "tier1": ["Santa Monica", "Beverly Hills", "Manhattan Beach"],
+      "tier2": ["Pasadena", "Irvine", "Redondo Beach"],
+      "tier3": ["Long Beach", "Torrance", "Burbank", "Anaheim"]
+    }
+  },
+  "amenities": {
+    "transportation": {
+      "publicTransit": {
+        "score": 7.2,
+        "systems": ["Metro Rail", "Metro Bus", "LAX Flyaway", "Beach Cities Transit"],
+        "coverage": "extensive"
+      },
+      "highways": ["I-405", "I-10", "I-110", "US-101", "I-5", "SR-91"],
+      "airports": [
+        {
+          "name": "LAX",
+          "distance": "central",
+          "type": "international_major"
+        },
+        {
+          "name": "Long Beach Airport",
+          "distance": "southeast",
+          "type": "domestic_major"
+        },
+        {
+          "name": "Burbank Airport",
+          "distance": "north",
+          "type": "domestic_major"
+        }
+      ]
+    },
+    "education": {
+      "publicSchools": {
+        "rating": 6.8,
+        "districts": ["LAUSD", "Beverly Hills USD", "Santa Monica-Malibu USD", "Irvine USD"]
+      },
+      "universities": ["UCLA", "USC", "Caltech", "Pepperdine", "UC Irvine", "CSULB"],
+      "privateSchools": 145
+    },
+    "lifestyle": {
+      "climate": {
+        "type": "mediterranean",
+        "averageTemp": 72,
+        "sunnyDays": 284
+      },
+      "recreation": ["beaches", "mountains", "entertainment", "dining", "shopping", "sports"],
+      "culturalAttractions": ["Hollywood", "Getty Center", "LACMA", "Disney Concert Hall", "Griffith Observatory", "Santa Monica Pier"]
+    }
+  },
+  "geographicContext": {
+    "coordinates": {
+      "latitude": 34.0522,
+      "longitude": -118.2437
+    },
+    "elevation": 285,
+    "landArea": 33954,
+    "waterFeatures": ["Pacific Ocean", "Los Angeles River", "San Gabriel River"],
+    "naturalFeatures": ["Santa Monica Mountains", "San Gabriel Mountains", "Palos Verdes Peninsula"],
+    "urbanClassification": "metropolitan"
+  }
+}

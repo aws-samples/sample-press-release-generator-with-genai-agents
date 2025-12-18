@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Market Validation Baselines Schema",
+  "description": "JSON schema for market-specific validation rules and quality thresholds",
+  "type": "object",
+  "required": ["marketInfo", "qualityThresholds", "marketSpecificRules", "validationConfig"],
+  "properties": {
+    "marketInfo": {
+      "type": "object",
+      "required": ["name", "code", "tier", "lastUpdated"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Market name matching the market data file"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "tier": {
+          "type": "string",
+          "enum": ["tier1", "tier2", "tier3"]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "qualityThresholds": {
+      "type": "object",
+      "required": ["accuracy", "relevance", "consistency"],
+      "properties": {
+        "accuracy": {
+          "type": "object",
+          "properties": {
+            "priceVariance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Maximum acceptable variance for price data (0.05 = 5%)"
+            },
+            "inventoryVariance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Maximum acceptable variance for inventory data"
+            },
+            "demographicVariance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Maximum acceptable variance for demographic data"
+            },
+            "minimumDataPoints": {
+              "type": "number",
+              "minimum": 1,
+              "description": "Minimum number of data points required for validation"
+            }
+          }
+        },
+        "relevance": {
+          "type": "object",
+          "properties": {
+            "neighborhoodMentions": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Minimum neighborhood references required"
+            },
+            "localContextScore": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Minimum local context relevance score"
+            },
+            "marketSpecificTerms": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Minimum market-specific terminology usage"
+            },
+            "culturalReferences": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Minimum cultural context references"
+            }
+          }
+        },
+        "consistency": {
+          "type": "object",
+          "properties": {
+            "dataSourceAlignment": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Required alignment between data sources"
+            },
+            "temporalConsistency": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Required consistency in temporal references"
+            },
+            "crossReferenceAccuracy": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Required accuracy in cross-referenced data"
+            }
+          }
+        }
+      }
+    },
+    "marketSpecificRules": {
+      "type": "object",
+      "required": ["requiredNeighborhoods", "keyEconomicIndicators", "culturalReferences"],
+      "properties": {
+        "requiredNeighborhoods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Neighborhoods that must be mentioned for market authenticity"
+        },
+        "keyEconomicIndicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Economic indicators specific to this market"
+        },
+        "culturalReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cultural context elements specific to this market"
+        },
+        "industryFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Key industries that define this market"
+        },
+        "lifestyleFactors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Lifestyle elements that characterize this market"
+        }
+      }
+    },
+    "validationConfig": {
+      "type": "object",
+      "properties": {
+        "strictMode": {
+          "type": "boolean",
+          "description": "Whether to apply strict validation rules"
+        },
+        "warningThresholds": {
+          "type": "object",
+          "properties": {
+            "lowAccuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+            "lowRelevance": { "type": "number", "minimum": 0, "maximum": 1 },
+            "lowConsistency": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "errorThresholds": {
+          "type": "object",
+          "properties": {
+            "criticalAccuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+            "criticalRelevance": { "type": "number", "minimum": 0, "maximum": 1 },
+            "criticalConsistency": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}

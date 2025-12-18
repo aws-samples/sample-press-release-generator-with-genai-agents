@@ -1,0 +1,26 @@
+{
+  "market": "Oklahoma City",
+  "realEstate": {
+    "medianHomePrice": 237588,
+    "priceChange": -0.1,
+    "inventoryLevel": 4666,
+    "daysOnMarket": 52,
+    "activeListings": 14827
+  },
+  "demographics": {
+    "population": 15667619,
+    "medianIncome": 66593,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 96.4,
+    "gdpGrowth": 5.5,
+    "majorIndustries": [
+      "Manufacturing",
+      "Healthcare",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.651099Z",
+  "source": "synthetic"
+}

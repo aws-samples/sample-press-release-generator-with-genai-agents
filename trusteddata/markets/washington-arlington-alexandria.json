@@ -1,0 +1,26 @@
+{
+  "market": "Washington-Arlington-Alexandria",
+  "realEstate": {
+    "medianHomePrice": 694949,
+    "priceChange": 4.1,
+    "inventoryLevel": 19051,
+    "daysOnMarket": 35,
+    "activeListings": 5302
+  },
+  "demographics": {
+    "population": 4334268,
+    "medianIncome": 92383,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 92.0,
+    "gdpGrowth": 3.7,
+    "majorIndustries": [
+      "Technology",
+      "Retail",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.636317Z",
+  "source": "synthetic"
+}

@@ -1,0 +1,26 @@
+{
+  "market": "Baton Rouge",
+  "realEstate": {
+    "medianHomePrice": 376791,
+    "priceChange": 3.9,
+    "inventoryLevel": 9225,
+    "daysOnMarket": 70,
+    "activeListings": 12993
+  },
+  "demographics": {
+    "population": 4187822,
+    "medianIncome": 61201,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 96.5,
+    "gdpGrowth": 4.6,
+    "majorIndustries": [
+      "Manufacturing",
+      "Energy",
+      "Retail"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.657715Z",
+  "source": "synthetic"
+}

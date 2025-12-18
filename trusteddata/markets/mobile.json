@@ -1,0 +1,26 @@
+{
+  "market": "Mobile",
+  "realEstate": {
+    "medianHomePrice": 162641,
+    "priceChange": 7.9,
+    "inventoryLevel": 2792,
+    "daysOnMarket": 26,
+    "activeListings": 8057
+  },
+  "demographics": {
+    "population": 3080966,
+    "medianIncome": 25444,
+    "householdSize": 2.3
+  },
+  "economic": {
+    "employmentRate": 96.6,
+    "gdpGrowth": 3.7,
+    "majorIndustries": [
+      "Healthcare",
+      "Retail",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.666950Z",
+  "source": "synthetic"
+}

@@ -1,0 +1,81 @@
+{
+  "description": "Enhanced Market Data Index - Market-Specific Breakdowns for Quality Framework Enhancement",
+  "version": "1.0.0",
+  "lastUpdated": "2025-08-21",
+  "totalMarkets": 1,
+  "implementedMarkets": 1,
+  "dataCategories": [
+    "demographics",
+    "economicIndicators", 
+    "housingMarket",
+    "neighborhoods",
+    "amenities",
+    "geographicContext",
+    "validationBaselines"
+  ],
+  "markets": [
+    {
+      "name": "Los Angeles-Long Beach-Anaheim",
+      "code": "LAX",
+      "directory": "los-angeles-long-beach-anaheim",
+      "tier": "tier1",
+      "status": "complete",
+      "dataFiles": [
+        "market-profile.json",
+        "validation-baselines.json"
+      ],
+      "lastUpdated": "2025-08-21",
+      "dataCompleteness": {
+        "demographics": true,
+        "economicIndicators": true,
+        "housingMarket": true,
+        "neighborhoods": true,
+        "amenities": true,
+        "geographicContext": true,
+        "validationBaselines": true
+      }
+    }
+  ],
+  "schemas": {
+    "marketData": "schemas/market-data-schema.json",
+    "validation": "schemas/validation-schema.json"
+  },
+  "qualityImpact": {
+    "expectedImprovements": {
+      "accuracyAssessment": "+5-8 points",
+      "relevanceAssessment": "+6-8 points", 
+      "consistencyAssessment": "+4-6 points",
+      "totalPotential": "+15-22 points"
+    },
+    "enhancementAreas": [
+      "Market-specific validation baselines",
+      "Neighborhood context validation",
+      "Economic indicator accuracy",
+      "Cultural context integration",
+      "Local amenity references"
+    ]
+  },
+  "integrationPoints": {
+    "qualityFramework": [
+      "accuracyAssessment",
+      "relevanceAssessment", 
+      "consistencyAssessment"
+    ],
+    "services": [
+      "enhancedMarketDataService",
+      "comparativeAnalyzer",
+      "qualityValidator"
+    ],
+    "agents": [
+      "marketResearcher",
+      "localizationEngine",
+      "qualityValidator"
+    ]
+  },
+  "performanceTargets": {
+    "loadTime": "<500ms",
+    "cacheHitRate": ">80%",
+    "memoryUsage": "<100MB",
+    "apiResponseTime": "<2s"
+  }
+}

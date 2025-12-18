@@ -1,0 +1,26 @@
+{
+  "market": "New Orleans-Metairie",
+  "realEstate": {
+    "medianHomePrice": 454275,
+    "priceChange": -1.6,
+    "inventoryLevel": 3325,
+    "daysOnMarket": 44,
+    "activeListings": 15226
+  },
+  "demographics": {
+    "population": 6045648,
+    "medianIncome": 60317,
+    "householdSize": 2.3
+  },
+  "economic": {
+    "employmentRate": 93.4,
+    "gdpGrowth": 3.0,
+    "majorIndustries": [
+      "Energy",
+      "Manufacturing",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.652058Z",
+  "source": "synthetic"
+}

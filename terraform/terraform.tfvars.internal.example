@@ -1,0 +1,68 @@
+# Internal Deployment Configuration Example
+# Copy this file to terraform.tfvars and customize for your internal deployment
+
+# Basic Configuration
+project_name = "press-release-generator"
+environment  = "prod"
+aws_region   = "us-west-2"
+
+# Deployment Type - INTERNAL (VPC-only access)
+deployment_type = "internal"
+
+# Application Configuration
+backend_image  = "nginx:alpine"  # Will be replaced with ECR URL after deployment
+frontend_image = "nginx:alpine"  # Will be replaced with ECR URL after deployment
+
+# Network Configuration for Internal Access
+vpc_cidr = "10.0.0.0/16"
+
+# Internal Access Control
+allowed_cidr_blocks_internal = [
+  "10.0.0.0/16",        # VPC CIDR
+  "172.16.0.0/12",      # Corporate network (example)
+  "192.168.1.0/24"      # Office network (example)
+]
+
+# CORS Configuration for Internal Deployment
+frontend_url = ""  # Leave empty for internal deployments
+cors_allowed_origins = "https://*.internal.company.com,https://*.vpc.local"
+
+# SSL/TLS Configuration (Optional - can use self-signed for internal)
+# ssl_certificate_arn = "arn:aws:acm:us-west-2:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+# domain_name = "api.internal.company.com"
+
+# Resource Sizing (can be smaller for internal use)
+backend_cpu    = 256
+backend_memory = 512
+backend_desired_count = 1
+
+frontend_cpu    = 256
+frontend_memory = 512
+frontend_desired_count = 1
+
+# Auto Scaling (conservative for internal)
+backend_min_capacity  = 1
+backend_max_capacity  = 3
+frontend_min_capacity = 1
+frontend_max_capacity = 2
+
+# Security Configuration - Restricted Access
+allowed_cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]  # Private networks only
+
+# AWS Bedrock Configuration
+aws_bedrock_model_id = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+# VPC Endpoints (automatically created for internal deployments)
+# These provide private connectivity to AWS services without internet access
+
+# Secrets (Optional - provide ARNs if you have API keys stored in AWS Secrets Manager)
+# firecrawl_api_key_secret_arn = "arn:aws:secretsmanager:us-west-2:123456789012:secret:firecrawl-api-key-AbCdEf"
+# perplexity_api_key_secret_arn = "arn:aws:secretsmanager:us-west-2:123456789012:secret:perplexity-api-key-GhIjKl"
+
+# Additional Tags
+additional_tags = {
+  Owner       = "Internal IT Team"
+  CostCenter  = "Operations"
+  AccessLevel = "Internal"
+  Compliance  = "SOC2"
+}

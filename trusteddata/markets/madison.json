@@ -1,0 +1,26 @@
+{
+  "market": "Madison",
+  "realEstate": {
+    "medianHomePrice": 379986,
+    "priceChange": 9.5,
+    "inventoryLevel": 8379,
+    "daysOnMarket": 52,
+    "activeListings": 9810
+  },
+  "demographics": {
+    "population": 4352693,
+    "medianIncome": 30352,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 92.1,
+    "gdpGrowth": 1.6,
+    "majorIndustries": [
+      "Agriculture",
+      "Manufacturing",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.664811Z",
+  "source": "synthetic"
+}

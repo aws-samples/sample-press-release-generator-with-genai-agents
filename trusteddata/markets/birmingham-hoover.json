@@ -1,0 +1,26 @@
+{
+  "market": "Birmingham-Hoover",
+  "realEstate": {
+    "medianHomePrice": 473093,
+    "priceChange": 5.8,
+    "inventoryLevel": 3909,
+    "daysOnMarket": 36,
+    "activeListings": 13968
+  },
+  "demographics": {
+    "population": 9412319,
+    "medianIncome": 57376,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 92.2,
+    "gdpGrowth": 4.7,
+    "majorIndustries": [
+      "Technology",
+      "Healthcare",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.652549Z",
+  "source": "synthetic"
+}

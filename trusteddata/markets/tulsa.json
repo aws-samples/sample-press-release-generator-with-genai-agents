@@ -1,0 +1,26 @@
+{
+  "market": "Tulsa",
+  "realEstate": {
+    "medianHomePrice": 431534,
+    "priceChange": 0.9,
+    "inventoryLevel": 7892,
+    "daysOnMarket": 41,
+    "activeListings": 8283
+  },
+  "demographics": {
+    "population": 10025852,
+    "medianIncome": 65727,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 97.2,
+    "gdpGrowth": 4.1,
+    "majorIndustries": [
+      "Technology",
+      "Retail",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.654562Z",
+  "source": "synthetic"
+}

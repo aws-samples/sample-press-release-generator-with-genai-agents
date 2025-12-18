@@ -1,0 +1,26 @@
+{
+  "market": "Las Vegas-Henderson-Paradise",
+  "realEstate": {
+    "medianHomePrice": 223506,
+    "priceChange": 1.6,
+    "inventoryLevel": 5401,
+    "daysOnMarket": 59,
+    "activeListings": 6058
+  },
+  "demographics": {
+    "population": 2552535,
+    "medianIncome": 62982,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 93.7,
+    "gdpGrowth": 4.7,
+    "majorIndustries": [
+      "Technology",
+      "Entertainment",
+      "Aerospace"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.647160Z",
+  "source": "synthetic"
+}

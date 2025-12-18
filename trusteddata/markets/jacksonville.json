@@ -1,0 +1,26 @@
+{
+  "market": "Jacksonville",
+  "realEstate": {
+    "medianHomePrice": 627824,
+    "priceChange": 10.9,
+    "inventoryLevel": 16067,
+    "daysOnMarket": 44,
+    "activeListings": 5755
+  },
+  "demographics": {
+    "population": 6843457,
+    "medianIncome": 72204,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 97.3,
+    "gdpGrowth": 3.4,
+    "majorIndustries": [
+      "Manufacturing",
+      "Retail",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.650765Z",
+  "source": "synthetic"
+}

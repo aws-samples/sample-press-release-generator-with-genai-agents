@@ -1,0 +1,26 @@
+{
+  "market": "Modesto",
+  "realEstate": {
+    "medianHomePrice": 427500,
+    "priceChange": 3.3,
+    "inventoryLevel": 7241,
+    "daysOnMarket": 39,
+    "activeListings": 2869
+  },
+  "demographics": {
+    "population": 1462765,
+    "medianIncome": 40961,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 95.3,
+    "gdpGrowth": 1.6,
+    "majorIndustries": [
+      "Technology",
+      "Healthcare",
+      "Entertainment"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.666202Z",
+  "source": "synthetic"
+}

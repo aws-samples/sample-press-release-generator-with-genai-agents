@@ -1,0 +1,376 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Market-Specific Data Schema",
+  "description": "JSON schema for validating market-specific data structure in the 100 Market Press Release Generator",
+  "type": "object",
+  "required": ["marketInfo", "demographics", "economicIndicators", "housingMarket", "neighborhoods", "amenities", "geographicContext"],
+  "properties": {
+    "marketInfo": {
+      "type": "object",
+      "required": ["name", "code", "state", "region", "lastUpdated"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full market name matching top-100-markets.json"
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "Three-letter market code"
+        },
+        "state": {
+          "type": "string",
+          "description": "State abbreviation or multi-state designation"
+        },
+        "region": {
+          "type": "string",
+          "enum": ["Northeast", "South", "Midwest", "West"]
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when market data was last updated"
+        }
+      }
+    },
+    "demographics": {
+      "type": "object",
+      "required": ["population", "households", "education"],
+      "properties": {
+        "population": {
+          "type": "object",
+          "required": ["total", "growthRate", "density", "ageDistribution"],
+          "properties": {
+            "total": {
+              "type": "number",
+              "minimum": 0
+            },
+            "growthRate": {
+              "type": "object",
+              "properties": {
+                "annual": { "type": "number" },
+                "fiveYear": { "type": "number" }
+              }
+            },
+            "density": {
+              "type": "number",
+              "minimum": 0
+            },
+            "ageDistribution": {
+              "type": "object",
+              "properties": {
+                "under25": { "type": "number", "minimum": 0, "maximum": 1 },
+                "age25to44": { "type": "number", "minimum": 0, "maximum": 1 },
+                "age45to64": { "type": "number", "minimum": 0, "maximum": 1 },
+                "over65": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        },
+        "households": {
+          "type": "object",
+          "required": ["total", "averageSize", "incomeDistribution"],
+          "properties": {
+            "total": {
+              "type": "number",
+              "minimum": 0
+            },
+            "averageSize": {
+              "type": "number",
+              "minimum": 0
+            },
+            "incomeDistribution": {
+              "type": "object",
+              "properties": {
+                "median": { "type": "number", "minimum": 0 },
+                "under50k": { "type": "number", "minimum": 0, "maximum": 1 },
+                "50kto100k": { "type": "number", "minimum": 0, "maximum": 1 },
+                "100kto200k": { "type": "number", "minimum": 0, "maximum": 1 },
+                "over200k": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "collegeGraduates": { "type": "number", "minimum": 0, "maximum": 1 },
+            "advancedDegrees": { "type": "number", "minimum": 0, "maximum": 1 },
+            "highSchoolGraduates": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "economicIndicators": {
+      "type": "object",
+      "required": ["employment", "economy"],
+      "properties": {
+        "employment": {
+          "type": "object",
+          "properties": {
+            "unemploymentRate": { "type": "number", "minimum": 0, "maximum": 1 },
+            "laborForceParticipation": { "type": "number", "minimum": 0, "maximum": 1 },
+            "jobGrowthRate": { "type": "number" },
+            "majorIndustries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "sector": { "type": "string" },
+                  "employmentShare": { "type": "number", "minimum": 0, "maximum": 1 },
+                  "growthRate": { "type": "number" }
+                }
+              }
+            }
+          }
+        },
+        "economy": {
+          "type": "object",
+          "properties": {
+            "gdpPerCapita": { "type": "number", "minimum": 0 },
+            "economicGrowthRate": { "type": "number" },
+            "businessFormationRate": { "type": "number", "minimum": 0 },
+            "costOfLivingIndex": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "housingMarket": {
+      "type": "object",
+      "required": ["pricing", "inventory", "activity"],
+      "properties": {
+        "pricing": {
+          "type": "object",
+          "properties": {
+            "medianSalePrice": { "type": "number", "minimum": 0 },
+            "pricePerSquareFoot": { "type": "number", "minimum": 0 },
+            "priceGrowthYoY": { "type": "number" },
+            "priceRanges": {
+              "type": "object",
+              "properties": {
+                "entry": {
+                  "type": "object",
+                  "properties": {
+                    "min": { "type": "number", "minimum": 0 },
+                    "max": { "type": "number", "minimum": 0 }
+                  }
+                },
+                "mid": {
+                  "type": "object",
+                  "properties": {
+                    "min": { "type": "number", "minimum": 0 },
+                    "max": { "type": "number", "minimum": 0 }
+                  }
+                },
+                "luxury": {
+                  "type": "object",
+                  "properties": {
+                    "min": { "type": "number", "minimum": 0 },
+                    "max": { "type": ["number", "null"] }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "inventory": {
+          "type": "object",
+          "properties": {
+            "activeListings": { "type": "number", "minimum": 0 },
+            "monthsOfSupply": { "type": "number", "minimum": 0 },
+            "newListings": { "type": "number", "minimum": 0 },
+            "daysOnMarket": { "type": "number", "minimum": 0 },
+            "inventoryTrend": {
+              "type": "string",
+              "enum": ["increasing", "stable", "declining"]
+            }
+          }
+        },
+        "activity": {
+          "type": "object",
+          "properties": {
+            "salesVolume": { "type": "number", "minimum": 0 },
+            "pendingSales": { "type": "number", "minimum": 0 },
+            "saleToListRatio": { "type": "number", "minimum": 0, "maximum": 2 },
+            "soldAboveList": { "type": "number", "minimum": 0, "maximum": 1 },
+            "offMarketInTwoWeeks": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "seasonality": {
+          "type": "object",
+          "properties": {
+            "peakSeason": {
+              "type": "string",
+              "enum": ["spring", "summer", "fall", "winter"]
+            },
+            "slowSeason": {
+              "type": "string",
+              "enum": ["spring", "summer", "fall", "winter"]
+            },
+            "seasonalVariation": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "neighborhoods": {
+      "type": "object",
+      "required": ["submarkets", "neighborhoodTiers"],
+      "properties": {
+        "submarkets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "type", "medianPrice", "characteristics"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "medianPrice": { "type": "number", "minimum": 0 },
+              "characteristics": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "demographics": {
+                "type": "object",
+                "properties": {
+                  "medianIncome": { "type": "number", "minimum": 0 },
+                  "ageMedian": { "type": "number", "minimum": 0 },
+                  "educationLevel": {
+                    "type": "string",
+                    "enum": ["low", "moderate", "high", "very_high"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "neighborhoodTiers": {
+          "type": "object",
+          "properties": {
+            "tier1": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "tier2": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "tier3": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "amenities": {
+      "type": "object",
+      "required": ["transportation", "education", "lifestyle"],
+      "properties": {
+        "transportation": {
+          "type": "object",
+          "properties": {
+            "publicTransit": {
+              "type": "object",
+              "properties": {
+                "score": { "type": "number", "minimum": 0, "maximum": 10 },
+                "systems": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "coverage": {
+                  "type": "string",
+                  "enum": ["limited", "moderate", "extensive", "comprehensive"]
+                }
+              }
+            },
+            "highways": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "airports": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "distance": { "type": "string" },
+                  "type": {
+                    "type": "string",
+                    "enum": ["regional", "domestic_major", "international_major"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "publicSchools": {
+              "type": "object",
+              "properties": {
+                "rating": { "type": "number", "minimum": 0, "maximum": 10 },
+                "districts": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            },
+            "universities": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "privateSchools": { "type": "number", "minimum": 0 }
+          }
+        },
+        "lifestyle": {
+          "type": "object",
+          "properties": {
+            "climate": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "averageTemp": { "type": "number" },
+                "sunnyDays": { "type": "number", "minimum": 0, "maximum": 365 }
+              }
+            },
+            "recreation": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "culturalAttractions": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "geographicContext": {
+      "type": "object",
+      "properties": {
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+            "longitude": { "type": "number", "minimum": -180, "maximum": 180 }
+          }
+        },
+        "elevation": { "type": "number" },
+        "landArea": { "type": "number", "minimum": 0 },
+        "waterFeatures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "naturalFeatures": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "urbanClassification": {
+          "type": "string",
+          "enum": ["urban_core", "suburban", "mixed", "metropolitan"]
+        }
+      }
+    }
+  }
+}

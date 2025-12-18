@@ -1,0 +1,63 @@
+# Example Terraform configuration for No Redis mode
+# Copy to terraform.tfvars and customize for your deployment
+
+# ECR Image URLs (replace with your actual ECR URLs)
+backend_image  = "your-account.dkr.ecr.us-west-2.amazonaws.com/press-rele-prod-backend:latest"
+frontend_image = "your-account.dkr.ecr.us-west-2.amazonaws.com/press-rele-prod-frontend:latest"
+
+# Deployment Configuration
+deployment_type = "public"  # or "internal" for VPC-only access
+
+# Redis Configuration - NO REDIS MODE
+redis_mode = "none"  # Disables all Redis functionality
+
+# Resource Configuration - Standard for no Redis
+# Backend uses standard resources since no Redis overhead
+backend_cpu    = 512   # Standard CPU allocation
+backend_memory = 1024  # Standard memory allocation
+backend_desired_count = 1
+
+# Frontend configuration (unchanged)
+frontend_cpu    = 512
+frontend_memory = 1024
+frontend_desired_count = 1
+
+# Redis Connection Configuration (not used but required for validation)
+redis_connection_timeout = 5000   # Not used in 'none' mode
+redis_command_timeout    = 3000   # Not used in 'none' mode
+redis_retry_attempts     = 3      # Not used in 'none' mode
+redis_retry_delay        = 1000   # Not used in 'none' mode
+
+# CORS Configuration
+frontend_url = "https://your-alb-dns-name.us-west-2.elb.amazonaws.com"
+cors_allowed_origins = "https://your-alb-dns-name.us-west-2.elb.amazonaws.com,https://*.cloudfront.net,https://*.elb.amazonaws.com"
+cors_domain_pattern = "^https://[a-z0-9-]+\\.(cloudfront\\.net|elb\\.[a-z0-9-]+\\.amazonaws\\.com|execute-api\\.[a-z0-9-]+\\.amazonaws\\.com)$"
+cors_credentials = true
+cors_max_age = 86400
+
+# AWS Bedrock Configuration
+aws_bedrock_model_id = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+# Auto Scaling Configuration
+backend_min_capacity  = 1
+backend_max_capacity  = 10
+frontend_min_capacity = 1
+frontend_max_capacity = 5
+
+# Cost Tracking
+cost_center = "engineering"
+owner       = "devops-team"
+
+# Additional Tags
+additional_tags = {
+  Application = "press-release-generator"
+  Team        = "content-generation"
+  RedisMode   = "none"
+}
+
+# No Redis Mode Notes:
+# - $0/month additional cost
+# - No caching capabilities
+# - Suitable for low-volume usage
+# - May have slower response times for repeated requests
+# - No job queue persistence across restarts

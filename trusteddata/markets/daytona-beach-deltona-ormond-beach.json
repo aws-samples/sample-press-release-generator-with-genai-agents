@@ -1,0 +1,26 @@
+{
+  "market": "Daytona Beach-Deltona-Ormond Beach",
+  "realEstate": {
+    "medianHomePrice": 350283,
+    "priceChange": -3.9,
+    "inventoryLevel": 8710,
+    "daysOnMarket": 64,
+    "activeListings": 3624
+  },
+  "demographics": {
+    "population": 5920045,
+    "medianIncome": 42226,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 96.4,
+    "gdpGrowth": 2.8,
+    "majorIndustries": [
+      "Retail",
+      "Energy",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.661908Z",
+  "source": "synthetic"
+}

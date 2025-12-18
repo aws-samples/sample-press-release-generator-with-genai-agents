@@ -1,0 +1,26 @@
+{
+  "market": "Boise City",
+  "realEstate": {
+    "medianHomePrice": 284251,
+    "priceChange": -1.0,
+    "inventoryLevel": 5449,
+    "daysOnMarket": 66,
+    "activeListings": 11698
+  },
+  "demographics": {
+    "population": 5390593,
+    "medianIncome": 37235,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 92.8,
+    "gdpGrowth": 2.5,
+    "majorIndustries": [
+      "Tourism",
+      "Healthcare",
+      "Entertainment"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.662170Z",
+  "source": "synthetic"
+}

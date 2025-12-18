@@ -1,0 +1,26 @@
+{
+  "market": "El Paso",
+  "realEstate": {
+    "medianHomePrice": 194688,
+    "priceChange": 8.3,
+    "inventoryLevel": 12311,
+    "daysOnMarket": 49,
+    "activeListings": 8090
+  },
+  "demographics": {
+    "population": 13310538,
+    "medianIncome": 59442,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 95.7,
+    "gdpGrowth": 3.2,
+    "majorIndustries": [
+      "Technology",
+      "Energy",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.658361Z",
+  "source": "synthetic"
+}

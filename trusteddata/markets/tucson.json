@@ -1,0 +1,26 @@
+{
+  "market": "Tucson",
+  "realEstate": {
+    "medianHomePrice": 570349,
+    "priceChange": 5.7,
+    "inventoryLevel": 5458,
+    "daysOnMarket": 43,
+    "activeListings": 2720
+  },
+  "demographics": {
+    "population": 5246684,
+    "medianIncome": 63926,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 94.4,
+    "gdpGrowth": 2.0,
+    "majorIndustries": [
+      "Entertainment",
+      "Aerospace",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.653777Z",
+  "source": "synthetic"
+}

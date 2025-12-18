@@ -1,0 +1,26 @@
+{
+  "market": "McAllen-Edinburg-Mission",
+  "realEstate": {
+    "medianHomePrice": 332313,
+    "priceChange": 0.9,
+    "inventoryLevel": 8954,
+    "daysOnMarket": 58,
+    "activeListings": 9950
+  },
+  "demographics": {
+    "population": 2432783,
+    "medianIncome": 37735,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 93.9,
+    "gdpGrowth": 2.1,
+    "majorIndustries": [
+      "Retail",
+      "Energy",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.658516Z",
+  "source": "synthetic"
+}

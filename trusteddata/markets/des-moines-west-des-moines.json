@@ -1,0 +1,26 @@
+{
+  "market": "Des Moines-West Des Moines",
+  "realEstate": {
+    "medianHomePrice": 325648,
+    "priceChange": -3.0,
+    "inventoryLevel": 1704,
+    "daysOnMarket": 67,
+    "activeListings": 5410
+  },
+  "demographics": {
+    "population": 6241724,
+    "medianIncome": 25814,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 95.9,
+    "gdpGrowth": 4.6,
+    "majorIndustries": [
+      "Agriculture",
+      "Finance",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.664036Z",
+  "source": "synthetic"
+}

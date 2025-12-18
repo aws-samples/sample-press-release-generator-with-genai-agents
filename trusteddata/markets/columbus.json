@@ -1,0 +1,26 @@
+{
+  "market": "Columbus",
+  "realEstate": {
+    "medianHomePrice": 649682,
+    "priceChange": 8.2,
+    "inventoryLevel": 1747,
+    "daysOnMarket": 35,
+    "activeListings": 13965
+  },
+  "demographics": {
+    "population": 14081490,
+    "medianIncome": 47371,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 94.6,
+    "gdpGrowth": 5.0,
+    "majorIndustries": [
+      "Technology",
+      "Manufacturing",
+      "Finance"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.648648Z",
+  "source": "synthetic"
+}

@@ -1,0 +1,26 @@
+{
+  "market": "Pensacola-Ferry Pass-Brent",
+  "realEstate": {
+    "medianHomePrice": 165013,
+    "priceChange": 8.0,
+    "inventoryLevel": 12594,
+    "daysOnMarket": 28,
+    "activeListings": 7150
+  },
+  "demographics": {
+    "population": 4037946,
+    "medianIncome": 43995,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 96.4,
+    "gdpGrowth": 3.2,
+    "majorIndustries": [
+      "Healthcare",
+      "Manufacturing",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.667744Z",
+  "source": "synthetic"
+}

@@ -1,0 +1,26 @@
+{
+  "market": "North Port-Sarasota-Bradenton",
+  "realEstate": {
+    "medianHomePrice": 215567,
+    "priceChange": 0.7,
+    "inventoryLevel": 9636,
+    "daysOnMarket": 74,
+    "activeListings": 7435
+  },
+  "demographics": {
+    "population": 10612229,
+    "medianIncome": 41461,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 95.4,
+    "gdpGrowth": 5.3,
+    "majorIndustries": [
+      "Energy",
+      "Healthcare",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.662368Z",
+  "source": "synthetic"
+}

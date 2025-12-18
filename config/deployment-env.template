@@ -1,0 +1,97 @@
+# Deployment Environment Configuration Template
+# This file serves as the master template for environment-specific deployments
+# Copy this file to config/deployment-env.{environment} and customize for each environment
+
+# =============================================================================
+# DEPLOYMENT ENVIRONMENT CONFIGURATION
+# =============================================================================
+
+# Environment Identification
+DEPLOYMENT_ENVIRONMENT=template
+PROJECT_NAME=100market-press-release-generator
+
+# =============================================================================
+# AWS CONFIGURATION
+# =============================================================================
+
+# AWS Account and Profile
+AWS_ACCOUNT_ID=YOUR_AWS_ACCOUNT_ID
+AWS_REGION=us-west-2
+AWS_PROFILE=YOUR_AWS_PROFILE
+
+# =============================================================================
+# ECR REPOSITORIES
+# =============================================================================
+
+# ECR Repository Names (environment-specific)
+ECR_BACKEND_REPO_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-backend
+ECR_FRONTEND_REPO_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-frontend
+
+# ECR Image URIs (computed from above variables)
+BACKEND_IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_BACKEND_REPO_NAME}:latest
+FRONTEND_IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_FRONTEND_REPO_NAME}:latest
+
+# =============================================================================
+# ECS CONFIGURATION
+# =============================================================================
+
+# ECS Cluster and Services
+ECS_CLUSTER_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-cluster
+ECS_BACKEND_SERVICE_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-backend
+ECS_FRONTEND_SERVICE_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-frontend
+
+# ECS Task Definitions
+ECS_BACKEND_TASK_FAMILY=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-backend
+ECS_FRONTEND_TASK_FAMILY=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-frontend
+
+# ECS IAM Roles
+ECS_TASK_EXECUTION_ROLE_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-ecs-task-execution
+ECS_TASK_ROLE_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-ecs-task
+
+# =============================================================================
+# LOAD BALANCER CONFIGURATION
+# =============================================================================
+
+# Application Load Balancer
+ALB_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-alb
+ALB_TARGET_GROUP_BACKEND=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-be-tg
+ALB_TARGET_GROUP_FRONTEND=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-fe-tg
+
+# =============================================================================
+# AWS BEDROCK CONFIGURATION
+# =============================================================================
+
+# Bedrock Model Configuration
+BEDROCK_MODEL_ID=arn:aws:bedrock:${AWS_REGION}:${AWS_ACCOUNT_ID}:inference-profile/us.anthropic.claude-sonnet-4-20250514-v1:0
+BEDROCK_REGION=${AWS_REGION}
+
+# =============================================================================
+# RESOURCE NAMING PATTERNS
+# =============================================================================
+
+# DynamoDB
+DYNAMODB_TABLE_PREFIX=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}
+
+# CloudWatch
+CLOUDWATCH_LOG_GROUP=/aws/ecs/${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}
+
+# S3
+S3_BUCKET_NAME=${PROJECT_NAME}-${DEPLOYMENT_ENVIRONMENT}-storage
+
+# =============================================================================
+# TERRAFORM CONFIGURATION
+# =============================================================================
+
+# Terraform Backend Configuration
+TF_STATE_BUCKET=${PROJECT_NAME}-terraform-state-${DEPLOYMENT_ENVIRONMENT}
+TF_STATE_KEY=${PROJECT_NAME}/${DEPLOYMENT_ENVIRONMENT}/terraform.tfstate
+TF_LOCK_TABLE=${PROJECT_NAME}-terraform-locks-${DEPLOYMENT_ENVIRONMENT}
+
+# =============================================================================
+# DOCKER CONFIGURATION
+# =============================================================================
+
+# Docker Build Configuration
+DOCKER_PLATFORM=linux/amd64
+DOCKER_BACKEND_TAG=${ECR_BACKEND_REPO_NAME}:latest
+DOCKER_FRONTEND_TAG=${ECR_FRONTEND_REPO_NAME}:latest

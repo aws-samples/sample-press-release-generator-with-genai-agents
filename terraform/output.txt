@@ -1,0 +1,1547 @@
+[0;34m🏗️  Press Release Generator - Terraform Deployment[0m
+=====================================================
+[0;34mℹ️  DEBUG: Setting up ERR trap[0m
+[0;34mℹ️  DEBUG: Starting deployment process...[0m
+[0;34mℹ️  DEBUG: Checking Terraform...[0m
+[0;34mℹ️  Checking Terraform installation...[0m
+[0;32m✅ Terraform version 1.13.1 is available[0m
+[0;34mℹ️  DEBUG: Terraform check completed[0m
+[0;34mℹ️  DEBUG: Checking AWS...[0m
+[0;34mℹ️  Checking AWS CLI and credentials...[0m
+[0;32m✅ AWS credentials configured for account 729395279077 in region us-west-2[0m
+[0;34mℹ️  DEBUG: AWS check completed[0m
+[0;34mℹ️  DEBUG: Loading environment...[0m
+[0;34mℹ️  Loading environment configuration...[0m
+[1;33m⚠️  No .env file found, using default values[0m
+[0;32m✅ Environment configuration loaded[0m
+[0;34mℹ️  Project: press-release-generator[0m
+[0;34mℹ️  Environment: prod[0m
+[0;34mℹ️  Region: us-west-2[0m
+[0;34mℹ️  DEBUG: Environment loaded[0m
+[0;34mℹ️  DEBUG: Initializing Terraform...[0m
+[0;34mℹ️  Initializing Terraform...[0m
+[0;34mℹ️  DEBUG: Changing to Terraform directory: /Users/staring/Source/100market-press-release-generator-genai-agents/terraform[0m
+[0;34mℹ️  DEBUG: Current directory: /Users/staring/Source/100market-press-release-generator-genai-agents/terraform[0m
+[0;34mℹ️  DEBUG: About to run terraform init -upgrade[0m
+[0m[1mInitializing the backend...[0m
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/aws versions matching "~> 5.0"...
+- Using previously-installed hashicorp/aws v5.100.0
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+[0;32m✅ Terraform initialized successfully[0m
+[0;34mℹ️  DEBUG: terraform init completed successfully[0m
+[0;34mℹ️  DEBUG: Terraform initialization completed[0m
+[0;34mℹ️  DEBUG: Checking destroy flag: false[0m
+[0;34mℹ️  DEBUG: About to call terraform_plan...[0m
+[0;34mℹ️  Planning Terraform deployment...[0m
+[0m[1mdata.aws_caller_identity.current: Reading...[0m[0m
+[0m[1mdata.aws_availability_zones.available: Reading...[0m[0m
+[0m[1mdata.aws_caller_identity.current: Read complete after 0s [id=729395279077][0m
+[0m[1mdata.aws_availability_zones.available: Read complete after 1s [id=us-west-2][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_appautoscaling_policy.backend_up[0m will be created
+[0m  [32m+[0m[0m resource "aws_appautoscaling_policy" "backend_up" {
+      [32m+[0m[0m alarm_arns         = (known after apply)
+      [32m+[0m[0m arn                = (known after apply)
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m name               = "press-rele-prod-backend-scale-up"
+      [32m+[0m[0m policy_type        = "TargetTrackingScaling"
+      [32m+[0m[0m resource_id        = "service/press-rele-prod-cluster/press-rele-prod-backend"
+      [32m+[0m[0m scalable_dimension = "ecs:service:DesiredCount"
+      [32m+[0m[0m service_namespace  = "ecs"
+
+      [32m+[0m[0m target_tracking_scaling_policy_configuration {
+          [32m+[0m[0m disable_scale_in = false
+          [32m+[0m[0m target_value     = 70
+
+          [32m+[0m[0m predefined_metric_specification {
+              [32m+[0m[0m predefined_metric_type = "ECSServiceAverageCPUUtilization"
+            }
+        }
+    }
+
+[1m  # aws_appautoscaling_policy.frontend_up[0m will be created
+[0m  [32m+[0m[0m resource "aws_appautoscaling_policy" "frontend_up" {
+      [32m+[0m[0m alarm_arns         = (known after apply)
+      [32m+[0m[0m arn                = (known after apply)
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m name               = "press-rele-prod-frontend-scale-up"
+      [32m+[0m[0m policy_type        = "TargetTrackingScaling"
+      [32m+[0m[0m resource_id        = "service/press-rele-prod-cluster/press-rele-prod-frontend"
+      [32m+[0m[0m scalable_dimension = "ecs:service:DesiredCount"
+      [32m+[0m[0m service_namespace  = "ecs"
+
+      [32m+[0m[0m target_tracking_scaling_policy_configuration {
+          [32m+[0m[0m disable_scale_in = false
+          [32m+[0m[0m target_value     = 70
+
+          [32m+[0m[0m predefined_metric_specification {
+              [32m+[0m[0m predefined_metric_type = "ECSServiceAverageCPUUtilization"
+            }
+        }
+    }
+
+[1m  # aws_appautoscaling_target.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_appautoscaling_target" "backend" {
+      [32m+[0m[0m arn                = (known after apply)
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m max_capacity       = 10
+      [32m+[0m[0m min_capacity       = 1
+      [32m+[0m[0m resource_id        = "service/press-rele-prod-cluster/press-rele-prod-backend"
+      [32m+[0m[0m role_arn           = (known after apply)
+      [32m+[0m[0m scalable_dimension = "ecs:service:DesiredCount"
+      [32m+[0m[0m service_namespace  = "ecs"
+      [32m+[0m[0m tags_all           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m suspended_state (known after apply)
+    }
+
+[1m  # aws_appautoscaling_target.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_appautoscaling_target" "frontend" {
+      [32m+[0m[0m arn                = (known after apply)
+      [32m+[0m[0m id                 = (known after apply)
+      [32m+[0m[0m max_capacity       = 5
+      [32m+[0m[0m min_capacity       = 1
+      [32m+[0m[0m resource_id        = "service/press-rele-prod-cluster/press-rele-prod-frontend"
+      [32m+[0m[0m role_arn           = (known after apply)
+      [32m+[0m[0m scalable_dimension = "ecs:service:DesiredCount"
+      [32m+[0m[0m service_namespace  = "ecs"
+      [32m+[0m[0m tags_all           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m suspended_state (known after apply)
+    }
+
+[1m  # aws_cloudwatch_log_group.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_group" "backend" {
+      [32m+[0m[0m arn               = (known after apply)
+      [32m+[0m[0m id                = (known after apply)
+      [32m+[0m[0m log_group_class   = (known after apply)
+      [32m+[0m[0m name              = "/ecs/press-rele-prod-backend"
+      [32m+[0m[0m name_prefix       = (known after apply)
+      [32m+[0m[0m retention_in_days = 30
+      [32m+[0m[0m skip_destroy      = false
+      [32m+[0m[0m tags              = {
+          [32m+[0m[0m "Name" = "press-rele-prod-backend-logs"
+        }
+      [32m+[0m[0m tags_all          = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-backend-logs"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+    }
+
+[1m  # aws_cloudwatch_log_group.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_cloudwatch_log_group" "frontend" {
+      [32m+[0m[0m arn               = (known after apply)
+      [32m+[0m[0m id                = (known after apply)
+      [32m+[0m[0m log_group_class   = (known after apply)
+      [32m+[0m[0m name              = "/ecs/press-rele-prod-frontend"
+      [32m+[0m[0m name_prefix       = (known after apply)
+      [32m+[0m[0m retention_in_days = 30
+      [32m+[0m[0m skip_destroy      = false
+      [32m+[0m[0m tags              = {
+          [32m+[0m[0m "Name" = "press-rele-prod-frontend-logs"
+        }
+      [32m+[0m[0m tags_all          = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-frontend-logs"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+    }
+
+[1m  # aws_ecr_lifecycle_policy.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecr_lifecycle_policy" "backend" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m policy      = jsonencode(
+            {
+              [32m+[0m[0m rules = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m action       = {
+                          [32m+[0m[0m type = "expire"
+                        }
+                      [32m+[0m[0m description  = "Keep last 10 images"
+                      [32m+[0m[0m rulePriority = 1
+                      [32m+[0m[0m selection    = {
+                          [32m+[0m[0m countNumber   = 10
+                          [32m+[0m[0m countType     = "imageCountMoreThan"
+                          [32m+[0m[0m tagPrefixList = [
+                              [32m+[0m[0m "v",
+                            ]
+                          [32m+[0m[0m tagStatus     = "tagged"
+                        }
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m action       = {
+                          [32m+[0m[0m type = "expire"
+                        }
+                      [32m+[0m[0m description  = "Delete untagged images older than 1 day"
+                      [32m+[0m[0m rulePriority = 2
+                      [32m+[0m[0m selection    = {
+                          [32m+[0m[0m countNumber = 1
+                          [32m+[0m[0m countType   = "sinceImagePushed"
+                          [32m+[0m[0m countUnit   = "days"
+                          [32m+[0m[0m tagStatus   = "untagged"
+                        }
+                    },
+                ]
+            }
+        )
+      [32m+[0m[0m registry_id = (known after apply)
+      [32m+[0m[0m repository  = "press-rele-prod-backend"
+    }
+
+[1m  # aws_ecr_lifecycle_policy.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecr_lifecycle_policy" "frontend" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m policy      = jsonencode(
+            {
+              [32m+[0m[0m rules = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m action       = {
+                          [32m+[0m[0m type = "expire"
+                        }
+                      [32m+[0m[0m description  = "Keep last 10 images"
+                      [32m+[0m[0m rulePriority = 1
+                      [32m+[0m[0m selection    = {
+                          [32m+[0m[0m countNumber   = 10
+                          [32m+[0m[0m countType     = "imageCountMoreThan"
+                          [32m+[0m[0m tagPrefixList = [
+                              [32m+[0m[0m "v",
+                            ]
+                          [32m+[0m[0m tagStatus     = "tagged"
+                        }
+                    },
+                  [32m+[0m[0m {
+                      [32m+[0m[0m action       = {
+                          [32m+[0m[0m type = "expire"
+                        }
+                      [32m+[0m[0m description  = "Delete untagged images older than 1 day"
+                      [32m+[0m[0m rulePriority = 2
+                      [32m+[0m[0m selection    = {
+                          [32m+[0m[0m countNumber = 1
+                          [32m+[0m[0m countType   = "sinceImagePushed"
+                          [32m+[0m[0m countUnit   = "days"
+                          [32m+[0m[0m tagStatus   = "untagged"
+                        }
+                    },
+                ]
+            }
+        )
+      [32m+[0m[0m registry_id = (known after apply)
+      [32m+[0m[0m repository  = "press-rele-prod-frontend"
+    }
+
+[1m  # aws_ecr_repository.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecr_repository" "backend" {
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m image_tag_mutability = "MUTABLE"
+      [32m+[0m[0m name                 = "press-rele-prod-backend"
+      [32m+[0m[0m registry_id          = (known after apply)
+      [32m+[0m[0m repository_url       = (known after apply)
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Name" = "press-rele-prod-backend-repo"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-backend-repo"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m image_scanning_configuration {
+          [32m+[0m[0m scan_on_push = true
+        }
+    }
+
+[1m  # aws_ecr_repository.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecr_repository" "frontend" {
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m image_tag_mutability = "MUTABLE"
+      [32m+[0m[0m name                 = "press-rele-prod-frontend"
+      [32m+[0m[0m registry_id          = (known after apply)
+      [32m+[0m[0m repository_url       = (known after apply)
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Name" = "press-rele-prod-frontend-repo"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-frontend-repo"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m image_scanning_configuration {
+          [32m+[0m[0m scan_on_push = true
+        }
+    }
+
+[1m  # aws_ecs_cluster.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_cluster" "main" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m name     = "press-rele-prod-cluster"
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "Name" = "press-rele-prod-cluster"
+        }
+      [32m+[0m[0m tags_all = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-cluster"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m setting {
+          [32m+[0m[0m name  = "containerInsights"
+          [32m+[0m[0m value = "enabled"
+        }
+    }
+
+[1m  # aws_ecs_cluster_capacity_providers.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_cluster_capacity_providers" "main" {
+      [32m+[0m[0m capacity_providers = [
+          [32m+[0m[0m "FARGATE",
+          [32m+[0m[0m "FARGATE_SPOT",
+        ]
+      [32m+[0m[0m cluster_name       = "press-rele-prod-cluster"
+      [32m+[0m[0m id                 = (known after apply)
+
+      [32m+[0m[0m default_capacity_provider_strategy {
+          [32m+[0m[0m base              = 0
+          [32m+[0m[0m capacity_provider = "FARGATE_SPOT"
+          [32m+[0m[0m weight            = 4
+        }
+      [32m+[0m[0m default_capacity_provider_strategy {
+          [32m+[0m[0m base              = 1
+          [32m+[0m[0m capacity_provider = "FARGATE"
+          [32m+[0m[0m weight            = 1
+        }
+    }
+
+[1m  # aws_ecs_service.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_service" "backend" {
+      [32m+[0m[0m availability_zone_rebalancing      = "DISABLED"
+      [32m+[0m[0m cluster                            = (known after apply)
+      [32m+[0m[0m deployment_maximum_percent         = 200
+      [32m+[0m[0m deployment_minimum_healthy_percent = 100
+      [32m+[0m[0m desired_count                      = 2
+      [32m+[0m[0m enable_ecs_managed_tags            = false
+      [32m+[0m[0m enable_execute_command             = false
+      [32m+[0m[0m health_check_grace_period_seconds  = 300
+      [32m+[0m[0m iam_role                           = (known after apply)
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m launch_type                        = "FARGATE"
+      [32m+[0m[0m name                               = "press-rele-prod-backend"
+      [32m+[0m[0m platform_version                   = (known after apply)
+      [32m+[0m[0m scheduling_strategy                = "REPLICA"
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "press-rele-prod-backend-service"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-backend-service"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m task_definition                    = (known after apply)
+      [32m+[0m[0m triggers                           = (known after apply)
+      [32m+[0m[0m wait_for_steady_state              = false
+
+      [32m+[0m[0m load_balancer {
+          [32m+[0m[0m container_name   = "backend"
+          [32m+[0m[0m container_port   = 3001
+          [32m+[0m[0m target_group_arn = (known after apply)
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+      [32m+[0m[0m network_configuration {
+          [32m+[0m[0m assign_public_ip = false
+          [32m+[0m[0m security_groups  = (known after apply)
+          [32m+[0m[0m subnets          = (known after apply)
+        }
+    }
+
+[1m  # aws_ecs_service.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_service" "frontend" {
+      [32m+[0m[0m availability_zone_rebalancing      = "DISABLED"
+      [32m+[0m[0m cluster                            = (known after apply)
+      [32m+[0m[0m deployment_maximum_percent         = 200
+      [32m+[0m[0m deployment_minimum_healthy_percent = 100
+      [32m+[0m[0m desired_count                      = 2
+      [32m+[0m[0m enable_ecs_managed_tags            = false
+      [32m+[0m[0m enable_execute_command             = false
+      [32m+[0m[0m health_check_grace_period_seconds  = 300
+      [32m+[0m[0m iam_role                           = (known after apply)
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m launch_type                        = "FARGATE"
+      [32m+[0m[0m name                               = "press-rele-prod-frontend"
+      [32m+[0m[0m platform_version                   = (known after apply)
+      [32m+[0m[0m scheduling_strategy                = "REPLICA"
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "press-rele-prod-frontend-service"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-frontend-service"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m task_definition                    = (known after apply)
+      [32m+[0m[0m triggers                           = (known after apply)
+      [32m+[0m[0m wait_for_steady_state              = false
+
+      [32m+[0m[0m load_balancer {
+          [32m+[0m[0m container_name   = "frontend"
+          [32m+[0m[0m container_port   = 80
+          [32m+[0m[0m target_group_arn = (known after apply)
+            [90m# (1 unchanged attribute hidden)[0m[0m
+        }
+
+      [32m+[0m[0m network_configuration {
+          [32m+[0m[0m assign_public_ip = false
+          [32m+[0m[0m security_groups  = (known after apply)
+          [32m+[0m[0m subnets          = (known after apply)
+        }
+    }
+
+[1m  # aws_ecs_task_definition.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_task_definition" "backend" {
+      [32m+[0m[0m arn                      = (known after apply)
+      [32m+[0m[0m arn_without_revision     = (known after apply)
+      [32m+[0m[0m container_definitions    = (known after apply)
+      [32m+[0m[0m cpu                      = "512"
+      [32m+[0m[0m enable_fault_injection   = (known after apply)
+      [32m+[0m[0m execution_role_arn       = (known after apply)
+      [32m+[0m[0m family                   = "press-rele-prod-backend"
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m memory                   = "1024"
+      [32m+[0m[0m network_mode             = "awsvpc"
+      [32m+[0m[0m requires_compatibilities = [
+          [32m+[0m[0m "FARGATE",
+        ]
+      [32m+[0m[0m revision                 = (known after apply)
+      [32m+[0m[0m skip_destroy             = false
+      [32m+[0m[0m tags                     = {
+          [32m+[0m[0m "Name" = "press-rele-prod-backend-task"
+        }
+      [32m+[0m[0m tags_all                 = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-backend-task"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m task_role_arn            = (known after apply)
+      [32m+[0m[0m track_latest             = false
+    }
+
+[1m  # aws_ecs_task_definition.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_ecs_task_definition" "frontend" {
+      [32m+[0m[0m arn                      = (known after apply)
+      [32m+[0m[0m arn_without_revision     = (known after apply)
+      [32m+[0m[0m container_definitions    = (known after apply)
+      [32m+[0m[0m cpu                      = "256"
+      [32m+[0m[0m enable_fault_injection   = (known after apply)
+      [32m+[0m[0m execution_role_arn       = (known after apply)
+      [32m+[0m[0m family                   = "press-rele-prod-frontend"
+      [32m+[0m[0m id                       = (known after apply)
+      [32m+[0m[0m memory                   = "512"
+      [32m+[0m[0m network_mode             = "awsvpc"
+      [32m+[0m[0m requires_compatibilities = [
+          [32m+[0m[0m "FARGATE",
+        ]
+      [32m+[0m[0m revision                 = (known after apply)
+      [32m+[0m[0m skip_destroy             = false
+      [32m+[0m[0m tags                     = {
+          [32m+[0m[0m "Name" = "press-rele-prod-frontend-task"
+        }
+      [32m+[0m[0m tags_all                 = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-frontend-task"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m task_role_arn            = (known after apply)
+      [32m+[0m[0m track_latest             = false
+    }
+
+[1m  # aws_eip.nat[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_eip" "nat" {
+      [32m+[0m[0m allocation_id        = (known after apply)
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m association_id       = (known after apply)
+      [32m+[0m[0m carrier_ip           = (known after apply)
+      [32m+[0m[0m customer_owned_ip    = (known after apply)
+      [32m+[0m[0m domain               = "vpc"
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m instance             = (known after apply)
+      [32m+[0m[0m ipam_pool_id         = (known after apply)
+      [32m+[0m[0m network_border_group = (known after apply)
+      [32m+[0m[0m network_interface    = (known after apply)
+      [32m+[0m[0m private_dns          = (known after apply)
+      [32m+[0m[0m private_ip           = (known after apply)
+      [32m+[0m[0m ptr_record           = (known after apply)
+      [32m+[0m[0m public_dns           = (known after apply)
+      [32m+[0m[0m public_ip            = (known after apply)
+      [32m+[0m[0m public_ipv4_pool     = (known after apply)
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Name" = "press-rele-prod-nat-eip-1"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-nat-eip-1"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc                  = (known after apply)
+    }
+
+[1m  # aws_eip.nat[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_eip" "nat" {
+      [32m+[0m[0m allocation_id        = (known after apply)
+      [32m+[0m[0m arn                  = (known after apply)
+      [32m+[0m[0m association_id       = (known after apply)
+      [32m+[0m[0m carrier_ip           = (known after apply)
+      [32m+[0m[0m customer_owned_ip    = (known after apply)
+      [32m+[0m[0m domain               = "vpc"
+      [32m+[0m[0m id                   = (known after apply)
+      [32m+[0m[0m instance             = (known after apply)
+      [32m+[0m[0m ipam_pool_id         = (known after apply)
+      [32m+[0m[0m network_border_group = (known after apply)
+      [32m+[0m[0m network_interface    = (known after apply)
+      [32m+[0m[0m private_dns          = (known after apply)
+      [32m+[0m[0m private_ip           = (known after apply)
+      [32m+[0m[0m ptr_record           = (known after apply)
+      [32m+[0m[0m public_dns           = (known after apply)
+      [32m+[0m[0m public_ip            = (known after apply)
+      [32m+[0m[0m public_ipv4_pool     = (known after apply)
+      [32m+[0m[0m tags                 = {
+          [32m+[0m[0m "Name" = "press-rele-prod-nat-eip-2"
+        }
+      [32m+[0m[0m tags_all             = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-nat-eip-2"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc                  = (known after apply)
+    }
+
+[1m  # aws_iam_role.ecs_task[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "ecs_task" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ecs-tasks.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "press-rele-prod-ecs-task"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name" = "press-rele-prod-ecs-task-role"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-ecs-task-role"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # aws_iam_role.ecs_task_execution[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "ecs_task_execution" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ecs-tasks.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "press-rele-prod-ecs-task-execution"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags                  = {
+          [32m+[0m[0m "Name" = "press-rele-prod-ecs-task-execution-role"
+        }
+      [32m+[0m[0m tags_all              = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-ecs-task-execution-role"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # aws_iam_role_policy.ecs_task[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy" "ecs_task" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "press-rele-prod-ecs-task-policy"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m policy      = (known after apply)
+      [32m+[0m[0m role        = (known after apply)
+    }
+
+[1m  # aws_iam_role_policy_attachment.ecs_task_execution[0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+      [32m+[0m[0m role       = "press-rele-prod-ecs-task-execution"
+    }
+
+[1m  # aws_internet_gateway.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_internet_gateway" "main" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m owner_id = (known after apply)
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "Name" = "press-rele-prod-igw"
+        }
+      [32m+[0m[0m tags_all = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-igw"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id   = (known after apply)
+    }
+
+[1m  # aws_lb.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_lb" "main" {
+      [32m+[0m[0m arn                                                          = (known after apply)
+      [32m+[0m[0m arn_suffix                                                   = (known after apply)
+      [32m+[0m[0m client_keep_alive                                            = 3600
+      [32m+[0m[0m desync_mitigation_mode                                       = "defensive"
+      [32m+[0m[0m dns_name                                                     = (known after apply)
+      [32m+[0m[0m drop_invalid_header_fields                                   = false
+      [32m+[0m[0m enable_deletion_protection                                   = false
+      [32m+[0m[0m enable_http2                                                 = true
+      [32m+[0m[0m enable_tls_version_and_cipher_suite_headers                  = false
+      [32m+[0m[0m enable_waf_fail_open                                         = false
+      [32m+[0m[0m enable_xff_client_port                                       = false
+      [32m+[0m[0m enable_zonal_shift                                           = false
+      [32m+[0m[0m enforce_security_group_inbound_rules_on_private_link_traffic = (known after apply)
+      [32m+[0m[0m id                                                           = (known after apply)
+      [32m+[0m[0m idle_timeout                                                 = 60
+      [32m+[0m[0m internal                                                     = false
+      [32m+[0m[0m ip_address_type                                              = (known after apply)
+      [32m+[0m[0m load_balancer_type                                           = "application"
+      [32m+[0m[0m name                                                         = "press-rele-prod-alb"
+      [32m+[0m[0m name_prefix                                                  = (known after apply)
+      [32m+[0m[0m preserve_host_header                                         = false
+      [32m+[0m[0m security_groups                                              = (known after apply)
+      [32m+[0m[0m subnets                                                      = (known after apply)
+      [32m+[0m[0m tags                                                         = {
+          [32m+[0m[0m "Name" = "press-rele-prod-alb"
+        }
+      [32m+[0m[0m tags_all                                                     = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-alb"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id                                                       = (known after apply)
+      [32m+[0m[0m xff_header_processing_mode                                   = "append"
+      [32m+[0m[0m zone_id                                                      = (known after apply)
+
+      [32m+[0m[0m subnet_mapping (known after apply)
+    }
+
+[1m  # aws_lb_listener.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_lb_listener" "main" {
+      [32m+[0m[0m arn                                                                   = (known after apply)
+      [32m+[0m[0m id                                                                    = (known after apply)
+      [32m+[0m[0m load_balancer_arn                                                     = (known after apply)
+      [32m+[0m[0m port                                                                  = 80
+      [32m+[0m[0m protocol                                                              = "HTTP"
+      [32m+[0m[0m routing_http_request_x_amzn_mtls_clientcert_header_name               = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_mtls_clientcert_issuer_header_name        = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_mtls_clientcert_leaf_header_name          = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_mtls_clientcert_serial_number_header_name = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_mtls_clientcert_subject_header_name       = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_mtls_clientcert_validity_header_name      = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_tls_cipher_suite_header_name              = (known after apply)
+      [32m+[0m[0m routing_http_request_x_amzn_tls_version_header_name                   = (known after apply)
+      [32m+[0m[0m routing_http_response_access_control_allow_credentials_header_value   = (known after apply)
+      [32m+[0m[0m routing_http_response_access_control_allow_headers_header_value       = (known after apply)
+      [32m+[0m[0m routing_http_response_access_control_allow_methods_header_value       = (known after apply)
+      [32m+[0m[0m routing_http_response_access_control_allow_origin_header_value        = (known after apply)
+      [32m+[0m[0m routing_http_response_access_control_expose_headers_header_value      = (known after apply)
+      [32m+[0m[0m routing_http_response_access_control_max_age_header_value             = (known after apply)
+      [32m+[0m[0m routing_http_response_content_security_policy_header_value            = (known after apply)
+      [32m+[0m[0m routing_http_response_server_enabled                                  = (known after apply)
+      [32m+[0m[0m routing_http_response_strict_transport_security_header_value          = (known after apply)
+      [32m+[0m[0m routing_http_response_x_content_type_options_header_value             = (known after apply)
+      [32m+[0m[0m routing_http_response_x_frame_options_header_value                    = (known after apply)
+      [32m+[0m[0m ssl_policy                                                            = (known after apply)
+      [32m+[0m[0m tags_all                                                              = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m tcp_idle_timeout_seconds                                              = (known after apply)
+
+      [32m+[0m[0m default_action {
+          [32m+[0m[0m order = (known after apply)
+          [32m+[0m[0m type  = "forward"
+
+          [32m+[0m[0m forward {
+              [32m+[0m[0m target_group {
+                  [32m+[0m[0m arn    = (known after apply)
+                  [32m+[0m[0m weight = 1
+                }
+            }
+        }
+
+      [32m+[0m[0m mutual_authentication (known after apply)
+    }
+
+[1m  # aws_lb_listener_rule.api[0m will be created
+[0m  [32m+[0m[0m resource "aws_lb_listener_rule" "api" {
+      [32m+[0m[0m arn          = (known after apply)
+      [32m+[0m[0m id           = (known after apply)
+      [32m+[0m[0m listener_arn = (known after apply)
+      [32m+[0m[0m priority     = 100
+      [32m+[0m[0m tags_all     = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m action {
+          [32m+[0m[0m order = (known after apply)
+          [32m+[0m[0m type  = "forward"
+
+          [32m+[0m[0m forward {
+              [32m+[0m[0m target_group {
+                  [32m+[0m[0m arn    = (known after apply)
+                  [32m+[0m[0m weight = 1
+                }
+            }
+        }
+
+      [32m+[0m[0m condition {
+          [32m+[0m[0m path_pattern {
+              [32m+[0m[0m values = [
+                  [32m+[0m[0m "/api/*",
+                ]
+            }
+        }
+    }
+
+[1m  # aws_lb_listener_rule.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_lb_listener_rule" "frontend" {
+      [32m+[0m[0m arn          = (known after apply)
+      [32m+[0m[0m id           = (known after apply)
+      [32m+[0m[0m listener_arn = (known after apply)
+      [32m+[0m[0m priority     = 200
+      [32m+[0m[0m tags_all     = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+
+      [32m+[0m[0m action {
+          [32m+[0m[0m order = (known after apply)
+          [32m+[0m[0m type  = "forward"
+
+          [32m+[0m[0m forward {
+              [32m+[0m[0m target_group {
+                  [32m+[0m[0m arn    = (known after apply)
+                  [32m+[0m[0m weight = 1
+                }
+            }
+        }
+
+      [32m+[0m[0m condition {
+          [32m+[0m[0m path_pattern {
+              [32m+[0m[0m values = [
+                  [32m+[0m[0m "/*",
+                ]
+            }
+        }
+    }
+
+[1m  # aws_lb_target_group.backend[0m will be created
+[0m  [32m+[0m[0m resource "aws_lb_target_group" "backend" {
+      [32m+[0m[0m arn                                = (known after apply)
+      [32m+[0m[0m arn_suffix                         = (known after apply)
+      [32m+[0m[0m connection_termination             = (known after apply)
+      [32m+[0m[0m deregistration_delay               = "300"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m ip_address_type                    = (known after apply)
+      [32m+[0m[0m lambda_multi_value_headers_enabled = false
+      [32m+[0m[0m load_balancer_arns                 = (known after apply)
+      [32m+[0m[0m load_balancing_algorithm_type      = (known after apply)
+      [32m+[0m[0m load_balancing_anomaly_mitigation  = (known after apply)
+      [32m+[0m[0m load_balancing_cross_zone_enabled  = (known after apply)
+      [32m+[0m[0m name                               = "press-rele-prod-be-tg"
+      [32m+[0m[0m name_prefix                        = (known after apply)
+      [32m+[0m[0m port                               = 3001
+      [32m+[0m[0m preserve_client_ip                 = (known after apply)
+      [32m+[0m[0m protocol                           = "HTTP"
+      [32m+[0m[0m protocol_version                   = (known after apply)
+      [32m+[0m[0m proxy_protocol_v2                  = false
+      [32m+[0m[0m slow_start                         = 0
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "press-rele-prod-backend-tg"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-backend-tg"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m target_type                        = "ip"
+      [32m+[0m[0m vpc_id                             = (known after apply)
+
+      [32m+[0m[0m health_check {
+          [32m+[0m[0m enabled             = true
+          [32m+[0m[0m healthy_threshold   = 2
+          [32m+[0m[0m interval            = 30
+          [32m+[0m[0m matcher             = "200"
+          [32m+[0m[0m path                = "/health"
+          [32m+[0m[0m port                = "traffic-port"
+          [32m+[0m[0m protocol            = "HTTP"
+          [32m+[0m[0m timeout             = 5
+          [32m+[0m[0m unhealthy_threshold = 2
+        }
+
+      [32m+[0m[0m stickiness (known after apply)
+
+      [32m+[0m[0m target_failover (known after apply)
+
+      [32m+[0m[0m target_group_health (known after apply)
+
+      [32m+[0m[0m target_health_state (known after apply)
+    }
+
+[1m  # aws_lb_target_group.frontend[0m will be created
+[0m  [32m+[0m[0m resource "aws_lb_target_group" "frontend" {
+      [32m+[0m[0m arn                                = (known after apply)
+      [32m+[0m[0m arn_suffix                         = (known after apply)
+      [32m+[0m[0m connection_termination             = (known after apply)
+      [32m+[0m[0m deregistration_delay               = "300"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m ip_address_type                    = (known after apply)
+      [32m+[0m[0m lambda_multi_value_headers_enabled = false
+      [32m+[0m[0m load_balancer_arns                 = (known after apply)
+      [32m+[0m[0m load_balancing_algorithm_type      = (known after apply)
+      [32m+[0m[0m load_balancing_anomaly_mitigation  = (known after apply)
+      [32m+[0m[0m load_balancing_cross_zone_enabled  = (known after apply)
+      [32m+[0m[0m name                               = "press-rele-prod-fe-tg"
+      [32m+[0m[0m name_prefix                        = (known after apply)
+      [32m+[0m[0m port                               = 80
+      [32m+[0m[0m preserve_client_ip                 = (known after apply)
+      [32m+[0m[0m protocol                           = "HTTP"
+      [32m+[0m[0m protocol_version                   = (known after apply)
+      [32m+[0m[0m proxy_protocol_v2                  = false
+      [32m+[0m[0m slow_start                         = 0
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "press-rele-prod-frontend-tg"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-frontend-tg"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m target_type                        = "ip"
+      [32m+[0m[0m vpc_id                             = (known after apply)
+
+      [32m+[0m[0m health_check {
+          [32m+[0m[0m enabled             = true
+          [32m+[0m[0m healthy_threshold   = 2
+          [32m+[0m[0m interval            = 30
+          [32m+[0m[0m matcher             = "200"
+          [32m+[0m[0m path                = "/"
+          [32m+[0m[0m port                = "traffic-port"
+          [32m+[0m[0m protocol            = "HTTP"
+          [32m+[0m[0m timeout             = 5
+          [32m+[0m[0m unhealthy_threshold = 2
+        }
+
+      [32m+[0m[0m stickiness (known after apply)
+
+      [32m+[0m[0m target_failover (known after apply)
+
+      [32m+[0m[0m target_group_health (known after apply)
+
+      [32m+[0m[0m target_health_state (known after apply)
+    }
+
+[1m  # aws_nat_gateway.main[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "main" {
+      [32m+[0m[0m allocation_id                      = (known after apply)
+      [32m+[0m[0m association_id                     = (known after apply)
+      [32m+[0m[0m connectivity_type                  = "public"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m network_interface_id               = (known after apply)
+      [32m+[0m[0m private_ip                         = (known after apply)
+      [32m+[0m[0m public_ip                          = (known after apply)
+      [32m+[0m[0m secondary_private_ip_address_count = (known after apply)
+      [32m+[0m[0m secondary_private_ip_addresses     = (known after apply)
+      [32m+[0m[0m subnet_id                          = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "press-rele-prod-nat-gw-1"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-nat-gw-1"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+    }
+
+[1m  # aws_nat_gateway.main[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_nat_gateway" "main" {
+      [32m+[0m[0m allocation_id                      = (known after apply)
+      [32m+[0m[0m association_id                     = (known after apply)
+      [32m+[0m[0m connectivity_type                  = "public"
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m network_interface_id               = (known after apply)
+      [32m+[0m[0m private_ip                         = (known after apply)
+      [32m+[0m[0m public_ip                          = (known after apply)
+      [32m+[0m[0m secondary_private_ip_address_count = (known after apply)
+      [32m+[0m[0m secondary_private_ip_addresses     = (known after apply)
+      [32m+[0m[0m subnet_id                          = (known after apply)
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "Name" = "press-rele-prod-nat-gw-2"
+        }
+      [32m+[0m[0m tags_all                           = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-nat-gw-2"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+    }
+
+[1m  # aws_route_table.private[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "private" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m nat_gateway_id             = (known after apply)
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name" = "press-rele-prod-private-rt-1"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-private-rt-1"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # aws_route_table.private[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "private" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m nat_gateway_id             = (known after apply)
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name" = "press-rele-prod-private-rt-2"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-private-rt-2"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # aws_route_table.public[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "public" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_block                 = "0.0.0.0/0"
+              [32m+[0m[0m gateway_id                 = (known after apply)
+                [90m# (11 unchanged attributes hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name" = "press-rele-prod-public-rt"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-public-rt"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # aws_route_table_association.private[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "private" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.private[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "private" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_route_table_association.public[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # aws_s3_bucket.storage[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket" "storage" {
+      [32m+[0m[0m acceleration_status         = (known after apply)
+      [32m+[0m[0m acl                         = (known after apply)
+      [32m+[0m[0m arn                         = (known after apply)
+      [32m+[0m[0m bucket                      = "press-rele-prod-storage"
+      [32m+[0m[0m bucket_domain_name          = (known after apply)
+      [32m+[0m[0m bucket_prefix               = (known after apply)
+      [32m+[0m[0m bucket_regional_domain_name = (known after apply)
+      [32m+[0m[0m force_destroy               = false
+      [32m+[0m[0m hosted_zone_id              = (known after apply)
+      [32m+[0m[0m id                          = (known after apply)
+      [32m+[0m[0m object_lock_enabled         = (known after apply)
+      [32m+[0m[0m policy                      = (known after apply)
+      [32m+[0m[0m region                      = (known after apply)
+      [32m+[0m[0m request_payer               = (known after apply)
+      [32m+[0m[0m tags                        = {
+          [32m+[0m[0m "Name" = "press-rele-prod-storage"
+        }
+      [32m+[0m[0m tags_all                    = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-storage"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m website_domain              = (known after apply)
+      [32m+[0m[0m website_endpoint            = (known after apply)
+
+      [32m+[0m[0m cors_rule (known after apply)
+
+      [32m+[0m[0m grant (known after apply)
+
+      [32m+[0m[0m lifecycle_rule (known after apply)
+
+      [32m+[0m[0m logging (known after apply)
+
+      [32m+[0m[0m object_lock_configuration (known after apply)
+
+      [32m+[0m[0m replication_configuration (known after apply)
+
+      [32m+[0m[0m server_side_encryption_configuration (known after apply)
+
+      [32m+[0m[0m versioning (known after apply)
+
+      [32m+[0m[0m website (known after apply)
+    }
+
+[1m  # aws_s3_bucket_cors_configuration.storage[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket_cors_configuration" "storage" {
+      [32m+[0m[0m bucket = (known after apply)
+      [32m+[0m[0m id     = (known after apply)
+
+      [32m+[0m[0m cors_rule {
+          [32m+[0m[0m allowed_headers = [
+              [32m+[0m[0m "*",
+            ]
+          [32m+[0m[0m allowed_methods = [
+              [32m+[0m[0m "DELETE",
+              [32m+[0m[0m "GET",
+              [32m+[0m[0m "HEAD",
+              [32m+[0m[0m "POST",
+              [32m+[0m[0m "PUT",
+            ]
+          [32m+[0m[0m allowed_origins = (known after apply)
+          [32m+[0m[0m expose_headers  = [
+              [32m+[0m[0m "ETag",
+            ]
+            id              = [90mnull[0m[0m
+          [32m+[0m[0m max_age_seconds = 3000
+        }
+    }
+
+[1m  # aws_security_group.alb[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "alb" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Managed by Terraform"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m description      = "HTTP"
+              [32m+[0m[0m from_port        = 80
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 80
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m description      = "HTTPS"
+              [32m+[0m[0m from_port        = 443
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 443
+            },
+        ]
+      [32m+[0m[0m name                   = (known after apply)
+      [32m+[0m[0m name_prefix            = "press-rele-prod-alb-"
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Name" = "press-rele-prod-alb-sg"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-alb-sg"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # aws_security_group.ecs[0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "ecs" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Managed by Terraform"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = []
+              [32m+[0m[0m description      = "Frontend from ALB"
+              [32m+[0m[0m from_port        = 80
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = (known after apply)
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 80
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = []
+              [32m+[0m[0m description      = "HTTP from ALB"
+              [32m+[0m[0m from_port        = 3001
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = (known after apply)
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 3001
+            },
+        ]
+      [32m+[0m[0m name                   = (known after apply)
+      [32m+[0m[0m name_prefix            = "press-rele-prod-ecs-"
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags                   = {
+          [32m+[0m[0m "Name" = "press-rele-prod-ecs-sg"
+        }
+      [32m+[0m[0m tags_all               = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-ecs-sg"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # aws_subnet.private[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "private" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-west-2a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.10.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "press-rele-prod-private-subnet-1"
+          [32m+[0m[0m "Type" = "private"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-private-subnet-1"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+          [32m+[0m[0m "Type"        = "private"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.private[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "private" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-west-2b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.11.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "press-rele-prod-private-subnet-2"
+          [32m+[0m[0m "Type" = "private"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-private-subnet-2"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+          [32m+[0m[0m "Type"        = "private"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-west-2a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.0.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "press-rele-prod-public-subnet-1"
+          [32m+[0m[0m "Type" = "public"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-public-subnet-1"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+          [32m+[0m[0m "Type"        = "public"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_subnet.public[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-west-2b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "10.0.1.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "press-rele-prod-public-subnet-2"
+          [32m+[0m[0m "Type" = "public"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-public-subnet-2"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+          [32m+[0m[0m "Type"        = "public"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # aws_vpc.main[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpc" "main" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = "10.0.0.0/16"
+      [32m+[0m[0m default_network_acl_id               = (known after apply)
+      [32m+[0m[0m default_route_table_id               = (known after apply)
+      [32m+[0m[0m default_security_group_id            = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = true
+      [32m+[0m[0m enable_dns_support                   = true
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = "default"
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_network_border_group = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Name" = "press-rele-prod-vpc"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Environment" = "prod"
+          [32m+[0m[0m "ManagedBy"   = "terraform"
+          [32m+[0m[0m "Name"        = "press-rele-prod-vpc"
+          [32m+[0m[0m "Project"     = "press-release-generator"
+        }
+    }
+
+[1mPlan:[0m 47 to add, 0 to change, 0 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m alb_security_group_id        = (known after apply)
+  [32m+[0m[0m api_url                      = (known after apply)
+  [32m+[0m[0m application_url              = (known after apply)
+  [32m+[0m[0m backend_ecr_repository_arn   = (known after apply)
+  [32m+[0m[0m backend_ecr_repository_url   = (known after apply)
+  [32m+[0m[0m backend_service_name         = "press-rele-prod-backend"
+  [32m+[0m[0m backend_target_group_arn     = (known after apply)
+  [32m+[0m[0m backend_task_definition_arn  = (known after apply)
+  [32m+[0m[0m common_tags                  = {
+      [32m+[0m[0m Environment = "prod"
+      [32m+[0m[0m ManagedBy   = "terraform"
+      [32m+[0m[0m Project     = "press-release-generator"
+    }
+  [32m+[0m[0m cors_configuration           = {
+      [32m+[0m[0m allowed_origins = (known after apply)
+      [32m+[0m[0m credentials     = "true"
+      [32m+[0m[0m domain_pattern  = "^https://[a-z0-9-]+\\.(cloudfront\\.net|elb\\.[a-z0-9-]+\\.amazonaws\\.com|execute-api\\.[a-z0-9-]+\\.amazonaws\\.com)$"
+      [32m+[0m[0m max_age         = "86400"
+    }
+  [32m+[0m[0m deployment_info              = {
+      [32m+[0m[0m aws_region     = "us-west-2"
+      [32m+[0m[0m commands       = {
+          [32m+[0m[0m build_and_push_backend  = (known after apply)
+          [32m+[0m[0m build_and_push_frontend = (known after apply)
+          [32m+[0m[0m check_alb_health        = (known after apply)
+          [32m+[0m[0m check_ecs_cluster       = "aws ecs describe-clusters --clusters press-rele-prod-cluster"
+          [32m+[0m[0m check_service_health    = "aws ecs describe-services --cluster press-rele-prod-cluster --services press-rele-prod-backend press-rele-prod-frontend"
+          [32m+[0m[0m ecr_login               = (known after apply)
+          [32m+[0m[0m list_ecs_services       = "aws ecs list-services --cluster press-rele-prod-cluster"
+          [32m+[0m[0m update_backend          = "aws ecs update-service --cluster press-rele-prod-cluster --service press-rele-prod-backend --force-new-deployment"
+          [32m+[0m[0m update_frontend         = "aws ecs update-service --cluster press-rele-prod-cluster --service press-rele-prod-frontend --force-new-deployment"
+          [32m+[0m[0m view_backend_logs       = "aws logs tail /ecs/press-rele-prod-backend --follow"
+          [32m+[0m[0m view_frontend_logs      = "aws logs tail /ecs/press-rele-prod-frontend --follow"
+        }
+      [32m+[0m[0m deployment_url = (known after apply)
+      [32m+[0m[0m environment    = "prod"
+      [32m+[0m[0m project_name   = "press-release-generator"
+    }
+  [32m+[0m[0m ecs_cluster_arn              = (known after apply)
+  [32m+[0m[0m ecs_cluster_id               = (known after apply)
+  [32m+[0m[0m ecs_cluster_name             = "press-rele-prod-cluster"
+  [32m+[0m[0m environment_variables        = {
+      [32m+[0m[0m backend  = {
+          [32m+[0m[0m AWS_REGION           = "us-west-2"
+          [32m+[0m[0m CORS_ALLOWED_ORIGINS = (known after apply)
+          [32m+[0m[0m CORS_CREDENTIALS     = "true"
+          [32m+[0m[0m CORS_DOMAIN_PATTERN  = "^https://[a-z0-9-]+\\.(cloudfront\\.net|elb\\.[a-z0-9-]+\\.amazonaws\\.com|execute-api\\.[a-z0-9-]+\\.amazonaws\\.com)$"
+          [32m+[0m[0m CORS_MAX_AGE         = "86400"
+          [32m+[0m[0m CORS_ORIGIN          = ""
+          [32m+[0m[0m FRONTEND_URL         = ""
+          [32m+[0m[0m NODE_ENV             = "prod"
+          [32m+[0m[0m PORT                 = "3001"
+        }
+      [32m+[0m[0m frontend = {
+          [32m+[0m[0m API_BASE_URL = (known after apply)
+          [32m+[0m[0m BACKEND_URL  = (known after apply)
+          [32m+[0m[0m CORS_MODE    = "cors"
+          [32m+[0m[0m NODE_ENV     = "prod"
+        }
+    }
+  [32m+[0m[0m frontend_ecr_repository_arn  = (known after apply)
+  [32m+[0m[0m frontend_ecr_repository_url  = (known after apply)
+  [32m+[0m[0m frontend_service_name        = "press-rele-prod-frontend"
+  [32m+[0m[0m frontend_target_group_arn    = (known after apply)
+  [32m+[0m[0m frontend_task_definition_arn = (known after apply)
+  [32m+[0m[0m load_balancer_arn            = (known after apply)
+  [32m+[0m[0m load_balancer_dns_name       = (known after apply)
+  [32m+[0m[0m load_balancer_zone_id        = (known after apply)
+  [32m+[0m[0m networking                   = {
+      [32m+[0m[0m availability_zones = [
+          [32m+[0m[0m "us-west-2a",
+          [32m+[0m[0m "us-west-2b",
+        ]
+      [32m+[0m[0m nat_gateway_ips    = [
+          [32m+[0m[0m (known after apply),
+          [32m+[0m[0m (known after apply),
+        ]
+      [32m+[0m[0m private_subnets    = [
+          [32m+[0m[0m "10.0.10.0/24",
+          [32m+[0m[0m "10.0.11.0/24",
+        ]
+      [32m+[0m[0m public_subnets     = [
+          [32m+[0m[0m "10.0.0.0/24",
+          [32m+[0m[0m "10.0.1.0/24",
+        ]
+      [32m+[0m[0m vpc_cidr           = "10.0.0.0/16"
+    }
+  [32m+[0m[0m private_subnet_ids           = [
+      [32m+[0m[0m (known after apply),
+      [32m+[0m[0m (known after apply),
+    ]
+  [32m+[0m[0m public_subnet_ids            = [
+      [32m+[0m[0m (known after apply),
+      [32m+[0m[0m (known after apply),
+    ]
+  [32m+[0m[0m resource_arns                = {
+      [32m+[0m[0m backend_ecr_repo      = (known after apply)
+      [32m+[0m[0m backend_service       = (known after apply)
+      [32m+[0m[0m backend_target_group  = (known after apply)
+      [32m+[0m[0m backend_task_def      = (known after apply)
+      [32m+[0m[0m ecs_cluster           = (known after apply)
+      [32m+[0m[0m frontend_ecr_repo     = (known after apply)
+      [32m+[0m[0m frontend_service      = (known after apply)
+      [32m+[0m[0m frontend_target_group = (known after apply)
+      [32m+[0m[0m frontend_task_def     = (known after apply)
+      [32m+[0m[0m load_balancer         = (known after apply)
+      [32m+[0m[0m storage_bucket        = (known after apply)
+      [32m+[0m[0m vpc                   = (known after apply)
+    }
+  [32m+[0m[0m storage_bucket_arn           = (known after apply)
+  [32m+[0m[0m storage_bucket_domain_name   = (known after apply)
+  [32m+[0m[0m storage_bucket_name          = "press-rele-prod-storage"
+  [32m+[0m[0m vpc_cidr_block               = "10.0.0.0/16"
+  [32m+[0m[0m vpc_id                       = (known after apply)
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Saved the plan to: tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "tfplan"
