@@ -231,8 +231,8 @@ This proof-of-concept system enables communications teams to generate profession
      "quotes": [
        {
          "id": "quote-001",
-         "agent": "Sarah Johnson",
-         "content": "We're seeing unprecedented demand in the starter home segment, with multiple offers becoming the norm.",
+         "agent": "Sam Johnson",
+         "content": "We're seeing unprecedented demand in the starter home segment, multiple offers becoming the norm.",
          "location": "Los Angeles-Long Beach-Anaheim",
          "market": "los-angeles-long-beach-anaheim",
          "theme": "buyer_behavior",
