@@ -765,7 +765,7 @@ This is an internal project with comprehensive development standards. All contri
 
 ## 📄 License
 
-Internal project - All rights reserved.
+This library is licensed under the MIT-0 License. See the LICENSE file.
 
 ---
 
