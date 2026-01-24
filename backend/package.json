@@ -49,7 +49,7 @@
     "helmet": "^7.1.0",
     "html-pdf-node": "^1.0.8",
     "jszip": "^3.10.1",
-    "lodash": "^4.17.0",
+    "lodash": "^4.17.23",
     "markdown-it": "^14.1.0",
     "moment": "^2.29.0",
     "morgan": "^1.10.0",
