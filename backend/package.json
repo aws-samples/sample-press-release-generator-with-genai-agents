@@ -34,7 +34,7 @@
     "@aws-sdk/s3-request-presigner": "^3.911.0",
     "@mendable/firecrawl-js": "^1.25.5",
     "@tavily/core": "^0.5.12",
-    "ajv": "^8.17.1",
+    "ajv": "^8.18.0",
     "ajv-formats": "^3.0.1",
     "archiver": "^6.0.1",
     "async": "^3.2.0",
