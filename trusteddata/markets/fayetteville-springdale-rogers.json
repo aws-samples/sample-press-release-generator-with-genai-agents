@@ -1,0 +1,26 @@
+{
+  "market": "Fayetteville-Springdale-Rogers",
+  "realEstate": {
+    "medianHomePrice": 317559,
+    "priceChange": -1.8,
+    "inventoryLevel": 4274,
+    "daysOnMarket": 72,
+    "activeListings": 5872
+  },
+  "demographics": {
+    "population": 1356251,
+    "medianIncome": 23597,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 93.2,
+    "gdpGrowth": 3.9,
+    "majorIndustries": [
+      "Healthcare",
+      "Retail",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.668551Z",
+  "source": "synthetic"
+}

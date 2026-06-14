@@ -1,0 +1,26 @@
+{
+  "market": "Austin-Round Rock",
+  "realEstate": {
+    "medianHomePrice": 339908,
+    "priceChange": 9.0,
+    "inventoryLevel": 1883,
+    "daysOnMarket": 67,
+    "activeListings": 11843
+  },
+  "demographics": {
+    "population": 12356892,
+    "medianIncome": 77180,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 94.0,
+    "gdpGrowth": 4.5,
+    "majorIndustries": [
+      "Retail",
+      "Technology",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.647879Z",
+  "source": "synthetic"
+}

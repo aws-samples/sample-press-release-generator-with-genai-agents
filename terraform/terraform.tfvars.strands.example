@@ -1,0 +1,164 @@
+# Strands Framework Phase 4 - Terraform Configuration Example
+# 
+# This configuration enables Strands Framework Phase 4 with enterprise-grade
+# orchestration, performance optimization, and comprehensive monitoring.
+# 
+# Copy this file to terraform.tfvars and customize for your deployment.
+
+# Project Configuration
+project_name = "press-release-generator"
+environment  = "prod"
+aws_region   = "us-west-2"
+
+# Strands Framework Phase 4 Configuration
+enable_strands                = true
+strands_log_level            = "info"
+strands_node_timeout         = 120000  # 2 minutes
+strands_graph_timeout        = 600000  # 10 minutes
+strands_max_node_executions  = 50
+strands_python_version       = "3.11"
+
+# Enhanced Resource Configuration for Strands
+backend_cpu    = 1024  # Increased for Strands orchestration
+backend_memory = 2048  # Increased for multi-agent coordination
+backend_desired_count = 2
+backend_min_capacity  = 1
+backend_max_capacity  = 10
+
+frontend_cpu    = 512
+frontend_memory = 1024
+frontend_desired_count = 2
+frontend_min_capacity  = 1
+frontend_max_capacity  = 5
+
+# Redis Configuration for Strands Caching
+redis_mode                    = "elasticache"
+redis_node_type              = "cache.t3.small"  # Upgraded for Strands performance
+redis_num_cache_nodes        = 2                 # Increased for high availability
+redis_engine_version         = "7.0"
+redis_encryption_at_rest     = true
+redis_encryption_in_transit  = true
+redis_snapshot_retention_limit = 7
+redis_connection_timeout     = 5000
+redis_command_timeout        = 3000
+redis_retry_attempts         = 3
+
+# Deployment Configuration
+deployment_type = "public"
+enable_cloudfront = true
+cloudfront_price_class = "PriceClass_100"
+
+# CORS Configuration for Strands API
+frontend_url = "https://your-domain.com"
+cors_allowed_origins = "https://*.cloudfront.net,https://*.elb.amazonaws.com"
+cors_credentials = true
+cors_max_age = 86400
+
+# SSL Configuration
+domain_name = "your-domain.com"
+ssl_certificate_arn = ""  # Leave empty to auto-generate
+
+# Monitoring Configuration
+enable_monitoring = true
+monitoring_level = "enhanced"  # Enhanced monitoring for Strands
+log_retention_days = 30
+
+# Cost Tracking Tags
+cost_center = "engineering"
+owner = "strands-team"
+business_unit = "ai-platform"
+application = "strands-press-release-generator"
+team = "strands-framework-team"
+backup_required = "yes"
+data_classification = "internal"
+auto_shutdown = "no"
+
+# Security Configuration
+enable_waf = true
+allowed_cidr_blocks = ["0.0.0.0/0"]  # Restrict as needed for production
+
+# Storage Configuration
+enable_s3_versioning = true
+s3_bucket_prefix = "strands-phase4"
+
+# Additional Environment Variables for Strands
+backend_environment_variables = {
+  # Strands Framework Advanced Configuration
+  STRANDS_ENABLE_SWARM = "true"
+  STRANDS_ENABLE_NESTED = "true"
+  STRANDS_ENABLE_HYBRID = "true"
+  STRANDS_CONSENSUS_THRESHOLD = "0.75"
+  STRANDS_MAX_ITERATIONS = "3"
+  
+  # Performance Optimization
+  STRANDS_PRESERVE_FUNCTIONALITY = "true"
+  STRANDS_ENHANCED_FEATURES = "true"
+  STRANDS_MONITORING_ENABLED = "true"
+  STRANDS_FALLBACK_ENABLED = "true"
+  
+  # Bridge Configuration
+  STRANDS_MESSAGE_QUEUE_SIZE = "1000"
+  STRANDS_HEARTBEAT_INTERVAL = "5000"
+  STRANDS_RECONNECT_ATTEMPTS = "5"
+  STRANDS_RECONNECT_DELAY = "2000"
+  STRANDS_BRIDGE_TIMEOUT = "30000"
+  
+  # Orchestration Patterns
+  STRANDS_DEFAULT_PATTERN = "adaptive_hybrid"
+  STRANDS_MAX_CONCURRENT_AGENTS = "15"  # Increased for Phase 4
+  
+  # Metrics and Monitoring
+  STRANDS_METRICS_ENABLED = "true"
+  STRANDS_PERFORMANCE_TRACKING = "true"
+  STRANDS_HEALTH_CHECK_INTERVAL = "30000"
+  STRANDS_METRICS_RETENTION_DAYS = "7"
+  
+  # Phase 4 Specific Features
+  STRANDS_ENABLE_ADAPTIVE_PATTERN_SELECTION = "true"
+  STRANDS_ENABLE_PATTERN_LEARNING = "true"
+  STRANDS_ENABLE_DYNAMIC_RECONFIGURATION = "true"
+  STRANDS_ENABLE_INTELLIGENT_CACHING = "true"
+  STRANDS_ENABLE_PARALLEL_EXECUTION = "true"
+  
+  # Performance Tuning
+  STRANDS_CACHE_SIZE = "2000"
+  STRANDS_CACHE_TTL = "300000"
+  STRANDS_MAX_PARALLEL_EXECUTIONS = "15"
+  STRANDS_OPTIMIZATION_PROFILE = "BALANCED"
+  
+  # Security Configuration
+  STRANDS_ENABLE_ENTERPRISE_SECURITY = "true"
+  STRANDS_COMPLIANCE_FRAMEWORKS = "SOX,GDPR"
+  STRANDS_ENCRYPTION_ENABLED = "true"
+  
+  # Integration Settings
+  STRANDS_PRESERVE_EXISTING_AGENTS = "true"
+  STRANDS_ENABLE_DUAL_MODE = "true"
+  STRANDS_VALIDATE_COMPATIBILITY = "true"
+}
+
+frontend_environment_variables = {
+  # Strands UI Configuration
+  STRANDS_UI_ENABLED = "true"
+  STRANDS_PATTERN_SELECTOR_ENABLED = "true"
+  STRANDS_PERFORMANCE_MONITOR_ENABLED = "true"
+  STRANDS_METRICS_DASHBOARD_ENABLED = "true"
+}
+
+# Secrets Configuration (replace with actual ARNs)
+# firecrawl_api_key_secret_arn = "arn:aws:secretsmanager:us-west-2:123456789012:secret:firecrawl-api-key-abcdef"
+# perplexity_api_key_secret_arn = "arn:aws:secretsmanager:us-west-2:123456789012:secret:perplexity-api-key-abcdef"
+# tavily_api_key_secret_arn = "arn:aws:secretsmanager:us-west-2:123456789012:secret:tavily-api-key-abcdef"
+# strands_api_key_secret_arn = "arn:aws:secretsmanager:us-west-2:123456789012:secret:strands-api-key-abcdef"
+
+# Additional Tags for Strands Framework
+additional_tags = {
+  StrandsFramework = "phase4"
+  StrandsVersion = "1.0.0"
+  OrchestrationEngine = "hybrid"
+  PerformanceOptimizer = "enabled"
+  EnterpriseFeatures = "enabled"
+  DeploymentDate = "2025-09-24"
+
+# Performance Comparison Configuration
+}

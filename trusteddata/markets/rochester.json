@@ -1,0 +1,26 @@
+{
+  "market": "Rochester",
+  "realEstate": {
+    "medianHomePrice": 467782,
+    "priceChange": 2.2,
+    "inventoryLevel": 6922,
+    "daysOnMarket": 38,
+    "activeListings": 14926
+  },
+  "demographics": {
+    "population": 904170,
+    "medianIncome": 46330,
+    "householdSize": 2.3
+  },
+  "economic": {
+    "employmentRate": 95.8,
+    "gdpGrowth": 2.0,
+    "majorIndustries": [
+      "Professional Services",
+      "Technology",
+      "Finance"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.653157Z",
+  "source": "synthetic"
+}

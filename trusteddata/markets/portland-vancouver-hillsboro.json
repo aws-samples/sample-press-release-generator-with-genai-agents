@@ -1,0 +1,26 @@
+{
+  "market": "Portland-Vancouver-Hillsboro",
+  "realEstate": {
+    "medianHomePrice": 300114,
+    "priceChange": 11.0,
+    "inventoryLevel": 10788,
+    "daysOnMarket": 61,
+    "activeListings": 14552
+  },
+  "demographics": {
+    "population": 12871410,
+    "medianIncome": 75351,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 95.5,
+    "gdpGrowth": 3.4,
+    "majorIndustries": [
+      "Technology",
+      "Tourism",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.646462Z",
+  "source": "synthetic"
+}

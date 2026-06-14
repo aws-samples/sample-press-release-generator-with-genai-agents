@@ -1,0 +1,26 @@
+{
+  "market": "Raleigh",
+  "realEstate": {
+    "medianHomePrice": 295284,
+    "priceChange": -4.3,
+    "inventoryLevel": 1913,
+    "daysOnMarket": 72,
+    "activeListings": 6209
+  },
+  "demographics": {
+    "population": 3342214,
+    "medianIncome": 60350,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 92.9,
+    "gdpGrowth": 4.0,
+    "majorIndustries": [
+      "Energy",
+      "Technology",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.652403Z",
+  "source": "synthetic"
+}

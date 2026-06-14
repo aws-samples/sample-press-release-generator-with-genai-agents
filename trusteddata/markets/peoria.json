@@ -1,0 +1,26 @@
+{
+  "market": "Peoria",
+  "realEstate": {
+    "medianHomePrice": 172542,
+    "priceChange": -1.5,
+    "inventoryLevel": 11725,
+    "daysOnMarket": 42,
+    "activeListings": 4372
+  },
+  "demographics": {
+    "population": 6536661,
+    "medianIncome": 35576,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 95.3,
+    "gdpGrowth": 5.0,
+    "majorIndustries": [
+      "Technology",
+      "Healthcare",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.668164Z",
+  "source": "synthetic"
+}

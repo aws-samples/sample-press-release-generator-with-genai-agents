@@ -1,0 +1,26 @@
+{
+  "market": "Los Angeles-Long Beach-Anaheim",
+  "realEstate": {
+    "medianHomePrice": 845740,
+    "priceChange": 3.7,
+    "inventoryLevel": 12604,
+    "daysOnMarket": 73,
+    "activeListings": 19396
+  },
+  "demographics": {
+    "population": 17356264,
+    "medianIncome": 93593,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 92.5,
+    "gdpGrowth": 4.7,
+    "majorIndustries": [
+      "Healthcare",
+      "Tourism",
+      "Entertainment"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.635421Z",
+  "source": "synthetic"
+}

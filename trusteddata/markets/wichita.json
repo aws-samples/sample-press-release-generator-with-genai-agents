@@ -1,0 +1,26 @@
+{
+  "market": "Wichita",
+  "realEstate": {
+    "medianHomePrice": 245897,
+    "priceChange": 11.8,
+    "inventoryLevel": 3401,
+    "daysOnMarket": 45,
+    "activeListings": 9738
+  },
+  "demographics": {
+    "population": 2332103,
+    "medianIncome": 31091,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 94.7,
+    "gdpGrowth": 5.2,
+    "majorIndustries": [
+      "Agriculture",
+      "Technology",
+      "Finance"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.664320Z",
+  "source": "synthetic"
+}

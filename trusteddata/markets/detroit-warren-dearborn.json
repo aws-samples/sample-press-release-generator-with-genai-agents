@@ -1,0 +1,26 @@
+{
+  "market": "Detroit-Warren-Dearborn",
+  "realEstate": {
+    "medianHomePrice": 595260,
+    "priceChange": 3.3,
+    "inventoryLevel": 13193,
+    "daysOnMarket": 37,
+    "activeListings": 9741
+  },
+  "demographics": {
+    "population": 901455,
+    "medianIncome": 77101,
+    "householdSize": 2.4
+  },
+  "economic": {
+    "employmentRate": 95.5,
+    "gdpGrowth": 2.6,
+    "majorIndustries": [
+      "Technology",
+      "Manufacturing",
+      "Finance"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.637780Z",
+  "source": "synthetic"
+}

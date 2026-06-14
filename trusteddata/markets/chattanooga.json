@@ -1,0 +1,26 @@
+{
+  "market": "Chattanooga",
+  "realEstate": {
+    "medianHomePrice": 440354,
+    "priceChange": 10.0,
+    "inventoryLevel": 10287,
+    "daysOnMarket": 44,
+    "activeListings": 3119
+  },
+  "demographics": {
+    "population": 550445,
+    "medianIncome": 27321,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 96.8,
+    "gdpGrowth": 3.2,
+    "majorIndustries": [
+      "Manufacturing",
+      "Retail",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.665535Z",
+  "source": "synthetic"
+}

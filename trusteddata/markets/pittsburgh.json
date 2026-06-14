@@ -1,0 +1,26 @@
+{
+  "market": "Pittsburgh",
+  "realEstate": {
+    "medianHomePrice": 721195,
+    "priceChange": 0.9,
+    "inventoryLevel": 15292,
+    "daysOnMarket": 40,
+    "activeListings": 2364
+  },
+  "demographics": {
+    "population": 4058031,
+    "medianIncome": 60868,
+    "householdSize": 2.4
+  },
+  "economic": {
+    "employmentRate": 96.6,
+    "gdpGrowth": 2.9,
+    "majorIndustries": [
+      "Professional Services",
+      "Education",
+      "Finance"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.646768Z",
+  "source": "synthetic"
+}

@@ -1,0 +1,26 @@
+{
+  "market": "Harrisburg-Carlisle",
+  "realEstate": {
+    "medianHomePrice": 319143,
+    "priceChange": 5.3,
+    "inventoryLevel": 14707,
+    "daysOnMarket": 40,
+    "activeListings": 11944
+  },
+  "demographics": {
+    "population": 11838326,
+    "medianIncome": 47926,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 92.6,
+    "gdpGrowth": 2.8,
+    "majorIndustries": [
+      "Finance",
+      "Healthcare",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.659915Z",
+  "source": "synthetic"
+}

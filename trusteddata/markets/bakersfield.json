@@ -1,0 +1,26 @@
+{
+  "market": "Bakersfield",
+  "realEstate": {
+    "medianHomePrice": 190644,
+    "priceChange": 3.5,
+    "inventoryLevel": 10099,
+    "daysOnMarket": 29,
+    "activeListings": 5573
+  },
+  "demographics": {
+    "population": 885446,
+    "medianIncome": 34283,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 97.1,
+    "gdpGrowth": 4.1,
+    "majorIndustries": [
+      "Technology",
+      "Entertainment",
+      "Tourism"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.658836Z",
+  "source": "synthetic"
+}

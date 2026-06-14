@@ -1,0 +1,26 @@
+{
+  "market": "Louisville/Jefferson County",
+  "realEstate": {
+    "medianHomePrice": 519385,
+    "priceChange": -3.3,
+    "inventoryLevel": 6665,
+    "daysOnMarket": 68,
+    "activeListings": 6552
+  },
+  "demographics": {
+    "population": 15610229,
+    "medianIncome": 68232,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 94.9,
+    "gdpGrowth": 2.0,
+    "majorIndustries": [
+      "Retail",
+      "Energy",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.651237Z",
+  "source": "synthetic"
+}

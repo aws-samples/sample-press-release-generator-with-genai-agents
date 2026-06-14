@@ -1,0 +1,59 @@
+# Example Terraform configuration for Embedded Redis mode
+# Copy to terraform.tfvars and customize for your deployment
+
+# ECR Image URLs (replace with your actual ECR URLs)
+backend_image  = "your-account.dkr.ecr.us-west-2.amazonaws.com/press-rele-prod-backend:latest"
+frontend_image = "your-account.dkr.ecr.us-west-2.amazonaws.com/press-rele-prod-frontend:latest"
+
+# Deployment Configuration
+deployment_type = "public"  # or "internal" for VPC-only access
+enable_cloudfront = true    # Enable CloudFront for better performance (public deployments only)
+
+# Redis Configuration - EMBEDDED MODE (Default)
+redis_mode = "embedded"  # Uses Redis container within ECS tasks
+
+# Resource Configuration - Increased for embedded Redis
+# Backend needs more resources when running embedded Redis
+backend_cpu    = 1024  # Increased from 512 for Redis overhead
+backend_memory = 2048  # Increased from 1024 for Redis memory usage
+backend_desired_count = 1
+
+# Frontend configuration (unchanged)
+frontend_cpu    = 512
+frontend_memory = 1024
+frontend_desired_count = 1
+
+# Redis Connection Configuration
+redis_connection_timeout = 5000   # 5 seconds
+redis_command_timeout    = 3000   # 3 seconds
+redis_retry_attempts     = 3      # Retry 3 times
+redis_retry_delay        = 1000   # 1 second between retries
+
+# CORS Configuration
+frontend_url = "https://your-alb-dns-name.us-west-2.elb.amazonaws.com"
+cors_allowed_origins = "https://your-alb-dns-name.us-west-2.elb.amazonaws.com,https://*.cloudfront.net,https://*.elb.amazonaws.com"
+cors_domain_pattern = "^https://[a-z0-9-]+\\.(cloudfront\\.net|elb\\.[a-z0-9-]+\\.amazonaws\\.com|execute-api\\.[a-z0-9-]+\\.amazonaws\\.com)$"
+cors_credentials = true
+cors_max_age = 86400
+
+# AWS Bedrock Configuration
+aws_bedrock_model_id = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+# Auto Scaling Configuration
+backend_min_capacity  = 1
+backend_max_capacity  = 10
+frontend_min_capacity = 1
+frontend_max_capacity = 5
+
+# Cost Tracking
+cost_center = "engineering"
+owner       = "devops-team"
+
+# Additional Tags
+additional_tags = {
+  Application = "press-release-generator"
+  Team        = "content-generation"
+  RedisMode   = "embedded"
+
+# Performance Comparison Configuration
+}

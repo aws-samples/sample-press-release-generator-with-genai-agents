@@ -1,0 +1,26 @@
+{
+  "market": "Syracuse",
+  "realEstate": {
+    "medianHomePrice": 329430,
+    "priceChange": 1.6,
+    "inventoryLevel": 2999,
+    "daysOnMarket": 27,
+    "activeListings": 6029
+  },
+  "demographics": {
+    "population": 8348577,
+    "medianIncome": 28290,
+    "householdSize": 2.4
+  },
+  "economic": {
+    "employmentRate": 96.9,
+    "gdpGrowth": 4.4,
+    "majorIndustries": [
+      "Finance",
+      "Professional Services",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.665226Z",
+  "source": "synthetic"
+}

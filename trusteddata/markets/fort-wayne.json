@@ -1,0 +1,26 @@
+{
+  "market": "Fort Wayne",
+  "realEstate": {
+    "medianHomePrice": 372807,
+    "priceChange": 8.2,
+    "inventoryLevel": 8584,
+    "daysOnMarket": 61,
+    "activeListings": 4392
+  },
+  "demographics": {
+    "population": 3472003,
+    "medianIncome": 25644,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 94.8,
+    "gdpGrowth": 4.7,
+    "majorIndustries": [
+      "Technology",
+      "Finance",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.665678Z",
+  "source": "synthetic"
+}

@@ -1,0 +1,26 @@
+{
+  "market": "Virginia Beach-Norfolk-Newport News",
+  "realEstate": {
+    "medianHomePrice": 566588,
+    "priceChange": 4.0,
+    "inventoryLevel": 20421,
+    "daysOnMarket": 43,
+    "activeListings": 7035
+  },
+  "demographics": {
+    "population": 5529158,
+    "medianIncome": 69756,
+    "householdSize": 2.3
+  },
+  "economic": {
+    "employmentRate": 93.5,
+    "gdpGrowth": 3.5,
+    "majorIndustries": [
+      "Technology",
+      "Healthcare",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.649631Z",
+  "source": "synthetic"
+}

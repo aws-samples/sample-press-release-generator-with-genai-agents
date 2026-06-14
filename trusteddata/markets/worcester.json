@@ -1,0 +1,26 @@
+{
+  "market": "Worcester",
+  "realEstate": {
+    "medianHomePrice": 295913,
+    "priceChange": 4.0,
+    "inventoryLevel": 11742,
+    "daysOnMarket": 39,
+    "activeListings": 13645
+  },
+  "demographics": {
+    "population": 682926,
+    "medianIncome": 45224,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 96.3,
+    "gdpGrowth": 4.5,
+    "majorIndustries": [
+      "Finance",
+      "Professional Services",
+      "Education"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.655942Z",
+  "source": "synthetic"
+}

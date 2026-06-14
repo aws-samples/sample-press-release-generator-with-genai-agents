@@ -1,0 +1,26 @@
+{
+  "market": "Youngstown-Warren-Boardman",
+  "realEstate": {
+    "medianHomePrice": 434878,
+    "priceChange": 9.4,
+    "inventoryLevel": 2273,
+    "daysOnMarket": 36,
+    "activeListings": 10057
+  },
+  "demographics": {
+    "population": 6728212,
+    "medianIncome": 42953,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 95.2,
+    "gdpGrowth": 1.8,
+    "majorIndustries": [
+      "Finance",
+      "Healthcare",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.659744Z",
+  "source": "synthetic"
+}

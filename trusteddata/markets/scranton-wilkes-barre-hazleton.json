@@ -1,0 +1,26 @@
+{
+  "market": "Scranton--Wilkes-Barre--Hazleton",
+  "realEstate": {
+    "medianHomePrice": 255698,
+    "priceChange": -0.2,
+    "inventoryLevel": 5757,
+    "daysOnMarket": 71,
+    "activeListings": 8317
+  },
+  "demographics": {
+    "population": 5564554,
+    "medianIncome": 39656,
+    "householdSize": 2.4
+  },
+  "economic": {
+    "employmentRate": 93.4,
+    "gdpGrowth": 3.6,
+    "majorIndustries": [
+      "Professional Services",
+      "Education",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.660312Z",
+  "source": "synthetic"
+}

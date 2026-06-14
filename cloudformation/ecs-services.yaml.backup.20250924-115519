@@ -1,0 +1,516 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Press Release Generator - ECS Services with CORS Support'
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: press-release-generator
+    Description: Name of the project
+  
+  Environment:
+    Type: String
+    Default: prod
+    AllowedValues: [dev, staging, prod]
+    Description: Environment name
+  
+  BackendImage:
+    Type: String
+    Default: 'press-release-generator-backend:latest'
+    Description: Docker image for backend service
+  
+  FrontendImage:
+    Type: String
+    Default: 'press-release-generator-frontend:latest'
+    Description: Docker image for frontend service
+  
+  BackendCpu:
+    Type: Number
+    Default: 512
+    Description: CPU units for backend service
+  
+  BackendMemory:
+    Type: Number
+    Default: 1024
+    Description: Memory (MB) for backend service
+  
+  FrontendCpu:
+    Type: Number
+    Default: 256
+    Description: CPU units for frontend service
+  
+  FrontendMemory:
+    Type: Number
+    Default: 512
+    Description: Memory (MB) for frontend service
+  
+  BackendDesiredCount:
+    Type: Number
+    Default: 2
+    Description: Desired number of backend tasks
+  
+  FrontendDesiredCount:
+    Type: Number
+    Default: 2
+    Description: Desired number of frontend tasks
+  
+  FrontendUrl:
+    Type: String
+    Default: ''
+    Description: Frontend URL for CORS configuration
+  
+  CorsAllowedOrigins:
+    Type: String
+    Default: 'https://*.cloudfront.net,https://*.elb.amazonaws.com'
+    Description: Comma-separated list of allowed CORS origins
+  
+  CorsDomainPattern:
+    Type: String
+    Default: '^https://[a-z0-9-]+\.(cloudfront\.net|elb\.[a-z0-9-]+\.amazonaws\.com)$'
+    Description: Regex pattern for allowed CORS domains
+  
+  FirecrawlApiKeySecretArn:
+    Type: String
+    Default: ''
+    Description: ARN of secret containing Firecrawl API key
+  
+  PerplexityApiKeySecretArn:
+    Type: String
+    Default: ''
+    Description: ARN of secret containing Perplexity API key
+  
+  BedrockModelId:
+    Type: String
+    Default: 'arn:aws:bedrock:us-west-2:123456789012:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0'
+    Description: AWS Bedrock model ID
+
+Conditions:
+  HasFirecrawlSecret: !Not [!Equals [!Ref FirecrawlApiKeySecretArn, '']]
+  HasPerplexitySecret: !Not [!Equals [!Ref PerplexityApiKeySecretArn, '']]
+  HasFrontendUrl: !Not [!Equals [!Ref FrontendUrl, '']]
+
+Resources:
+  # ECS Cluster
+  ECSCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Sub '${ProjectName}-${Environment}-cluster'
+      CapacityProviders:
+        - FARGATE
+        - FARGATE_SPOT
+      DefaultCapacityProviderStrategy:
+        - CapacityProvider: FARGATE
+          Weight: 1
+        - CapacityProvider: FARGATE_SPOT
+          Weight: 4
+      ClusterSettings:
+        - Name: containerInsights
+          Value: enabled
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-cluster'
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+
+  # IAM Roles
+  ECSTaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${ProjectName}-${Environment}-ecs-execution-role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      Policies:
+        - PolicyName: SecretsManagerAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !If [HasFirecrawlSecret, !Ref FirecrawlApiKeySecretArn, !Ref 'AWS::NoValue']
+                  - !If [HasPerplexitySecret, !Ref PerplexityApiKeySecretArn, !Ref 'AWS::NoValue']
+        - PolicyName: CloudWatchLogs
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: '*'
+
+  ECSTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${ProjectName}-${Environment}-ecs-task-role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: BedrockAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource: !Ref BedrockModelId
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:DeleteObject
+                Resource:
+                  - !Sub
+                    - '${BucketArn}/*'
+                    - BucketArn: !ImportValue
+                        Fn::Sub: '${ProjectName}-${Environment}-StorageBucketArn'
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                Resource:
+                  - !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${ProjectName}-${Environment}-*'
+
+  # CloudWatch Log Groups
+  BackendLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/ecs/${ProjectName}-${Environment}-backend'
+      RetentionInDays: 30
+
+  FrontendLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/ecs/${ProjectName}-${Environment}-frontend'
+      RetentionInDays: 30
+
+  # Backend Task Definition
+  BackendTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Sub '${ProjectName}-${Environment}-backend'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      Cpu: !Ref BackendCpu
+      Memory: !Ref BackendMemory
+      ExecutionRoleArn: !GetAtt ECSTaskExecutionRole.Arn
+      TaskRoleArn: !GetAtt ECSTaskRole.Arn
+      ContainerDefinitions:
+        - Name: backend
+          Image: !Ref BackendImage
+          Essential: true
+          PortMappings:
+            - ContainerPort: 3001
+              Protocol: tcp
+          Environment:
+            - Name: NODE_ENV
+              Value: !Ref Environment
+            - Name: PORT
+              Value: '3001'
+            - Name: AWS_REGION
+              Value: !Ref 'AWS::Region'
+            - Name: FRONTEND_URL
+              Value: !If
+                - HasFrontendUrl
+                - !Ref FrontendUrl
+                - !Sub
+                  - 'https://${LoadBalancerDNS}'
+                  - LoadBalancerDNS: !ImportValue
+                      Fn::Sub: '${ProjectName}-${Environment}-LoadBalancerDNSName'
+            - Name: CORS_ORIGIN
+              Value: !If
+                - HasFrontendUrl
+                - !Ref FrontendUrl
+                - !Sub
+                  - 'https://${LoadBalancerDNS}'
+                  - LoadBalancerDNS: !ImportValue
+                      Fn::Sub: '${ProjectName}-${Environment}-LoadBalancerDNSName'
+            - Name: CORS_ALLOWED_ORIGINS
+              Value: !Ref CorsAllowedOrigins
+            - Name: CORS_DOMAIN_PATTERN
+              Value: !Ref CorsDomainPattern
+            - Name: CORS_CREDENTIALS
+              Value: 'true'
+            - Name: CORS_MAX_AGE
+              Value: '86400'
+            - Name: BEDROCK_MODEL_ID
+              Value: !Ref BedrockModelId
+          Secrets: !If
+            - HasFirecrawlSecret
+            - - Name: FIRECRAWL_API_KEY
+                ValueFrom: !Ref FirecrawlApiKeySecretArn
+              - !If
+                - HasPerplexitySecret
+                - Name: PERPLEXITY_API_KEY
+                  ValueFrom: !Ref PerplexityApiKeySecretArn
+                - !Ref 'AWS::NoValue'
+            - !If
+              - HasPerplexitySecret
+              - - Name: PERPLEXITY_API_KEY
+                  ValueFrom: !Ref PerplexityApiKeySecretArn
+              - !Ref 'AWS::NoValue'
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref BackendLogGroup
+              awslogs-region: !Ref 'AWS::Region'
+              awslogs-stream-prefix: ecs
+          HealthCheck:
+            Command:
+              - CMD-SHELL
+              - 'curl -f http://localhost:3001/health || exit 1'
+            Interval: 30
+            Timeout: 5
+            Retries: 3
+            StartPeriod: 60
+
+  # Frontend Task Definition
+  FrontendTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: !Sub '${ProjectName}-${Environment}-frontend'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      Cpu: !Ref FrontendCpu
+      Memory: !Ref FrontendMemory
+      ExecutionRoleArn: !GetAtt ECSTaskExecutionRole.Arn
+      TaskRoleArn: !GetAtt ECSTaskRole.Arn
+      ContainerDefinitions:
+        - Name: frontend
+          Image: !Ref FrontendImage
+          Essential: true
+          PortMappings:
+            - ContainerPort: 80
+              Protocol: tcp
+          Environment:
+            - Name: NODE_ENV
+              Value: !Ref Environment
+            - Name: API_BASE_URL
+              Value: !Sub
+                - 'https://${LoadBalancerDNS}/api/v1'
+                - LoadBalancerDNS: !ImportValue
+                    Fn::Sub: '${ProjectName}-${Environment}-LoadBalancerDNSName'
+            - Name: BACKEND_URL
+              Value: !Sub
+                - 'https://${LoadBalancerDNS}'
+                - LoadBalancerDNS: !ImportValue
+                    Fn::Sub: '${ProjectName}-${Environment}-LoadBalancerDNSName'
+            - Name: CORS_MODE
+              Value: cors
+            - Name: DEBUG
+              Value: 'false'
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref FrontendLogGroup
+              awslogs-region: !Ref 'AWS::Region'
+              awslogs-stream-prefix: ecs
+          HealthCheck:
+            Command:
+              - CMD-SHELL
+              - 'curl -f http://localhost:80/health || exit 1'
+            Interval: 30
+            Timeout: 5
+            Retries: 3
+            StartPeriod: 30
+
+  # Backend ECS Service
+  BackendService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: !Sub '${ProjectName}-${Environment}-backend'
+      Cluster: !Ref ECSCluster
+      TaskDefinition: !Ref BackendTaskDefinition
+      DesiredCount: !Ref BackendDesiredCount
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          SecurityGroups:
+            - !ImportValue
+                Fn::Sub: '${ProjectName}-${Environment}-ECSSecurityGroupId'
+          Subnets:
+            - !ImportValue
+                Fn::Sub: '${ProjectName}-${Environment}-PrivateSubnet1Id'
+            - !ImportValue
+                Fn::Sub: '${ProjectName}-${Environment}-PrivateSubnet2Id'
+          AssignPublicIp: DISABLED
+      LoadBalancers:
+        - ContainerName: backend
+          ContainerPort: 3001
+          TargetGroupArn: !ImportValue
+            Fn::Sub: '${ProjectName}-${Environment}-BackendTargetGroupArn'
+      HealthCheckGracePeriodSeconds: 300
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: true
+      EnableExecuteCommand: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-backend-service'
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Frontend ECS Service
+  FrontendService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: !Sub '${ProjectName}-${Environment}-frontend'
+      Cluster: !Ref ECSCluster
+      TaskDefinition: !Ref FrontendTaskDefinition
+      DesiredCount: !Ref FrontendDesiredCount
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          SecurityGroups:
+            - !ImportValue
+                Fn::Sub: '${ProjectName}-${Environment}-ECSSecurityGroupId'
+          Subnets:
+            - !ImportValue
+                Fn::Sub: '${ProjectName}-${Environment}-PrivateSubnet1Id'
+            - !ImportValue
+                Fn::Sub: '${ProjectName}-${Environment}-PrivateSubnet2Id'
+          AssignPublicIp: DISABLED
+      LoadBalancers:
+        - ContainerName: frontend
+          ContainerPort: 80
+          TargetGroupArn: !ImportValue
+            Fn::Sub: '${ProjectName}-${Environment}-FrontendTargetGroupArn'
+      HealthCheckGracePeriodSeconds: 300
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 50
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: true
+      EnableExecuteCommand: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${ProjectName}-${Environment}-frontend-service'
+        - Key: Project
+          Value: !Ref ProjectName
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Auto Scaling
+  BackendAutoScalingTarget:
+    Type: AWS::ApplicationAutoScaling::ScalableTarget
+    Properties:
+      MaxCapacity: 10
+      MinCapacity: 1
+      ResourceId: !Sub 'service/${ECSCluster}/${BackendService.Name}'
+      RoleARN: !Sub 'arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService'
+      ScalableDimension: ecs:service:DesiredCount
+      ServiceNamespace: ecs
+
+  BackendAutoScalingPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: !Sub '${ProjectName}-${Environment}-backend-scaling-policy'
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref BackendAutoScalingTarget
+      TargetTrackingScalingPolicyConfiguration:
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ECSServiceAverageCPUUtilization
+        TargetValue: 70.0
+        ScaleOutCooldown: 300
+        ScaleInCooldown: 300
+
+  FrontendAutoScalingTarget:
+    Type: AWS::ApplicationAutoScaling::ScalableTarget
+    Properties:
+      MaxCapacity: 5
+      MinCapacity: 1
+      ResourceId: !Sub 'service/${ECSCluster}/${FrontendService.Name}'
+      RoleARN: !Sub 'arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService'
+      ScalableDimension: ecs:service:DesiredCount
+      ServiceNamespace: ecs
+
+  FrontendAutoScalingPolicy:
+    Type: AWS::ApplicationAutoScaling::ScalingPolicy
+    Properties:
+      PolicyName: !Sub '${ProjectName}-${Environment}-frontend-scaling-policy'
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: !Ref FrontendAutoScalingTarget
+      TargetTrackingScalingPolicyConfiguration:
+        PredefinedMetricSpecification:
+          PredefinedMetricType: ECSServiceAverageCPUUtilization
+        TargetValue: 70.0
+        ScaleOutCooldown: 300
+        ScaleInCooldown: 300
+
+Outputs:
+  ECSClusterName:
+    Description: Name of the ECS cluster
+    Value: !Ref ECSCluster
+    Export:
+      Name: !Sub '${ProjectName}-${Environment}-ECSClusterName'
+
+  ECSClusterArn:
+    Description: ARN of the ECS cluster
+    Value: !GetAtt ECSCluster.Arn
+    Export:
+      Name: !Sub '${ProjectName}-${Environment}-ECSClusterArn'
+
+  BackendServiceName:
+    Description: Name of the backend ECS service
+    Value: !GetAtt BackendService.Name
+    Export:
+      Name: !Sub '${ProjectName}-${Environment}-BackendServiceName'
+
+  FrontendServiceName:
+    Description: Name of the frontend ECS service
+    Value: !GetAtt FrontendService.Name
+    Export:
+      Name: !Sub '${ProjectName}-${Environment}-FrontendServiceName'
+
+  BackendTaskDefinitionArn:
+    Description: ARN of the backend task definition
+    Value: !Ref BackendTaskDefinition
+
+  FrontendTaskDefinitionArn:
+    Description: ARN of the frontend task definition
+    Value: !Ref FrontendTaskDefinition
+
+  CorsConfiguration:
+    Description: CORS configuration for the services
+    Value: !Sub |
+      Frontend URL: ${FrontendUrl}
+      Allowed Origins: ${CorsAllowedOrigins}
+      Domain Pattern: ${CorsDomainPattern}
+      Credentials: true
+      Max Age: 86400

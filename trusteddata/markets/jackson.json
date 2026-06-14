@@ -1,0 +1,26 @@
+{
+  "market": "Jackson",
+  "realEstate": {
+    "medianHomePrice": 196402,
+    "priceChange": 9.8,
+    "inventoryLevel": 13445,
+    "daysOnMarket": 45,
+    "activeListings": 8645
+  },
+  "demographics": {
+    "population": 10479033,
+    "medianIncome": 52005,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 95.9,
+    "gdpGrowth": 2.2,
+    "majorIndustries": [
+      "Healthcare",
+      "Technology",
+      "Energy"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.663778Z",
+  "source": "synthetic"
+}

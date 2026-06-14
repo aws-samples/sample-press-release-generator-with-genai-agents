@@ -1,0 +1,74 @@
+# Example Terraform configuration for ElastiCache mode
+# Copy to terraform.tfvars and customize for your deployment
+
+# ECR Image URLs (replace with your actual ECR URLs)
+backend_image  = "your-account.dkr.ecr.us-west-2.amazonaws.com/press-rele-prod-backend:latest"
+frontend_image = "your-account.dkr.ecr.us-west-2.amazonaws.com/press-rele-prod-frontend:latest"
+
+# Deployment Configuration
+deployment_type = "public"  # or "internal" for VPC-only access
+enable_cloudfront = true    # Enable CloudFront for better performance (public deployments only)
+
+# Redis Configuration - ELASTICACHE MODE
+redis_mode = "elasticache"  # Uses AWS ElastiCache managed Redis
+
+# ElastiCache Configuration
+redis_node_type                   = "cache.t3.micro"    # Start small, can scale up
+redis_num_cache_nodes            = 1                    # Single node for cost optimization
+redis_engine_version             = "7.0"               # Latest stable Redis version
+redis_snapshot_retention_limit   = 1                   # 1 day retention for cost optimization
+redis_snapshot_window            = "03:00-05:00"       # UTC backup window
+redis_maintenance_window         = "sun:05:00-sun:06:00" # UTC maintenance window
+redis_encryption_at_rest         = true                # Security best practice
+redis_encryption_in_transit      = true                # Security best practice
+redis_auth_token                 = ""                  # Leave empty for no auth (can add later)
+
+# Resource Configuration - Standard for ElastiCache mode
+# Backend can use standard resources since Redis is external
+backend_cpu    = 512   # Standard CPU allocation
+backend_memory = 1024  # Standard memory allocation
+backend_desired_count = 1
+
+# Frontend configuration (unchanged)
+frontend_cpu    = 512
+frontend_memory = 1024
+frontend_desired_count = 1
+
+# Redis Connection Configuration
+redis_connection_timeout = 5000   # 5 seconds
+redis_command_timeout    = 3000   # 3 seconds
+redis_retry_attempts     = 3      # Retry 3 times
+redis_retry_delay        = 1000   # 1 second between retries
+
+# CORS Configuration
+frontend_url = "https://your-alb-dns-name.us-west-2.elb.amazonaws.com"
+cors_allowed_origins = "https://your-alb-dns-name.us-west-2.elb.amazonaws.com,https://*.cloudfront.net,https://*.elb.amazonaws.com"
+cors_domain_pattern = "^https://[a-z0-9-]+\\.(cloudfront\\.net|elb\\.[a-z0-9-]+\\.amazonaws\\.com|execute-api\\.[a-z0-9-]+\\.amazonaws\\.com)$"
+cors_credentials = true
+cors_max_age = 86400
+
+# AWS Bedrock Configuration
+aws_bedrock_model_id = "global.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
+# Auto Scaling Configuration
+backend_min_capacity  = 1
+backend_max_capacity  = 10
+frontend_min_capacity = 1
+frontend_max_capacity = 5
+
+# Cost Tracking
+cost_center = "engineering"
+owner       = "devops-team"
+
+# Additional Tags
+additional_tags = {
+  Application = "press-release-generator"
+  Team        = "content-generation"
+  RedisMode   = "elasticache"
+}
+
+# ElastiCache Cost Optimization Notes:
+# - cache.t3.micro: ~$12/month + operational costs (~$6-13) = $18-25/month total
+# - cache.t3.small: ~$25/month + operational costs (~$6-13) = $31-38/month total
+# - Consider Reserved Instances for 30-40% discount on long-term deployments
+# - Monitor CPU and memory usage to right-size the instance

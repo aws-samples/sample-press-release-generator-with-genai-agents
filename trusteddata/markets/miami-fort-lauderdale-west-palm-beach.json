@@ -1,0 +1,26 @@
+{
+  "market": "Miami-Fort Lauderdale-West Palm Beach",
+  "realEstate": {
+    "medianHomePrice": 304971,
+    "priceChange": 8.0,
+    "inventoryLevel": 19635,
+    "daysOnMarket": 62,
+    "activeListings": 9482
+  },
+  "demographics": {
+    "population": 15575632,
+    "medianIncome": 54100,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 93.9,
+    "gdpGrowth": 1.7,
+    "majorIndustries": [
+      "Energy",
+      "Retail",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.636474Z",
+  "source": "synthetic"
+}

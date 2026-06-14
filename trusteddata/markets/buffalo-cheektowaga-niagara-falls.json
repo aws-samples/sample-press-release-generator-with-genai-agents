@@ -1,0 +1,26 @@
+{
+  "market": "Buffalo-Cheektowaga-Niagara Falls",
+  "realEstate": {
+    "medianHomePrice": 575702,
+    "priceChange": 6.2,
+    "inventoryLevel": 14874,
+    "daysOnMarket": 39,
+    "activeListings": 12267
+  },
+  "demographics": {
+    "population": 11191625,
+    "medianIncome": 43575,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 93.4,
+    "gdpGrowth": 2.1,
+    "majorIndustries": [
+      "Professional Services",
+      "Technology",
+      "Education"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.652255Z",
+  "source": "synthetic"
+}

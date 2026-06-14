@@ -1,0 +1,26 @@
+{
+  "market": "Kansas City",
+  "realEstate": {
+    "medianHomePrice": 389732,
+    "priceChange": -0.5,
+    "inventoryLevel": 1853,
+    "daysOnMarket": 53,
+    "activeListings": 16807
+  },
+  "demographics": {
+    "population": 15779266,
+    "medianIncome": 43373,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 96.4,
+    "gdpGrowth": 4.6,
+    "majorIndustries": [
+      "Manufacturing",
+      "Finance",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.648358Z",
+  "source": "synthetic"
+}

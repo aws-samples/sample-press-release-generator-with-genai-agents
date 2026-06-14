@@ -1,0 +1,26 @@
+{
+  "market": "Charleston-North Charleston",
+  "realEstate": {
+    "medianHomePrice": 268315,
+    "priceChange": 0.6,
+    "inventoryLevel": 14065,
+    "daysOnMarket": 42,
+    "activeListings": 1768
+  },
+  "demographics": {
+    "population": 6358032,
+    "medianIncome": 37151,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 95.1,
+    "gdpGrowth": 5.0,
+    "majorIndustries": [
+      "Healthcare",
+      "Manufacturing",
+      "Retail"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.661316Z",
+  "source": "synthetic"
+}

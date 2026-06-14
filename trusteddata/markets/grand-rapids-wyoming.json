@@ -1,0 +1,26 @@
+{
+  "market": "Grand Rapids-Wyoming",
+  "realEstate": {
+    "medianHomePrice": 211854,
+    "priceChange": 7.3,
+    "inventoryLevel": 1843,
+    "daysOnMarket": 57,
+    "activeListings": 13653
+  },
+  "demographics": {
+    "population": 14008084,
+    "medianIncome": 57896,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 94.7,
+    "gdpGrowth": 2.1,
+    "majorIndustries": [
+      "Technology",
+      "Finance",
+      "Manufacturing"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.653512Z",
+  "source": "synthetic"
+}

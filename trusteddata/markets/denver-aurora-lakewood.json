@@ -1,0 +1,26 @@
+{
+  "market": "Denver-Aurora-Lakewood",
+  "realEstate": {
+    "medianHomePrice": 315927,
+    "priceChange": 11.8,
+    "inventoryLevel": 20101,
+    "daysOnMarket": 65,
+    "activeListings": 2908
+  },
+  "demographics": {
+    "population": 16445814,
+    "medianIncome": 64604,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 93.8,
+    "gdpGrowth": 3.5,
+    "majorIndustries": [
+      "Technology",
+      "Entertainment",
+      "Tourism"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.644513Z",
+  "source": "synthetic"
+}

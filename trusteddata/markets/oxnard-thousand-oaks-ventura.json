@@ -1,0 +1,26 @@
+{
+  "market": "Oxnard-Thousand Oaks-Ventura",
+  "realEstate": {
+    "medianHomePrice": 211842,
+    "priceChange": 11.1,
+    "inventoryLevel": 6201,
+    "daysOnMarket": 26,
+    "activeListings": 4189
+  },
+  "demographics": {
+    "population": 631871,
+    "medianIncome": 52422,
+    "householdSize": 2.4
+  },
+  "economic": {
+    "employmentRate": 95.9,
+    "gdpGrowth": 3.7,
+    "majorIndustries": [
+      "Technology",
+      "Tourism",
+      "Entertainment"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.660899Z",
+  "source": "synthetic"
+}

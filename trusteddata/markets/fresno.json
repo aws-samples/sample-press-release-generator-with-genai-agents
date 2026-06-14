@@ -1,0 +1,26 @@
+{
+  "market": "Fresno",
+  "realEstate": {
+    "medianHomePrice": 531670,
+    "priceChange": 9.5,
+    "inventoryLevel": 13884,
+    "daysOnMarket": 42,
+    "activeListings": 1683
+  },
+  "demographics": {
+    "population": 10907052,
+    "medianIncome": 49955,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 93.3,
+    "gdpGrowth": 2.2,
+    "majorIndustries": [
+      "Aerospace",
+      "Healthcare",
+      "Tourism"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.655704Z",
+  "source": "synthetic"
+}

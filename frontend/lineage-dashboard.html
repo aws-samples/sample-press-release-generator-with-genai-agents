@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Lineage (experimental) - AI Press Release Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/lineage-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-project-diagram"></i>
+                    <h1>Data Lineage (experimental)</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="back-to-main" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Generator
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Job Selection Controls -->
+            <div class="job-controls">
+                <div class="job-controls-header">
+                    <h2><i class="fas fa-tasks"></i> Job Selection</h2>
+                    <div class="refresh-controls">
+                        <label class="auto-refresh-toggle">
+                            <input type="checkbox" id="auto-refresh" checked>
+                            <span>Auto-refresh (30s)</span>
+                        </label>
+                        <button id="refresh-dashboard" class="btn btn-primary">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh
+                        </button>
+                        <button id="view-raw-json" class="btn btn-secondary" style="display: none;">
+                            <i class="fas fa-code"></i>
+                            View Raw Data
+                        </button>
+                    </div>
+                </div>
+                <div class="job-selection-row">
+                    <div class="job-selection-group">
+                        <label for="job-select">Select Job:</label>
+                        <select id="job-select" class="form-select">
+                            <option value="">Loading jobs...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idle State Message -->
+            <div id="idle-state" class="dashboard-section" style="display: block;">
+                <div class="idle-message">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Select a Job to View Dashboard</h3>
+                    <p id="available-jobs-count">Loading available jobs...</p>
+                </div>
+            </div>
+
+            <!-- 6-Tile Dashboard Grid -->
+            <div id="dashboard-tiles" class="dashboard-tiles" style="display: none;">
+                <!-- Tile 1: Job Summary -->
+                <div class="dashboard-tile tile-job-summary" id="tile-job-summary">
+                    <div class="tile-header">
+                        <h3 class="tile-title">
+                            <i class="fas fa-info-circle tile-icon"></i>
+                            Job Summary
+                        </h3>
+                    </div>
+                    <div class="tile-content" id="job-summary-content">
+                        <div class="tile-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 2: Processing Metrics -->
+                <div class="dashboard-tile tile-processing-metrics" id="tile-processing-metrics">
+                    <div class="tile-header">
+                        <h3 class="tile-title">
+                            <i class="fas fa-chart-line tile-icon"></i>
+                            Processing Metrics
+                        </h3>
+                    </div>
+                    <div class="tile-content" id="processing-metrics-content">
+                        <div class="tile-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 3: Output Files -->
+                <div class="dashboard-tile tile-output-files" id="tile-output-files">
+                    <div class="tile-header">
+                        <h3 class="tile-title">
+                            <i class="fas fa-file-alt tile-icon"></i>
+                            Output Files
+                        </h3>
+                    </div>
+                    <div class="tile-content" id="output-files-content">
+                        <div class="tile-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 4: Quality Score -->
+                <div class="dashboard-tile tile-quality-score" id="tile-quality-score">
+                    <div class="tile-header">
+                        <h3 class="tile-title">
+                            <i class="fas fa-star tile-icon"></i>
+                            Quality Score
+                        </h3>
+                    </div>
+                    <div class="tile-content" id="quality-score-content">
+                        <div class="tile-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 5: Data Sources -->
+                <div class="dashboard-tile tile-data-sources" id="tile-data-sources">
+                    <div class="tile-header">
+                        <h3 class="tile-title">
+                            <i class="fas fa-database tile-icon"></i>
+                            Data Sources
+                        </h3>
+                    </div>
+                    <div class="tile-content" id="data-sources-content">
+                        <div class="tile-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 6: Validation Status -->
+                <div class="dashboard-tile tile-validation-status" id="tile-validation-status">
+                    <div class="tile-header">
+                        <h3 class="tile-title">
+                            <i class="fas fa-check-circle tile-icon"></i>
+                            Validation Status
+                        </h3>
+                    </div>
+                    <div class="tile-content" id="validation-status-content">
+                        <div class="tile-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL Tracking Table (Expandable) -->
+            <div id="url-table-section" class="url-table-container" style="display: none;">
+                <div class="table-controls">
+                    <div class="search-controls">
+                        <h3 style="margin: 0; color: var(--Example Company-gray-800);">
+                            <i class="fas fa-link"></i> Data Sources & URLs
+                        </h3>
+                    </div>
+                    <div class="filter-controls">
+                        <button id="toggle-url-table" class="btn btn-secondary">
+                            <i class="fas fa-chevron-down"></i>
+                            Show Details
+                        </button>
+                    </div>
+                </div>
+                <div class="table-wrapper" id="url-table-wrapper" style="display: none;">
+                    <table class="url-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable"><i class="fas fa-link"></i> Source / Market</th>
+                                <th class="sortable"><i class="fas fa-search"></i> Search Query</th>
+                                <th class="sortable"><i class="fas fa-tag"></i> Data Type</th>
+                                <th class="sortable"><i class="fas fa-file-alt"></i> Narrative Usage</th>
+                                <th><i class="fas fa-check-circle"></i> Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="url-table-body">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer" id="url-table-footer" style="display: none;">
+                    <div class="table-info">
+                        <span id="url-count">0 URLs tracked</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JSON Viewer Modal -->
+    <div id="json-viewer-modal" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-code"></i> Raw Job Data</h3>
+                <div class="modal-actions">
+                    <button id="copy-json" class="btn btn-sm btn-secondary">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <button id="download-json" class="btn btn-sm btn-secondary">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button id="close-modal" class="btn btn-sm btn-outline">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="json-viewer-container">
+                    <pre id="json-content"><code class="language-json"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading dashboard data...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/lineage-dashboard.js"></script>
+</body>
+</html>

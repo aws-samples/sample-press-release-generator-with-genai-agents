@@ -1,0 +1,26 @@
+{
+  "market": "Allentown-Bethlehem-Easton",
+  "realEstate": {
+    "medianHomePrice": 436043,
+    "priceChange": 2.4,
+    "inventoryLevel": 7937,
+    "daysOnMarket": 26,
+    "activeListings": 5000
+  },
+  "demographics": {
+    "population": 1695073,
+    "medianIncome": 35796,
+    "householdSize": 2.5
+  },
+  "economic": {
+    "employmentRate": 93.0,
+    "gdpGrowth": 3.6,
+    "majorIndustries": [
+      "Finance",
+      "Professional Services",
+      "Education"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.662039Z",
+  "source": "synthetic"
+}

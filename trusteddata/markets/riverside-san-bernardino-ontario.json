@@ -1,0 +1,26 @@
+{
+  "market": "Riverside-San Bernardino-Ontario",
+  "realEstate": {
+    "medianHomePrice": 455087,
+    "priceChange": 11.4,
+    "inventoryLevel": 11932,
+    "daysOnMarket": 61,
+    "activeListings": 12008
+  },
+  "demographics": {
+    "population": 2622063,
+    "medianIncome": 87400,
+    "householdSize": 2.9
+  },
+  "economic": {
+    "employmentRate": 93.2,
+    "gdpGrowth": 3.4,
+    "majorIndustries": [
+      "Aerospace",
+      "Tourism",
+      "Healthcare"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.637615Z",
+  "source": "synthetic"
+}

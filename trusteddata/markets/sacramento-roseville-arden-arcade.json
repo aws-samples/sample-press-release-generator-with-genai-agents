@@ -1,0 +1,26 @@
+{
+  "market": "Sacramento--Roseville--Arden-Arcade",
+  "realEstate": {
+    "medianHomePrice": 725074,
+    "priceChange": 9.0,
+    "inventoryLevel": 7338,
+    "daysOnMarket": 25,
+    "activeListings": 4579
+  },
+  "demographics": {
+    "population": 7611570,
+    "medianIncome": 82111,
+    "householdSize": 2.6
+  },
+  "economic": {
+    "employmentRate": 92.3,
+    "gdpGrowth": 4.9,
+    "majorIndustries": [
+      "Entertainment",
+      "Technology",
+      "Aerospace"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.646603Z",
+  "source": "synthetic"
+}

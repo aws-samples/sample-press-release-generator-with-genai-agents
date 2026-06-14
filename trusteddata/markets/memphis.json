@@ -1,0 +1,26 @@
+{
+  "market": "Memphis",
+  "realEstate": {
+    "medianHomePrice": 329190,
+    "priceChange": -1.2,
+    "inventoryLevel": 15160,
+    "daysOnMarket": 72,
+    "activeListings": 3059
+  },
+  "demographics": {
+    "population": 9429901,
+    "medianIncome": 74772,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 93.3,
+    "gdpGrowth": 3.1,
+    "majorIndustries": [
+      "Healthcare",
+      "Energy",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.650941Z",
+  "source": "synthetic"
+}

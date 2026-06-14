@@ -1,0 +1,26 @@
+{
+  "market": "Spokane-Spokane Valley",
+  "realEstate": {
+    "medianHomePrice": 227797,
+    "priceChange": 7.5,
+    "inventoryLevel": 5277,
+    "daysOnMarket": 49,
+    "activeListings": 10115
+  },
+  "demographics": {
+    "population": 8135104,
+    "medianIncome": 29197,
+    "householdSize": 2.8
+  },
+  "economic": {
+    "employmentRate": 96.9,
+    "gdpGrowth": 4.6,
+    "majorIndustries": [
+      "Healthcare",
+      "Entertainment",
+      "Technology"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.665400Z",
+  "source": "synthetic"
+}

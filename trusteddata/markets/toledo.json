@@ -1,0 +1,26 @@
+{
+  "market": "Toledo",
+  "realEstate": {
+    "medianHomePrice": 144353,
+    "priceChange": 8.9,
+    "inventoryLevel": 9760,
+    "daysOnMarket": 65,
+    "activeListings": 3400
+  },
+  "demographics": {
+    "population": 9568426,
+    "medianIncome": 25591,
+    "householdSize": 2.7
+  },
+  "economic": {
+    "employmentRate": 92.2,
+    "gdpGrowth": 2.8,
+    "majorIndustries": [
+      "Manufacturing",
+      "Finance",
+      "Agriculture"
+    ]
+  },
+  "timestamp": "2025-10-28T13:14:56.665021Z",
+  "source": "synthetic"
+}
