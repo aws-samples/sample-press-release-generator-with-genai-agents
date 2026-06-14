@@ -249,28 +249,42 @@ class StrandsConfig {
     updateConfig(key, value) {
         const keys = key.split('.');
 
-        // SECURITY (js/prototype-pollution-utility, alert 50): reject dangerous keys
-        // (`__proto__`, `constructor`, `prototype`) at ANY depth so a dot-notation key
-        // cannot walk into and mutate Object.prototype / other built-in prototypes.
-        const FORBIDDEN_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
-        if (keys.some((k) => FORBIDDEN_KEYS.has(k))) {
+        let current = this.config;
+
+        for (let i = 0; i < keys.length - 1; i++) {
+            const segment = keys[i];
+            // SECURITY (CodeQL js/prototype-polluting-assignment, alert 50): INLINE
+            // dangerous-key guard immediately before the dynamic `current[segment] = {}`
+            // assignment sink. A `__proto__`/`constructor`/`prototype` segment would
+            // otherwise walk into and mutate Object.prototype. CodeQL recognizes this
+            // inline literal key comparison as a sanitizer barrier on the bracket
+            // assignment; an equivalent check hoisted to the top (e.g. `keys.some(...)`)
+            // is NOT propagated to this specific sink (cause of the re-opened alert).
+            if (segment === '__proto__' || segment === 'constructor' || segment === 'prototype') {
+                logger.warn('Strands configuration update rejected: unsafe key path', { key });
+                return;
+            }
+            // Use hasOwnProperty so inherited props don't masquerade as existing config,
+            // and create plain objects only for own, safe segments.
+            if (!Object.prototype.hasOwnProperty.call(current, segment) || typeof current[segment] !== 'object' || current[segment] === null) {
+                current[segment] = {};
+            }
+            current = current[segment];
+        }
+
+        const leafKey = keys[keys.length - 1];
+        // SECURITY (CodeQL js/prototype-polluting-assignment, alert 50): INLINE guard
+        // at the leaf assignment sink. Reject the special keys so a dot-notation key
+        // like `__proto__.polluted` or `constructor.prototype.x` can never write to a
+        // built-in prototype. Inline here so the barrier is recognized on this exact
+        // `current[leafKey] = value` assignment.
+        if (leafKey === '__proto__' || leafKey === 'constructor' || leafKey === 'prototype') {
             logger.warn('Strands configuration update rejected: unsafe key path', { key });
             return;
         }
 
-        let current = this.config;
-
-        for (let i = 0; i < keys.length - 1; i++) {
-            // Use hasOwnProperty so inherited props don't masquerade as existing config,
-            // and create plain objects only for own, safe segments.
-            if (!Object.prototype.hasOwnProperty.call(current, keys[i]) || typeof current[keys[i]] !== 'object' || current[keys[i]] === null) {
-                current[keys[i]] = {};
-            }
-            current = current[keys[i]];
-        }
-
-        const oldValue = current[keys[keys.length - 1]];
-        current[keys[keys.length - 1]] = value;
+        const oldValue = current[leafKey];
+        current[leafKey] = value;
         
         logger.debug('Strands configuration updated', {
             key,

@@ -111,7 +111,26 @@ class FileSystemStorageService {
    */
   async get(key) {
     try {
-      const filePath = this._keyToPath(key);
+      if (typeof key !== 'string') {
+        throw new TypeError('Storage key must be a string');
+      }
+      // Reject poison null bytes inline before resolving (classic truncation defense).
+      if (key.indexOf('\0') !== -1) {
+        throw new Error('Unsafe storage key: null byte detected');
+      }
+      // SECURITY (CodeQL js/path-injection — alerts 41,42): INLINE containment
+      // barrier. Resolve the user-controlled key against the storage base IN THIS
+      // FUNCTION and reject any result that escapes it, so the value reaching
+      // fsSync.existsSync()/fs.readFile() below is the sanitized `filePath` — not
+      // the raw key. CodeQL recognizes the `path.resolve(base, input)` +
+      // `startsWith(base + path.sep)` check as a sanitizer barrier ON `filePath`;
+      // the equivalent check inside the `_keyToPath` helper is NOT propagated
+      // across the function boundary (which is why these alerts re-opened).
+      const baseDir = path.resolve(this.config.generatedPath);
+      const filePath = path.resolve(baseDir, key.replace(/^\/+/, ''));
+      if (filePath !== baseDir && !filePath.startsWith(baseDir + path.sep)) {
+        throw new Error('Unsafe storage key: resolved path escapes base directory');
+      }
 
       // Check if file exists
       if (!fsSync.existsSync(filePath)) {
@@ -286,7 +305,25 @@ class FileSystemStorageService {
   async listObjects(prefix, options = {}) {
     try {
       const { maxKeys = 1000, recursive = true } = options;
-      const dirPath = this._keyToPath(prefix);
+      if (typeof prefix !== 'string') {
+        throw new TypeError('Storage prefix must be a string');
+      }
+      // Reject poison null bytes inline before resolving (classic truncation defense).
+      if (prefix.indexOf('\0') !== -1) {
+        throw new Error('Unsafe storage prefix: null byte detected');
+      }
+      // SECURITY (CodeQL js/path-injection — alerts 43,44): INLINE containment
+      // barrier. Resolve the user-controlled prefix against the storage base IN
+      // THIS FUNCTION so the sanitized `dirPath` is what reaches
+      // fsSync.existsSync()/fs.readdir() below. The `path.resolve(base, input)` +
+      // `startsWith(base + path.sep)` check is a CodeQL-recognized sanitizer
+      // barrier on `dirPath`; the same check inside `_keyToPath` is NOT propagated
+      // across the helper boundary (cause of the re-opened alerts).
+      const baseDir = path.resolve(this.config.generatedPath);
+      const dirPath = path.resolve(baseDir, prefix.replace(/^\/+/, ''));
+      if (dirPath !== baseDir && !dirPath.startsWith(baseDir + path.sep)) {
+        throw new Error('Unsafe storage prefix: resolved path escapes base directory');
+      }
 
       if (!fsSync.existsSync(dirPath)) {
         return [];
@@ -303,10 +340,11 @@ class FileSystemStorageService {
           if (entry.isFile()) {
             // SECURITY (CodeQL js/path-injection — alerts 44,45): re-validate the
             // joined child path stays within the storage base before stat'ing it.
-            let filePath;
-            try {
-              filePath = resolveWithinBase(this.config.generatedPath, path.join(dirPath, entry.name));
-            } catch (_) {
+            // INLINE the resolve+containment check so the sanitized `filePath` is
+            // what reaches fs.stat() (helper-returned values are not recognized).
+            const childBase = path.resolve(this.config.generatedPath);
+            const filePath = path.resolve(childBase, path.join(dirPath, entry.name));
+            if (filePath !== childBase && !filePath.startsWith(childBase + path.sep)) {
               continue; // skip anything that would escape the base
             }
             const stats = await fs.stat(filePath);
