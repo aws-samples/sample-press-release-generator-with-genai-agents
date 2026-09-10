@@ -52,7 +52,7 @@
     "lodash": "^4.18.0",
     "markdown-it": "^14.1.1",
     "moment": "^2.29.0",
-    "morgan": "^1.10.0",
+    "morgan": "^1.12.0",
     "node-cron": "^3.0.0",
     "puppeteer": "^24.10.1",
     "redis": "^4.6.0",
